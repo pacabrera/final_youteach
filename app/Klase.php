@@ -1,0 +1,39 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Klase extends Model
+{
+  protected $primaryKey = 'class_id';
+  protected $table = 'classes';
+  public $incrementing = false;
+  
+    protected $fillable = [
+        'class_id',
+        'instructor_id',
+        'class_name',
+        'subject_id',
+        'section_id',
+        'class_active'
+    ];
+
+  public function subject(){
+    return $this->belongsTo('App\Subject', 'subject_id', 'subject_id');
+  }
+
+  public function section(){
+    return $this->belongsTo('App\Section', 'section_id', 'section_id');
+  }
+
+   public function class_members(){
+        return $this->hasMany('App\ClassMembers', 'class_id', 'class_id');
+    }
+
+  public function user_profile(){
+    return $this->belongsTo('App\UserProfile', 'instructor_id', 'id');
+  }
+  
+}
+
