@@ -34,7 +34,7 @@ class PostsController extends Controller
     {
         $threads = Thread::where('class_id',  $class_id)->orderBy('created_at', 'desc')->get();
         $myClass = Klase::where('class_id', $class_id)->first();
-        return view('teacher.class', compact('myClass', 'threads', 'comments'));
+        return view('teacher.class', compact('myClass', 'threads'));
     }
 
 
@@ -87,7 +87,7 @@ class PostsController extends Controller
   public function show($id){
     $threads = Thread::where('id', $id)->first();
     $myClass = Klase::where('class_id', $threads->class_id)->first();
-    return view('teacher.post', compact('myClass', 'threads', 'comments'));
+    return view('teacher.post', compact('myClass', 'threads'));
   }
 
   public function showAssign($class_id)
