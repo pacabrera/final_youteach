@@ -10,7 +10,9 @@ use App\QuizEvent;
 use App\StudentScore;
 use App\UserProfile;
 use Auth;
+use App\Thread;
 use App\Post;
+
 
 class QuizEventController extends Controller
 {
@@ -92,12 +94,25 @@ class QuizEventController extends Controller
         $quizEvent->quiz_event_status = 0;
     $quizEvent->save();
 
-    $post = new Post;
-        $post->body = $quiz_name;
-        $post->class_id = $class_code;
-        $post->usr_id = Auth::user()->id;
-        $post->quiz_event_id = $quizEvent->quiz_event_id;
-    $post->save();
+             $new_thread = [
+            'title'               =>  $quiz_name,
+            'usr_id'               => Auth::user()->id,
+            'class_id'            => $class_code,
+            'quiz_id' => $quizEvent->quiz_event_id,
+            ];
+
+        $thread = Thread::create($new_thread);
+        
+        $klase = Klase::find($class_code)->first();
+
+        $new_post = [
+            'thread_id' => $thread->id,
+            'usr_id'               => Auth::user()->id,
+            'body'                  => 'Quiz on '. $klase->class_name,
+            ];
+
+        $post = Post::create($new_post);
+
 
         return redirect('/quizzes');
     }

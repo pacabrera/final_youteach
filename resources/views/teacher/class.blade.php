@@ -109,6 +109,10 @@
                             <a href="{{ route('assign-turnIn', $thread->assign_id)}}"> {{$thread->title}} 
                             </a>
                              <span class="category">Assignment</span>
+                            @elseif(!empty($thread->quiz_id))
+                            <a href="{{ route('take.show', $thread->quiz_id) }}"> {{$thread->title}} 
+                            </a>
+                             <span class="category">Quiz</span>
                              @else
                               <a href="{{ route('post-single', $thread->id)}}"> {{$thread->title}} 
                             </a>

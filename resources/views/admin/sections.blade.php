@@ -46,7 +46,7 @@
     </div>
     
 </div>
-<!-- Edit Subject Modal -->
+<!-- Edit Section Modal -->
 <div class="modal fade" id="editSection" tabindex="-1" role="dialog" aria-labelledby="editSectionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -76,12 +76,12 @@
     </div>
 </div>
 
-<!-- Add Subject Modal -->
+<!-- Add Section Modal -->
 <div class="modal fade" id="addSection" tabindex="-1" role="dialog" aria-labelledby="addSectionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Subject</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add Section</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -90,7 +90,7 @@
                     <input type="hidden" id="usrid" value="-1">
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="">Subject Name</label>
+                            <label for="">Section Name</label>
                             <input id="s_code_new" type="text" class="form-control" placeholder="">
                         </div>
                     </div>
@@ -103,7 +103,7 @@
     </div>
 </div>
 
-<!-- Delete Subject Confirmation Modal -->
+<!-- Delete Section Confirmation Modal -->
 <div class="modal fade" id="deleteSection" tabindex="-1" role="dialog" aria-labelledby="deleteSectionModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -114,7 +114,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete this subject? This is irreversible!
+                Are you sure you want to delete this Section? This is irreversible!
                 <input type="text" id="sub_id_del" value="">
             </div>
             <div class="modal-footer">

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssignmentsTable extends Migration
+class CreateThreadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateAssignmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assignments', function (Blueprint $table) {
+        Schema::create('threads', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->longText('body');
-            $table->dateTime('deadline');
             $table->unsignedInteger('usr_id');
             $table->foreign('usr_id')->references('id')->on('users');
             $table->string('class_id', 5);
-            $table->foreign('class_id')->references('class_id')->on('classes');
-            $table->smallInteger('status');
+            $table->foreign('class_id')->references('class_id')->on('classes')->onDelete('cascade');;
+            $table->unsignedInteger('assign_id')->nullable();
+            $table->foreign('assign_id')->references('id')->on('assignments')->onDelete('cascade');
+            $table->unsignedInteger('quiz_id')->nullable();
+            $table->foreign('quiz_id')->references('quiz_event_id')->on('quiz_events')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -34,6 +35,6 @@ class CreateAssignmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assignments');
+        Schema::dropIfExists('threads');
     }
 }
