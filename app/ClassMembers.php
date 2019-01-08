@@ -20,7 +20,7 @@ class ClassMembers extends Model
     public function user_profile(){
         return $this->belongsTo('App\UserProfile', 'student_id', 'id');
     }
-    /*
+
     public function student_score(){
         return $this->hasOne('App\StudentScore', 'student_id', 'student_id');
     }
@@ -28,5 +28,5 @@ class ClassMembers extends Model
     public function quiz_event(){
         return $this->belongsTo('App\QuizEvent', 'quiz_event_id', 'quiz_event_id');
     }
-*/
+
 }
