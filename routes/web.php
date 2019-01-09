@@ -55,7 +55,7 @@ Route::get('events', 'EventController@admin')->name('events-admin');
 //All Teacher Routes
 Route::prefix('/teacher')->group(function(){
 Route::get('/', 'TeacherViewController@teacherPanel')->name('teacher-panel');
-
+Route::get('/attendance/{class_id}', 'AttendanceController@index')->name('qr-attendance');
 Route::resource('class', 'ClassesController',  ['only' => [//Class
     'store', 'destroy'
 ]]);
@@ -107,7 +107,8 @@ Route::post('profile', 'AccountController@changeProfilePic')->name('profile-pic'
 Route::resource('take', 'TakeQuizController', ['only' => [//Related to taking of quiz
     'store', 'show'
 ]]); 
-
+Route::get('/attendance/{class_id}', 'AttendanceController@student')->name('attendance');
+Route::post('/attendance', 'AttendanceController@attendance')->name('attendance');
 
 }); // End /Student
 
@@ -125,3 +126,6 @@ Route::post('/comment/{id}', 'PostsController@postComment')->name('post-comment'
 Route::get('/assignments/{class_id}', 'PostsController@showAssign')->name('assignments');
 Route::get('/turn-in/{assign_id}', 'PostsController@turnIn')->name('assign-turnIn');
 Route::post('/turn-in/{assign_id}', 'PostsController@turnInPost')->name('turn-in.post');
+
+//Attendance
+

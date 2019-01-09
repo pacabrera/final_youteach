@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssignmentsTable extends Migration
+class CreateAttendanceQrsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,11 @@ class CreateAssignmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assignments', function (Blueprint $table) {
+        Schema::create('attendance_qrs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->longText('body');
-            $table->dateTime('deadline');
-            $table->unsignedInteger('usr_id');
-            $table->foreign('usr_id')->references('id')->on('users');
+            $table->string('qrcode');
             $table->string('class_id', 5);
             $table->foreign('class_id')->references('class_id')->on('classes')->onDelete('cascade');
-            $table->smallInteger('status');
             $table->timestamps();
         });
     }
@@ -34,6 +29,6 @@ class CreateAssignmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assignments');
+        Schema::dropIfExists('attendance_qrs');
     }
 }

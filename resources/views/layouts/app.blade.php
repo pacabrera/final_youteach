@@ -19,6 +19,7 @@
     <link href="{{ asset('assets/css/style.red.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
+    <link href=" {{ URL::asset('/qr_login/option2/css/style.css') }}" rel="stylesheet">
 <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}">
    <!-- OneSignal for Notifcations --> 
 <link rel="manifest" href="{{ asset('assets/onesignal/manifest.json') }}" />
@@ -290,7 +291,11 @@
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/teckquiz.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
-            <script src="{{ asset('assets/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script type="text/javascript" src=" {{ asset('qr_login/option2/js/filereader.js') }}"></script>
+    <script type="text/javascript" src=" {{ asset('qr_login/option2/js/qrcodelib.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('qr_login/option2/js/webcodecamjs.js ') }}"></script>
+    <script type="text/javascript" src="{{ asset('qr_login/option2/attendance.js ') }}"></script>
 
      <script type="text/javascript">
     $('.form_datetime').datetimepicker({        //language:  'fr',

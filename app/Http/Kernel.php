@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\LogLastUserActivity::class,
             \App\Http\Middleware\StatusAssignment::class,
+            \App\Http\Middleware\AttendanceQrGenerator::class,
         ],
 
         'api' => [
