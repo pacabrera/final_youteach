@@ -27,14 +27,14 @@ class LoginController extends Controller
      */
     public function authenticated($request , $user){
         if($user->permissions=='1'){
-            swal()->autoclose(2000)->message('Good Job','You have successfully logged In!','info'); 
+            
             return redirect()->route('teacher-panel') ;
         }elseif($user->permissions=='2'){
-            swal()->autoclose(2000)->message('Good Job','You have successfully logged In!','info'); 
+            
             return redirect()->route('student-panel') ;
         }
         elseif($user->permissions=='0'){
-            swal()->autoclose(2000)->message('Good Job','You have successfully logged In!','info'); 
+            
             return redirect()->route('admin-panel') ;
         }
 

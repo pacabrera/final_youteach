@@ -74,6 +74,14 @@
                            <input type="text" placeholder="Event Title" id="ev_title" class="form-control">
                         </div>
                         <div class="form-group">
+                            <label for="">Event Venue</label>
+                           <input type="text" placeholder="Event Venue" id="ev_venue" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Event Description</label>
+                           <textarea placeholder="Event Description" id="ev_desc" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
                             <label for="">Display Color</label>
                            <input type="color" placeholder="Last Name" id="ev_color" class="form-control">
                         </div>
@@ -117,17 +125,31 @@
                            <input type="text" placeholder="Event Title" id="title" class="form-control">
                         </div>
                         <div class="form-group">
+                            <label for="">Event Venue</label>
+                           <input type="text" placeholder="Event Venue" id="venue" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Event Description</label>
+                           <textarea placeholder="Event Description" id="desc" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
                             <label for="">Display Color</label>
                            <input type="color" placeholder="Last Name" id="color" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label for="">Start Date</label>
-                           <input type="date" class="form-control" id="start_date" placeholder="Start Date">
-                        </div>
-                        <div class="form-group">
-                            <label for="">End Date</label>
-                          <input type="date" class="form-control" id="end_date" placeholder="End Date">
-                        </div>
+
+             <div class="input-group date form_datetime col-md-12"  data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                    <input class="form-control" size="16" type="text" value="" readonly placeholder="Deadline Date"> 
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+                <input type="hidden" id="dtp_input1" value="" id="start_date" name="deadline" /><br/>
+
+            <div class="input-group date form_datetime col-md-12"  data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input2">
+                    <input class="form-control" size="16" type="text" value="" readonly placeholder="Deadline Date"> 
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+                <input type="hidden" id="dtp_input2" value="" id="end_date" name="deadline" /><br/>
                     </div>
                 </form>
             </div>
@@ -196,7 +218,7 @@
         var event_id = $('#ev_id').val();
         var title = $('#ev_title').val();
         var color = $('#ev_color').val();
-        var start_date = $('#ev_start_date').val();
+        var start_date = $('#dtp_input2').val();
         var end_date = $('#ev_end_date').val();
   
         $.ajax({
@@ -214,15 +236,17 @@
     function addEvent() {
         var title = $('#title').val();
         var color = $('#color').val();
-        var start_date = $('#start_date').val();
-        var end_date = $('#end_date').val();
+        var venue = $('#venue').val();
+        var desc = $('#desc').val();
+        var start_date = $('#dtp_input1').val();
+        var end_date = $('#dtp_input2').val();
 
 
         $.ajax({
             url: '/admin/events/',
             type: 'POST', //type is any HTTP method
             data: {
-                title, color, start_date, end_date
+                title, color, start_date, end_date, venue , desc
             }, //Data as js object
             success: function () {
                 window.location.reload(true);

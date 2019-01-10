@@ -76,6 +76,7 @@ Route::put('/quiz/{id}', 'QuizEventController@update')->name('quiz.update');
 Route::resource('assignments', 'AssignmentController', ['only' => [//Sections and Grade Levels
     'index', 'store', 'update', 'destroy'
 ]]);
+Route::get('/assignment/{id}', 'TeacherViewController@viewSubmissions')->name('assign-submissions');
 
 Route::resource('question', 'QuestionController', ['only' => [//Question
     'store', 'update',  'destroy',
@@ -128,4 +129,4 @@ Route::get('/turn-in/{assign_id}', 'PostsController@turnIn')->name('assign-turnI
 Route::post('/turn-in/{assign_id}', 'PostsController@turnInPost')->name('turn-in.post');
 
 //Attendance
-
+Route::get('/event/{id}', 'EventController@showSingle')->name('event-single');

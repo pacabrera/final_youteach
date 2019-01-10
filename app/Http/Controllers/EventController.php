@@ -9,24 +9,27 @@ use Calendar;
 
 class EventController extends Controller
 {
-public function index()
+
+    public function index()
     {
-        $event = [];
-        $events = Event::all();
-            foreach ($events as $row) {
-                $event[] = Calendar::event(
-                    $row->title,
-                    true,
-                    new \DateTime($row->start_date),
-                    new \DateTime($row->end_date),
-                    $row->id,
+        $events = [];
+        $data = Event::all();
+        if($data->count()) {
+            foreach ($data as $key => $value) {
+                $events[] = Calendar::event(
+                    $value->title,
+                    false,
+                    new \DateTime($value->start_date),
+                    new \DateTime($value->end_date),
+                    $value->id,
                     // Add color and link on event
-	                [
-	                    'color' => $row->color,
-	                    'url' => route('teacher-panel', $row->id),
-	                ]
+                    [
+                        'color' => '#f05050',
+                       'url' => route('event-single', $value->id),
+                    ]
                 );
             }
+        }
         $calendar = Calendar::addEvents($events);
         return view('teacher.fullcalender', compact('calendar'));
     }
@@ -44,10 +47,10 @@ public function index()
                     new \DateTime($value->end_date.' +1 day'),
                     null,
                     // Add color and link on event
-	                [
-	                    'color' => $value->color,
-	                    'url' => route('admin-panel', $value->id),
-	                ]
+                    [
+                        'color' => $value->color,
+                        'url' => route('event-single', $value->id),
+                    ]
                 );
             }
         }
@@ -77,6 +80,8 @@ public function index()
 
         $events->title = $request->input('title');
         $events->color = $request->input('color');
+        $events->venue = $request->input('venue');
+        $events->description = $request->input('desc');
         $events->start_date = $request->input('start_date');
         $events->end_date = $request->input('end_date');
 
@@ -84,5 +89,10 @@ public function index()
 
         return redirect()->route('events-admin');
 
+    }
+    public function showSingle($id)
+    {
+        $event = Event::find($id)->first();
+        return view('teacher.event-single', compact('event'));
     }
 }

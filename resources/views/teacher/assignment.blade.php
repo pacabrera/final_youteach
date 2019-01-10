@@ -69,7 +69,7 @@
 						@foreach($assignments as $ass)
 						<tr>
 							<td>{{$ass->id}}</td>
-							<td><a href="{{ route('assign-turnIn', $ass->id)}}">Turn In </a></td>
+							<td><a href="{{ route('assign-submissions', $ass->id)}}">View Submissions</a></td>
 						</tr>
 						@endforeach
                   	</table>

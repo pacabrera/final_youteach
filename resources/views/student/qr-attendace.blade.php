@@ -67,6 +67,10 @@
          
 
  </div>
+     <script type="text/javascript" src=" {{ asset('qr_login/option2/js/filereader.js') }}"></script>
+    <script type="text/javascript" src=" {{ asset('qr_login/option2/js/qrcodelib.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('qr_login/option2/js/webcodecamjs.js ') }}"></script>
+    <script type="text/javascript" src="{{ asset('qr_login/option2/attendance.js ') }}"></script>
  <script>
       $.ajaxSetup({
         headers: {

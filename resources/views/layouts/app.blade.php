@@ -40,6 +40,7 @@
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="{{ asset('assets/js/front.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 
 </head>
  @if(Auth::guest())
@@ -141,7 +142,7 @@
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="{{ route('home') }}" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>About</span></a></li>
-              <li class="sidebar-list-item"><a href="forms.html" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Events</span></a></li>
+              <li class="sidebar-list-item"><a href="{{ route('events') }}" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Events</span></a></li>
             </ul>
  <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MY CLASSES</div>
          @foreach(Auth::user()->klases() as $classes)      
@@ -292,10 +293,8 @@
     <script src="{{ asset('assets/js/teckquiz.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ asset('assets/laravel-ckeditor/ckeditor.js') }}"></script>
-    <script type="text/javascript" src=" {{ asset('qr_login/option2/js/filereader.js') }}"></script>
-    <script type="text/javascript" src=" {{ asset('qr_login/option2/js/qrcodelib.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('qr_login/option2/js/webcodecamjs.js ') }}"></script>
-    <script type="text/javascript" src="{{ asset('qr_login/option2/attendance.js ') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
 
      <script type="text/javascript">
     $('.form_datetime').datetimepicker({        //language:  'fr',

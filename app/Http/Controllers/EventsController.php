@@ -49,6 +49,8 @@ class EventsController extends Controller
 
         $events->title = $request->input('title');
         $events->color = $request->input('color');
+        $events->venue = $request->input('venue');
+        $events->description = $request->input('desc');
         $events->start_date = $request->input('start_date');
         $events->end_date = $request->input('end_date');
 

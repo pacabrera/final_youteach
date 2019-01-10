@@ -1,15 +1,29 @@
 @extends('layouts.app')
-@section('title', 'Teacher - YouTeach')
+@section('title', 'Admin - YouTeach')
 @section('content')
- <div class="page-holder w-100 d-flex flex-wrap">
+<div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
           <section class="py-5">
-          	<a href="{{ route('add-event') }}" class="btn btn-info">Add New Event</a>
-            <div class='onesignal-customlink-container'></div>
-          		
-                <div class="panel-body">
+            <div class="row">
+              <!-- Basic Form-->
+
+              <!-- Form Elements -->
+              <div class="col-lg-12 mb-5">
+                <div class="card">
+                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                    <h3> Events </h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="container">
                     {!! $calendar->calendar() !!}
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</section>
+</div>
 
                 {!! $calendar->script() !!}
 @endsection
