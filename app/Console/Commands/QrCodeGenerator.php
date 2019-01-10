@@ -14,7 +14,6 @@ class QrCodeGenerator extends Command
      *
      * @var string
      */
-    protected $name = 'purchase:podcast';
     protected $signature = 'command:name';
 
     /**
@@ -41,6 +40,7 @@ class QrCodeGenerator extends Command
      */
     public function handle()
     {
+        echo 'Running';
         $klases = Klase::all();
         foreach($klases as $klase){
             $qrcode = new AttendanceQr;

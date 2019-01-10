@@ -156,6 +156,7 @@
                 <li class="sidebar-list-item"><a href="{{ route('group', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Group Generator</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('quizzes', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Quizzes</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('assignments', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Assignments</a></li>
+                <li class="sidebar-list-item"><a href="{{ route('qr-attendance', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Assignments</a></li>
               </ul>
             </div>
           

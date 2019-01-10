@@ -15,6 +15,7 @@
 
 
    <h1 class="text-left">Quiz Events</h1>
+</div>
                         <div class="col-10">
                             <h4>Current Quizzes</h4>
                             <table class="table table-hover">
@@ -30,7 +31,11 @@
                                         <tr id="quiz_entry{{ $qe->quiz_event_id }}">
                                             <td><a href="{{ route('quiz.show', $qe->quiz_event_id) }}">{{ $qe->quiz_event_name }}</a></td>
                                             <td>{{ $qe->klase->subject->subject_desc }}</td>
-                                            <td>{{ $qe->klase->course_sec}}</td>
+                                            @if($qe->quiz_event_status == 1)
+                                            <td>Active</td>
+                                            @else
+                                             <td>Disabled</td>
+                                             @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -53,7 +58,7 @@
                                             <tr>
                                                 <td><a href="{{ route('quiz.show' , $qe->quiz_event_id) }}">{{ $qe->quiz_event_name }}</a></td>
                                                 <td>{{ $qe->klase->subject->subject_desc }}</td>
-                                                <td>{{ $qe->klase->course_sec}}</td>
+                                                <td>{{ $qe->klase->class_name}}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

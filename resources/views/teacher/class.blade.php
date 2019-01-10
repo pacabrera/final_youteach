@@ -13,6 +13,8 @@
                     <h3> {{ $myClass->class_name}} </h3>
                     <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
                   </div>
+                  @if(Auth::user()->permissions == 0)
+                  <a href="{{ route('attendance', $myClass->class_id)}}" class="btn-info">Attendance</a>
                              <form method="POST" action="{{ route('post-store', $myClass->class_id) }}" enctype="multipart/form-data">
                   <div class="card-body" >
                       <div class="card gedf-card" >
