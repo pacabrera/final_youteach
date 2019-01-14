@@ -253,6 +253,21 @@
                        @endforeach
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="">Schedule</label> <br/>
+                    <div class="row">
+                    <div class="col-lg-6 col-md-3">
+                    Monday <input type="time" name="monday" class="form-control">
+                    Tuesday <input type="time" name="tuesday" class="form-control">
+                    Wednesday <input type="time" name="wednesday" class="form-control">
+                  </div>
+                 <div class="col-lg-6 col-md-3">
+                    Thursday <input type="time" name="thursday" class="form-control">
+                    Friday <input type="time" name="friday" class="form-control">
+                    Saturday <input type="time" name="saturday" class="form-control">
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

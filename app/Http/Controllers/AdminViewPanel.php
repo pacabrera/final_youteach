@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Post;
+use App\User;
+use App\Event;
 use OwenIt\Auditing\Models\Audit;
 
 class AdminViewPanel extends Controller
@@ -17,7 +19,9 @@ class AdminViewPanel extends Controller
 
     public function index()
     {
-        return view('admin.panel');
+    	$students = User::where('permissions', '2')->get();
+        $events = Event::get();
+        return view('admin.panel', compact('students', 'events'));
     }
 
     public function audits()

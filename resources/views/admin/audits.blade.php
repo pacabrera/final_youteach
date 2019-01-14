@@ -14,7 +14,7 @@
 
         @foreach ($audit->getModified() as $attribute => $modified)
         <ul>
-            <li>@lang('article.'.$audit->event.'.modified.'.$attribute, $modified)</li>
+            <li>@lang('POST.'.$audit->event.'.modified.'.$attribute, $modified)</li>
         </ul>
         @endforeach
     </li>
