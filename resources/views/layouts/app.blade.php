@@ -23,7 +23,8 @@
 <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}">
    <!-- OneSignal for Notifcations --> 
 <link rel="manifest" href="{{ asset('assets/onesignal/manifest.json') }}" />
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 
    @include('vendor.sweetalert.cdn') 
 
@@ -41,7 +42,8 @@
     <script src="{{ asset('assets/js/front.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
-
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 </head>
  @if(Auth::guest())
     
@@ -156,7 +158,7 @@
                 <li class="sidebar-list-item"><a href="{{ route('group', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Group Generator</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('quizzes', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Quizzes</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('assignments', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Assignments</a></li>
-                <li class="sidebar-list-item"><a href="{{ route('qr-attendance', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Assignments</a></li>
+                <li class="sidebar-list-item"><a href="{{ route('qr-attendance', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Attendance</a></li>
               </ul>
             </div>
           
@@ -297,7 +299,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
 
+
      <script type="text/javascript">
+
+      $(document).ready( function () {
+    $('#dataTable').DataTable();
+} );
+
     $('.form_datetime').datetimepicker({        //language:  'fr',
     weekStart: 1,
     todayBtn:  1,

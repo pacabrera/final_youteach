@@ -21,7 +21,7 @@ class SectionsController extends Controller
         $sections = section::with('klase')->get();
         //return $sections;
         $section = section::first();
-        return view('admin.sections', compact('sections', 'all'));
+        return view('admin.sections', compact('sections'));
     }
 
     /**
@@ -49,6 +49,7 @@ class SectionsController extends Controller
         $section = section::find($id);
         $section->section_name = $request->input('s_code');
         $section->save();
+        swal()->success('Successfully Added!',[]);
     }
 
     /**
@@ -59,5 +60,6 @@ class SectionsController extends Controller
      */
     public function destroy($id){
         section::destroy($id);
+        swal()->success('Successfully Added!',[]);
     }
 }

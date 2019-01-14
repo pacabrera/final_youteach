@@ -34,6 +34,23 @@ class Klase extends Model
   public function user_profile(){
     return $this->belongsTo('App\UserProfile', 'instructor_id', 'id');
   }
+
+    public function user(){
+    return $this->belongsTo('App\User', 'instructor_id', 'id');
+  }
+
+    public function thread(){
+        return $this->hasMany('App\Thread', 'class_id');
+    }
+
+    public function assignment(){
+        return $this->hasMany('App\Assignment', 'class_id');
+    }
+
+    public function quiz_event(){
+        return $this->hasMany('App\QuizEvent', 'class_id');
+    }
+
   
 }
 

@@ -21,4 +21,10 @@ class Thread extends Model
     public function user(){
         return $this->belongsTo('App\User', 'usr_id', 'id');
     }
+    
+    public function klase(){
+        return $this->belongsTo('App\Klase', 'class_id');
+    }
+
+
 }

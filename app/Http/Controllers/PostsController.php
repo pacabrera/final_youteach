@@ -38,12 +38,12 @@ class PostsController extends Controller
     }
 
 
-    public function postStore(Request $request, $class_id){
+    public function postStore(Request $request){
 
         $new_thread = [
             'title'               =>  $request->input('title'),
             'usr_id'               => Auth::user()->id,
-            'class_id'            => $class_id,
+            'class_id'            => $request->input('class_id'),
             ];
 
         $thread = Thread::create($new_thread);
@@ -69,7 +69,7 @@ class PostsController extends Controller
     }
 
         
-        return redirect()->route('class-forum', $class_id);
+        return redirect()->route('class-forum', $request->input('class_id'));
     }
 
     public function postComment(Request $request, $id){

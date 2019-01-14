@@ -3,14 +3,23 @@
 @section('content')
 <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
-          <div class="container">
-
-<div class="container">
-    <h1 class="mt-5">Sections</h1>
-    <div class="row">
-        <div class="col-9">
-
-            <table class="table table-hover">
+          <section class="py-5">
+          <!-- Post -->   
+            <div class="row mb-4">            
+              <div class="col-lg-12 mb-4 mb-lg-0">
+                <div class="card">
+                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-6 col-sm-6">
+                             <h3>Sections</h3>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                             <button class="btn btn-warning" data-toggle="modal" data-target="#addSection">Add new Section</button>
+                        </div>
+                    </div>
+                </div>
+                          <div class="card-body">
+            <table id="dataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -32,16 +41,13 @@
                                 data-code="{{ $s->section_name }}">
                                 Edit
                             </button>
-                            <button class="btn btn-danger btn-sm" data-subid="{{ $s->section_id }}" data-toggle="modal" data-target="#deleteSection" {{ $s->klase->count() > 0 ? 'disabled' : '' }}>Delete</button>
+                            <button class="btn btn-danger btn-sm" data-subid_del="{{ $s->section_id }}" data-toggle="modal" data-target="#deleteSection" {{ $s->klase->count() > 0 ? 'disabled' : '' }}>Delete</button>
                         </td>
                     </tr>
 
                     @endforeach
                 </tbody>
             </table>
-        </div>
-        <div class="col-3">
-            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addSection">Add new Section</button>
         </div>
     </div>
     
@@ -62,9 +68,9 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="">Section Name</label>
-                            <input id="sub_code" type="text" class="form-control" placeholder="">
+                            <input id="ed_sub_code" type="text" class="form-control" placeholder="">
                         </div>
-                        <input type="hidden" id="sub_id">
+                        <input type="hidden" id="ed_sub_id">
                     </div>
                 </form>
             </div>
@@ -138,21 +144,21 @@
         var s_code = button.data('code')
 
         var modal = $(this)
-        modal.find('#sub_code').val(s_code)
-        modal.find('#sub_id').val(subid);
+        modal.find('#ed_sub_code').val(s_code)
+        modal.find('#ed_sub_id').val(subid);
     });
 
     $('#deleteSection').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
-        var subid = button.data('subid')
+        var subid = button.data('subid_del')
 
         var modal = $(this)
         modal.find('#sub_id_del').val(subid)
     });
 
     function UpdateSection() {
-        var subid = $('#sub_id').val();
-        var s_code = $('#sub_code').val();
+        var subid = $('#ed_sub_id').val();
+        var s_code = $('#ed_sub_code').val();
   
         $.ajax({
             url: '/admin/sections/' + subid,

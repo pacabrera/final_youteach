@@ -15,7 +15,7 @@ class CreateKlasesTable extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->string('class_id', 5);
-            $table->integer('instructor_id')->unsigned();   //instructor_id comes from users table
+            $table->integer('instructor_id');   //instructor_id comes from users table
             $table->integer('subject_id')->unsigned();
             $table->boolean('class_active');
             $table->primary('class_id');

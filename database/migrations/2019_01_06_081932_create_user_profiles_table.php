@@ -14,11 +14,12 @@ class CreateUserProfilesTable extends Migration
     public function up()
     {
        Schema::create('user_profiles', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
+            $table->integer('id');
             $table->string('given_name');
             $table->string('family_name');
             $table->string('middle_name');
             $table->string('ext_name')->nullable();
+            $table->string('gender');
             $table->timestamps();
             $table->string('profile_pic');
         });
@@ -27,10 +28,11 @@ class CreateUserProfilesTable extends Migration
         });
 
         UserProfile::create([
-            'id' => 1,
+            'id' => 100,
             'given_name' => 'Admin',
             'family_name' => 'Admin',
             'middle_name' => 'Admin',
+            'gender' => 'Male',
             'profile_pic' => 'no-profile.png',
         ]);
 

@@ -1,14 +1,27 @@
 @extends('layouts.app')
 @section('title', 'Subjects - TeckQuiz')
 @section('content')
-<br>
-
-<div class="container">
-    <h1 class="mt-5">Subjects</h1>
-    <div class="row">
-        <div class="col-9">
-
-            <table class="table table-hover">
+<div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+          <!-- Post -->   
+            <div class="row mb-4">            
+              <div class="col-lg-12 mb-4 mb-lg-0">
+                <div class="card">
+                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-6 col-sm-6">
+                             <h3>Teachers</h3>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                             <button class="btn btn-warning" data-toggle="modal" data-target="#addSubject">Add new subject</button>
+                        </div>
+                    </div>
+                </div>
+                  <div class="card-body" >
+<div class="card gedf-card" >
+                          <div class="card-body">
+            <table id="dataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -40,9 +53,6 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
-        <div class="col-3">
-            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addSubject">Add new subject</button>
         </div>
     </div>
 </div>

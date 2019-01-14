@@ -16,7 +16,7 @@ class CreateAssignSubmissionsTable extends Migration
         Schema::create('assign_submissions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('assgn_id');
-            $table->unsignedInteger('usr_id');
+            $table->integer('usr_id');
             $table->foreign('usr_id')->references('id')->on('users');
             $table->foreign('assgn_id')->references('id')->on('assignments')->onDelete('cascade');
             $table->string('response');

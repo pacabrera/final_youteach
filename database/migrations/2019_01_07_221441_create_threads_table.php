@@ -16,7 +16,7 @@ class CreateThreadsTable extends Migration
         Schema::create('threads', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->unsignedInteger('usr_id');
+            $table->integer('usr_id');
             $table->foreign('usr_id')->references('id')->on('users');
             $table->string('class_id', 5);
             $table->foreign('class_id')->references('class_id')->on('classes')->onDelete('cascade');;

@@ -26,7 +26,7 @@ class AccountController extends Controller
     public function store(Request $request){
         if (Auth::user()->permissions == 0){//Only the admin can store teachers
             $out =[
-                'usr' => $request->input('usr'),
+                'id' => $request->input('id'),
                 'permissions' => $request->input('permission'),
                 'password' => bcrypt($request->input('password')),
             ];
@@ -39,10 +39,11 @@ class AccountController extends Controller
             UserProfile::create([
                 'given_name' => $request->input('n_given'),
                 'family_name' => $request->input('n_family'),
+                'gender' => $request->input('gender'),
                 'middle_name' => $request->input('n_middle'),
                 'ext_name' => $request->input('n_ext'),
                 'profile_pic' => 'no-profile.png',
-                'id' => $usr->id,
+                'id' => $request->input('id'),
             ]);
 
             return redirect('/admin/teachers');

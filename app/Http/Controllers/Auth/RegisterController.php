@@ -51,9 +51,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'usr' => 'required|string|max:255|unique:users',
+            'id' => 'required|integer|unique:users,id',
             //'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:1|confirmed',
+            'gender' => 'required',
             //'class_code' => 'exists:classes,class_id|string',
         ]);
     }
@@ -67,19 +68,20 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $out = User::create([
-            'usr' => $data['usr'],
+            'id' => $data['id'],
             'permissions' => 2,
             'password' => bcrypt($data['password']),
         ]);
 
-        $usr = User::select('id')->where('usr', $data['usr'])->first();
+        $usr = User::select('id')->where('id', $data['id'])->first();
         
         UserProfile::create([
-            'id' => $out->id,
+            'id' => $data['id'],
             'given_name' => $data['n_given'],
             'family_name' => $data['n_family'],
             'middle_name' => $data['n_middle'],
             'ext_name' => $data['n_ext'],
+            'gender' => $data['gender'],
             'profile_pic' => 'no-profile.png'
         ]);
 

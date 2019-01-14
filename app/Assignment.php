@@ -13,4 +13,8 @@ class Assignment extends Model
     return $this->hasMany('App\Thread');
   }
 
+     public function klase(){
+        return $this->belongsTo('App\Klase', 'class_id');
+    }
+
 }

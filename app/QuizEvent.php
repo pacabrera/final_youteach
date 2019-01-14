@@ -36,4 +36,8 @@ class QuizEvent extends Model
     public function class_members(){
         return $this->hasOne('App\ClassMembers', 'class_id', 'class_id');
     }
+
+    public function klases(){
+        return $this->belongsTo('App\Klase', 'class_id');
+    }
 }

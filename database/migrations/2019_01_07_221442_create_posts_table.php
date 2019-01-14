@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->longText('body');
-            $table->unsignedInteger('usr_id');
+            $table->integer('usr_id');
             $table->foreign('usr_id')->references('id')->on('users');
             $table->unsignedInteger('thread_id');
             $table->foreign('thread_id')->references('id')->on('threads')->onDelete('cascade');

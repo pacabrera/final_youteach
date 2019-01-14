@@ -3,14 +3,25 @@
 @section('content')
 <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
-          <div class="container">
-
-<div class="container">
-    <h1 class="mt-5">Events</h1>
-    <div class="row">
-        <div class="col-9">
-
-            <table class="table table-hover">
+          <section class="py-5">
+          <!-- Post -->   
+            <div class="row mb-4">            
+              <div class="col-lg-12 mb-4 mb-lg-0">
+                <div class="card">
+                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-6 col-sm-6">
+                             <h3>Events</h3>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                             <button class="btn btn-warning" data-toggle="modal" data-target="#addEvent">Add new Event</button>
+                        </div>
+                    </div>
+                </div>
+                  <div class="card-body" >
+<div class="card gedf-card" >
+                          <div class="card-body">
+            <table id="dataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -48,9 +59,6 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
-        <div class="col-3">
-            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addEvent">Add new Section</button>
         </div>
     </div>
 </div>
@@ -172,7 +180,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete this subject? This is irreversible!
+                Are you sure you want to delete this event? This is irreversible!
                 <input type="hidden" id="sub_id_del" value="">
             </div>
             <div class="modal-footer">

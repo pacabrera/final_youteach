@@ -13,9 +13,8 @@
                     <h3> {{ $myClass->class_name}} </h3>
                     <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
                   </div>
-                  @if(Auth::user()->permissions == 0)
-                  <a href="{{ route('attendance', $myClass->class_id)}}" class="btn-info">Attendance</a>
-                             <form method="POST" action="{{ route('post-store', $myClass->class_id) }}" enctype="multipart/form-data">
+                  
+                             <form method="POST" action="{{ route('post-store') }}" enctype="multipart/form-data">
                   <div class="card-body" >
                       <div class="card gedf-card" >
                           <div class="card-body">
@@ -36,7 +35,7 @@
                                           </div>
                                       </div>
                                 
-
+                              <input type="hidden" name="class_id" value="{{ $myClass->class_id}}">
                               <div class="btn-toolbar justify-content-between" style="margin-top: 25px;">
                                   <div class="btn-group">
                                       <button type="submit" class="btn btn-primary" class="btn">Post</button>

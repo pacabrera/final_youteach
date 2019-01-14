@@ -15,8 +15,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('usr')->unique();
+            $table->integer('id')->unique();
             $table->string('password');
             $table->integer('permissions');
             $table->rememberToken();
@@ -24,7 +23,7 @@ class CreateUsersTable extends Migration
         });
 
         User::create([
-            'usr' => 'Administrator',
+            'id' => '100',
             'permissions' => 0,
             'password' => Hash::make("password"),
         ]);

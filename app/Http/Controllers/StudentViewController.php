@@ -11,6 +11,7 @@ use Auth;
 use App\Post;
 use App\Comment;
 use App\User;
+use App\Event;
 
 class StudentViewController extends Controller
 {
@@ -24,13 +25,12 @@ class StudentViewController extends Controller
     public function studentPanel()
     {   
         $usr = UserProfile::where('id', Auth::user()->id)->first();
-        $checkClass = ClassMembers::where('class_members.student_id', Auth::user()->id)
-        ->join('classes', 'classes.class_id', '=', 'class_members.class_id')
+        $checkClass = Klase::join('class_members', 'classes.class_id', '=', 'class_members.class_id')->where('class_members.student_id', Auth::user()->id)
         ->get();
 
-        
+        $eventsCount = Event::all()->count();
 
-        return view('student.student', compact('checkClass', 'usr'));
+        return view('student.student', compact('checkClass', 'usr','myClass', 'eventsCount'));
     }
 
     //View Class per Class Code

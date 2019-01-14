@@ -28,6 +28,6 @@ class TeacherController extends Controller
         // return $teachers;
         // 
         
-        return view('admin.teachers', compact('teachers', 'all'));
+        return view('admin.teachers', compact('teachers'));
     }
 }

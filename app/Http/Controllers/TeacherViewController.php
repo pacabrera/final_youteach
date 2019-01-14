@@ -18,6 +18,7 @@ use Alert;
 use Softon\SweetAlert\Facades\SWAL; 
 use App\PostFiles;
 use Illuminate\Support\Facades\Storage;
+use App\Event;
 
 
 class TeacherViewController extends Controller
@@ -32,8 +33,9 @@ class TeacherViewController extends Controller
     {
     	$sections = Section::get();
     	$subjects = Subject::get();
-    	
-        return view('teacher.panel', compact('sections', 'subjects'));
+    	$myClass = Klase::where('instructor_id', Auth::user()->id)->get();
+        $eventsCount = Event::all()->count();
+        return view('teacher.panel', compact('sections', 'subjects', 'myClass', 'eventsCount'));
     }
 
     public function recitation($class_id){

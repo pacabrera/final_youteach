@@ -4,14 +4,25 @@
 
 <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
-          <div class="container">
-
-<div class="container">
-    <h1 class="mt-5">Teachers</h1>
-    <div class="row">
-        <div class="col-9">
-
-            <table class="table table-hover">
+          <section class="py-5">
+          <!-- Post -->   
+            <div class="row mb-4">            
+              <div class="col-lg-12 mb-4 mb-lg-0">
+                <div class="card">
+                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-6 col-sm-6">
+                             <h3>Teachers</h3>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                             <button class="btn btn-warning" data-toggle="modal" data-target="#addSubject">Add new teacher</button>
+                        </div>
+                    </div>
+                </div>
+                  <div class="card-body" >
+<div class="card gedf-card" >
+                          <div class="card-body">
+            <table id="dataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -48,9 +59,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-3">
-            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addSubject">Add new teacher</button>
-        </div>
+
 
 
     <!-- Add Teacher Modal -->
@@ -75,10 +84,21 @@
                                 <input name="n_ext" id="n_ext" type="text" placeholder="Ext." class="form-control mb-2">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="">Username</label>
-                            <input name="usr" id="usr" type="text" class="form-control">
-                        </div>
+                                                            <div class="form-group">
+                                      <label for="gender">Gender</label>
+                                      <select id="gender" class="form-control" name="gender">
+                                        <option selected value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                      </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Employee No.</label>
+                                        <input name="id" id="id" type="text" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" value="{{ old('id') }}">
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('id') }}
+                                        </div>
+                                    </div>
+
                         <div class="form-group">
                             <label for="">Password</label>
                             <input pattern=".{8,}" name="password" id="password" type="password" class="form-control">

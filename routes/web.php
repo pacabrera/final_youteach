@@ -121,7 +121,7 @@ Route::put('/account/{account}', 'AccountController@changePassStud')->name('chan
 
 Route::get('/class/{class_id}', 'PostsController@viewClass')->name('class-forum'); //Go to Class
 Route::get('/thread/{id}', 'PostsController@show')->name('post-single');
-Route::post('/post/{class_id}', 'PostsController@postStore')->name('post-store');
+Route::post('/post', 'PostsController@postStore')->name('post-store');
 Route::post('/comment/{id}', 'PostsController@postComment')->name('post-comment');
 
 Route::get('/assignments/{class_id}', 'PostsController@showAssign')->name('assignments');
@@ -130,3 +130,5 @@ Route::post('/turn-in/{assign_id}', 'PostsController@turnInPost')->name('turn-in
 
 //Attendance
 Route::get('/event/{id}', 'EventController@showSingle')->name('event-single');
+
+Route::get('/audits', 'AdminViewPanel@audits')->name('audits');

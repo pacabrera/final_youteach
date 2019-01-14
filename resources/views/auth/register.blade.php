@@ -50,10 +50,17 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="">Username</label>
-                                        <input name="usr" id="usr" type="text" class="form-control {{ $errors->has('usr') ? 'is-invalid' : '' }}" value="{{ old('usr') }}">
+                                      <label for="gender">Gender</label>
+                                      <select id="gender" class="form-control" name="gender">
+                                        <option selected value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                      </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Student No.</label>
+                                        <input name="id" id="id" type="text" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" value="{{ old('id') }}">
                                         <div class="invalid-feedback">
-                                            {{ $errors->first('usr') }}
+                                            {{ $errors->first('id') }}
                                         </div>
                                     </div>
                                     <div class="form-group">
