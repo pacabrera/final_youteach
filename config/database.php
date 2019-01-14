@@ -48,7 +48,7 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
- 
+ /*
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -64,8 +64,9 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-    
-/*
+     */  
+
+
     'mysql' => array(
         'driver'    => 'mysql',
         'host'      => $host,
@@ -77,8 +78,7 @@ return [
         'prefix'    => '',
     ),
       
-      */  
- 
+      
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
