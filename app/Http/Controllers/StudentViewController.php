@@ -30,7 +30,7 @@ class StudentViewController extends Controller
 
         $eventsCount = Event::all()->count();
 
-        return view('student.student', compact('checkClass', 'usr','myClass', 'eventsCount'));
+        return view('student.student', compact('checkClass', 'usr', 'eventsCount'));
     }
 
     //View Class per Class Code
