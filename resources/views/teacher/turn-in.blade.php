@@ -22,12 +22,12 @@
 
 
                       <div class="form-group row">
-                         <div class="col-md-2 col-sm-2 col-lg-12">
-                            <textarea class="form-control" placeholder="Instructions" name="body" rows="10"></textarea> 
+                         <div class="col-md-12 col-sm-12 col-lg-12">
+                            <textarea class="form-control" placeholder="Text Response" name="body" rows="10"></textarea> 
                         </div>
                       </div>
                       <div class="form-group row">
-                        <div class="col-md-2 col-sm-2 col-lg-12">
+                        <div class="col-md-12 col-sm-12 col-lg-12">
                           <label class="file">
   <input type="file" id="file" aria-label="File browser example" name="file[]" multiple>
   <span class="file-custom"></span>

@@ -22,9 +22,9 @@
                   <div class="card-body">
                     <form class="form-horizontal" method="POST" action="{{ route('assignments.store')}}" enctype="multipart/form-data">
                     	@csrf
-                                            <div class="form-group row">
+                      <div class="form-group row">
                          <div class="col-md-2 col-sm-2 col-lg-12">
-                            <input type="text" class="form-control" placeholder="Instructions" name="title">
+                            <input type="text" class="form-control" placeholder="Assignment Title" name="title">
                       </div>
                     </div>
                       <div class="form-group row">

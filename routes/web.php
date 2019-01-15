@@ -77,7 +77,7 @@ Route::put('/quiz/{id}', 'QuizEventController@update')->name('quiz.update');
 Route::resource('assignments', 'AssignmentController', ['only' => [//Sections and Grade Levels
     'index', 'store', 'update', 'destroy'
 ]]);
-Route::get('/assignment/{id}', 'TeacherViewController@viewSubmissions')->name('assign-submissions');
+Route::get('/assignment/{id}', 'AssignmentController@viewSubmissions')->name('assign-submissions');
 
 Route::resource('question', 'QuestionController', ['only' => [//Question
     'store', 'update',  'destroy',
@@ -92,7 +92,7 @@ Route::get('events', 'EventController@index')->name('events');
 Route::get('/group/{class_id}', 'TeacherViewController@groupGen')->name('group');
 Route::post('/generate/{class_id}', 'TeacherViewController@groupGenPost')->name('generate-group');
 Route::post('/group', 'TeacherViewController@gradeGroup')->name('grade-group');
-
+Route::get('submissions', 'AssignmentController@submissions')->name('submissions');
 
 }); // End /teacher
 

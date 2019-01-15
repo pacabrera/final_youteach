@@ -128,4 +128,15 @@ class AssignmentController extends Controller
     {
         //
     }
+
+    public function viewSubmissions($id)
+    {
+
+        $submissions = AssignSubmission::where('assgn_id', $id)->get();
+        $xd = Assignment::where('id', $id)->first()->class_id;
+        $myClass = Klase::where('class_id', $xd)->first();
+
+
+        return view('teacher.submissions', compact('submissions', 'myClass'));
+    }
 }

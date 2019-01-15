@@ -24,6 +24,11 @@ class UserProfile extends Model
         return $this->belongsTo('App\User', 'id', 'id');
     }
 
+    public function assignSubmissions()
+    {
+        return $this->hasMany('App\AssignSubmission');
+    }
+
     public function posts()
     {
         return $this->hasMany('App\User', 'id', 'id');

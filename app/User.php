@@ -60,6 +60,10 @@ class User extends Authenticatable
         }     
     }
 
+    public function submission(){
+        return $this->hasMany(AssignSubmission::Class);
+    }
+
     public function username(){
         return $this->user_profile->given_name . ' ' . $this->user_profile->family_name;
     }
