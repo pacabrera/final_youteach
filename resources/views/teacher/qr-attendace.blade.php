@@ -19,7 +19,7 @@
   <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->color(38, 38, 38, 0.85)->backgroundColor(255, 255, 255, 0.82)->size(300)->generate($qrcode->qrcode)) !!} " class="img-responsive">
   <p> You may now let the students to scan the QR Code!</p>
 
-  <button type="submit" id="autogenerate_qr" class="btn btn-primary">Generate New</button>
+  <a href="{{route('attendances', $qrcode->id)}}" class="btn btn-primary"> View Attendance </a>
 </div>
 
                     </div>
@@ -34,7 +34,6 @@
    //Delete Items
   $('#autogenerate_qr').click(function(){
       if(confirm('Are you sure you want to generate a new QR Code?')){
-
          $.ajax({
             type: "POST",
             cache: false,

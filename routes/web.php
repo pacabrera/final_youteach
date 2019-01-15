@@ -59,6 +59,7 @@ Route::get('/attendance/{class_id}', 'AttendanceController@index')->name('qr-att
 Route::resource('class', 'ClassesController',  ['only' => [//Class
     'store', 'destroy'
 ]]);
+Route::get('/attendances/{id}', 'AttendanceController@getAttendance')->name('attendances');
 
 Route::get('/recitation/{class_id}', 'TeacherViewController@recitation')->name('recitation');
 Route::post('/randomize/{class_id}', 'TeacherViewController@recitationTool')->name('randomize');
@@ -108,9 +109,11 @@ Route::post('profile', 'AccountController@changeProfilePic')->name('profile-pic'
 Route::resource('take', 'TakeQuizController', ['only' => [//Related to taking of quiz
     'store', 'show'
 ]]); 
-Route::get('/attendance/{class_id}', 'AttendanceController@student')->name('attendance');
+Route::get('/attendance/{class_id}', 'AttendanceController@student')->name('attendance-stud');
 Route::post('/attendance', 'AttendanceController@attendance')->name('attendance');
 
+Route::get('/grades/{class_id}', 'StudentViewController@grades')->name('grades');
+Route::get('/quiz-score/{quiz_id}', 'StudentViewController@quizGrade')->name('quiz-score');
 }); // End /Student
 
 

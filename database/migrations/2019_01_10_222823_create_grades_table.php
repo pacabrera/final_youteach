@@ -20,7 +20,7 @@ class CreateGradesTable extends Migration
             $table->foreign('usr_id')->references('id')->on('users');
             $table->string('class_id', 5);
             $table->foreign('class_id')->references('class_id')->on('classes');
-            $table->unsignedInteger('gradeCategory');
+            $table->string('type');
             $table->timestamps();
         });
     }

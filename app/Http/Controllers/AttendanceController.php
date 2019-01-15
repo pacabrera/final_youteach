@@ -26,15 +26,32 @@ class AttendanceController extends Controller
 
     public function attendance(Request $request)
     {
-    	    $code = $request->input('code');
-   $qrcode = AttendanceQr::where('qrcode', $code)->whereDate('created_at', Carbon::today())->first();
-        $attendance = new Attendance;
-        $attendance->usr_id = Auth::user()->id;
-        $attendance->qr_id = $qrcode->id;
-        $attendance->string = $request->input('code');
-        $attendance->save();
+        $result =0;
 
-        swal()->success('Attendance Recorded!',[]);
+        $code = $request->data;
+        if ($code) {
+        $qrcode = AttendanceQr::where('qrcode', $code)->whereDate('created_at', Carbon::today())->first();
+        $checkQr = AttendanceQr::where('qrcode', $code)->first();
+        $check = Attendance::where('usr_id', Auth::user()->id)->where('qr_id', $qrcode->id)->count();
+        if($check == 0){
+            $attendance = new Attendance;
+            $attendance->usr_id = Auth::user()->id;
+            $attendance->qr_id = $qrcode->id;
+            $attendance->save();
+             swal()->success('Attendance Recorded!',[]);
+             $result =1;
+        }
+ 
+        else {
+            swal()->warning('You Already take Attendance!',[]);
+            
+        }
+    }
+
+ return $result;
+
+       
+
 
     }
 
@@ -42,5 +59,13 @@ class AttendanceController extends Controller
     {
     	$myClass = Klase::where('class_id', $class_id)->first();
     	return view('student.qr-attendace', compact('myClass'));
+    }
+
+    public function getAttendance($id)
+    {
+        $xd = AttendanceQr::where('id', $id)->first()->class_id;
+        $attendances = Attendance::where('qr_id', $id)->whereDate('created_at', Carbon::today())->get();
+        $myClass = Klase::where('class_id', $xd)->first();
+        return view('teacher.attendances', compact('myClass', 'attendances'));
     }
 }

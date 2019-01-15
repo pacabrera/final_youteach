@@ -66,7 +66,7 @@ class TakeQuizController extends Controller
             'recorded_on' => \Carbon\Carbon::now()
         ]);
      
-        return redirect('/quiz/' . $quiz_event_id);
+        return redirect()->route('quiz-score', $quiz_event_id);
     }
 
     /**

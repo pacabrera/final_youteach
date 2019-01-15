@@ -85,11 +85,18 @@
             url: '/student/attendance/',
             type: 'POST', //type is any HTTP method
             data: {
-                code
+                data:code
             }, //Data as js object
-            success: function () {
-                window.location.reload(true);
+            success: function (data) {
+                
+                if (data==1) {
+                    //location.reload()
+                 window.location.reload(true);
+                  }else{
+                   return confirm('There is no user with this qr code'); 
+                  }
             }
+
         });
     }
  </script>

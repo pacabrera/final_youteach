@@ -114,7 +114,7 @@ class QuizEventController extends Controller
         $post = Post::create($new_post);
 
 
-        return redirect('/quizzes');
+        return redirect()->route('class-forum', $class_code);
     }
 
 
@@ -148,19 +148,12 @@ class QuizEventController extends Controller
 
             $qtn_id = QuizEvent::find($id)->questionnaire_id;
             $sum = Question::where('questionnaire_id', $qtn_id)->sum('points');
-  $myClass = Klase::where('class_id', $id)->first();
+            $myClass = Klase::where('class_id', $results->class_id)->first();
             return view('teacher.manage-quiz', compact('quiz_details', 'results', 'sum', 'myClass'));
       
 //Student cut next
 /*
-            $results = StudentScore::with('quiz_event', 'user_profile')
-                        ->where('student_id', Auth::user()->id)
-                        ->first();
 
-            $qtn_id = QuizEvent::find($id)->questionnaire_id;
-            $sum = Question::where('questionnaire_id', $qtn_id)->sum('points');
-
-            return view('quiz.results', compact('results', 'sum'));
         */
         
     }

@@ -12,6 +12,11 @@ use App\Post;
 use App\Comment;
 use App\User;
 use App\Event;
+use App\Grade;
+use App\Question;
+use App\QuizEvent;
+use App\StudentScore;
+
 
 class StudentViewController extends Controller
 {
@@ -117,5 +122,23 @@ class StudentViewController extends Controller
         $comment->save();
 
         return 'success';
+    }
+
+    public function grades($class_id){
+        $grades = Grade::get()->where('class_id', $class_id);
+        $myClass = Klase::where('class_id', $class_id)->first();
+        return view('student.grades', compact('grades','myClass'));
+    }
+
+    public function quizGrade($quiz_id)
+    {
+            $results = StudentScore::with('quiz_event', 'user_profile')
+                        ->where('student_id', Auth::user()->id)
+                        ->first();
+
+            $qtn_id = QuizEvent::find($quiz_id)->questionnaire_id;
+            $sum = Question::where('questionnaire_id', $qtn_id)->sum('points');
+
+            return view('student.quiz.results', compact('results', 'sum'));
     }
 }

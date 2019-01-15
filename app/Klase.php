@@ -51,6 +51,10 @@ class Klase extends Model
         return $this->hasMany('App\QuizEvent', 'class_id');
     }
 
+        public function schedule(){
+        return $this->hasMany('App\Schedule', 'class_id');
+    }
+
   
 }
 

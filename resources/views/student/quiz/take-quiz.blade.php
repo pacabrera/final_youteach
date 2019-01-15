@@ -9,13 +9,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $quiz->quiz_event_name }} - TeckQuiz</title>
+    <title>{{ $quiz->quiz_event_name }} - YouTeach</title>
 
     <!-- Styles -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+   <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link href="{{ asset('assets/css/teckquiz.css') }}" rel="stylesheet">
 </head>
-<style>
+<style>a
     .sidebar{
         position: fixed;
         top: 0px;
@@ -29,7 +29,7 @@
             <div class="row">
                 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
                     <ul class="nav nav-pills flex-column">
-                        <li class="nav-item disabled"><a class="nav-link disabled" style="font-size: 2rem; text-align: center">TeckQuiz</a></li>
+                        <li class="nav-item disabled"><a class="nav-link disabled" style="font-size: 2rem; text-align: center">YOUTEACH-LMS</a></li>
                         <li class="nav-item">
                             <a class="nav-link active" id="v-pills-welcome-tab" data-toggle="pill" href="#welcome" role="tab" aria-controls="v-pills-welcome"
                                 aria-expanded="true">Welcome</a>

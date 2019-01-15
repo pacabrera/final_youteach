@@ -61,7 +61,7 @@
                         <div class="flex-grow-1 d-flex align-items-center">
                           <div class="dot mr-3 bg-red"></div>
                           <div class="text">
-                            <h6 class="mb-0">Assignment</h6><span class="text-gray">127 new cases</span>
+                            <h6 class="mb-0">Assignment</h6><span class="text-gray">{{ $myClass->assignment->where('status', 0)->count()}} new cases</span>
                           </div>
                         </div>
                         <div class="icon bg-red text-white"><i class="fas fa-clipboard-check"></i></div>
@@ -71,7 +71,7 @@
                         <div class="flex-grow-1 d-flex align-items-center">
                           <div class="dot mr-3 bg-red"></div>
                           <div class="text">
-                            <h6 class="mb-0">Quizzes</h6><span class="text-gray">127 new cases</span>
+                            <h6 class="mb-0">Quizzes</h6><span class="text-gray">{{ $myClass->quiz_event->where('status', 0)->count()}} new cases</span>
                           </div>
                         </div>
                         <div class="icon bg-red text-white"><i class="fas fa-clipboard-check"></i></div>
@@ -81,7 +81,17 @@
                         <div class="flex-grow-1 d-flex align-items-center">
                           <div class="dot mr-3 bg-red"></div>
                           <div class="text">
-                            <h6 class="mb-0">Events</h6><span class="text-gray">127 new cases</span>
+                            <h6 class="mb-0"><a href="{{route('grades', $myClass->class_id)}}">Grades</a></h6><span class="text-gray"></span>
+                          </div>
+                        </div>
+                        <div class="icon bg-red text-white"><i class="fas fa-clipboard-check"></i></div>
+                      </div>
+
+                      <div class="bg-white shadow roundy px-4 py-3 d-flex align-items-center justify-content-between mb-4">
+                        <div class="flex-grow-1 d-flex align-items-center">
+                          <div class="dot mr-3 bg-red"></div>
+                          <div class="text">
+                            <h6 class="mb-0"><a href="{{route('attendance-stud', $myClass->class_id)}}">Attendance</a></h6><span class="text-gray"></span>
                           </div>
                         </div>
                         <div class="icon bg-red text-white"><i class="fas fa-clipboard-check"></i></div>
@@ -138,6 +148,7 @@
               </div>
             </div>
             @endforeach
+          </div>
 <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
 <script>
   CKEDITOR.replace('my-editor');

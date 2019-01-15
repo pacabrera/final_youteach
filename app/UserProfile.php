@@ -39,4 +39,9 @@ class UserProfile extends Model
         return $this->hasMany('App\Klase', 'instructor_id', 'id');
     }
 
+    public function attendance()
+    {
+        return $this->hasMany('App\Attendance', 'usr_id');
+    }
+
 }

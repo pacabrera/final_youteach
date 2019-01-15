@@ -131,7 +131,7 @@
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Schedule</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Grades</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-user-details-1 mr-3 text-gray"></i><span>Account Settings</span></a></li>
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Help</span></a></li>
+              <li class="sidebar-list-item"><a href="{{ route('acc-settings') }}" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Help</span></a></li>
         </ul>
       </div>
 
@@ -182,7 +182,7 @@
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="{{ route('home') }}" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>About</span></a></li>
-              <li class="sidebar-list-item"><a href="forms.html" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Events</span></a></li>
+              <li class="sidebar-list-item"><a href="{{ route('events') }}" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Events</span></a></li>
           <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>My Classes</span></a>
             <div id="pages" class="collapse">
                 <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">

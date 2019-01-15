@@ -82,33 +82,4 @@ class QuizController extends Controller
             return view('panel.student', compact('pending_quiz', 'upcoming_quiz', 'finished_quiz', 'url'));
         }
     
-    
-    /* Function Add News
-    public function uploadAws (Request $request){
-        //Handles the file upload
-        $file = $request->file('news_img');
-        $file = $request->photo;
-        if($request->hasFile('news_img')) {
-          //Get filename with the extension
-          $filenameWithExt = $request->file('news_img')->getClientOriginalName();
-          //Get just filename
-          $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-          //Get just ext
-          $extension = $request->file('news_img')->getClientOriginalExtension();
-          //Filename to store
-          $fileNameToStore = $filename.'.'.$extension;
-          //Upload the image
-$path = $request->file('news_img')->storeAs(
-    $fileNameToStore, $request->user()->id, 's3'
-);
-        }
-
-        else {
-          $fileNameToStore = 'no_image.png';
-        }
-
-        return view('panel.student');
-    }
-*/
-    
 }

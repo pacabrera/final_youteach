@@ -1,7 +1,19 @@
-@extends('layouts.app') @section('title', 'Manage Quiz - TeckQuiz') @section('content')
-
-<section class="container">
-    <h1>Manage Quiz</h1>
+@extends('layouts.app')
+@section('title', 'Quiz')
+@section('content')
+<div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+          <!-- Post -->   
+            <div class="row mb-4">            
+              <div class="col-lg-12 mb-4 mb-lg-0">
+                <div class="card">
+                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                    <h3> {{ $myClass->class_name}} </h3>
+                    <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
+                  </div>
+                     <div class="card-body">
+    <h2>Manage Quizzes</h2>
     <hr>
     <div class="row">
         <div class="col-lg-9">

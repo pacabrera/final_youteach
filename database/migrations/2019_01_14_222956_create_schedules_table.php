@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGradeCategoriesTable extends Migration
+class CreateSchedulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateGradeCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('grade_categories', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type');
-            
+            $table->string('day');
+            $table->time('time');
+            $table->string('class_id', 5);
+            $table->foreign('class_id')->references('class_id')->on('classes')->onDelete('cascade');;
+            $table->timestamps();
         });
     }
 
@@ -27,6 +30,6 @@ class CreateGradeCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grade_categories');
+        Schema::dropIfExists('schedules');
     }
 }
