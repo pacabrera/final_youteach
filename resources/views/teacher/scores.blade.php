@@ -26,31 +26,27 @@
             <div class="row">
               <div id="table-title">
                 </div>
-                <table id="table-fill">
+               <table id="dataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                 <thead>
-                <tr id="tr-grades">
-                <th id="th-grades" class="text-left">Student Name</th>
-                <th id="th-grades" class="text-left" colspan="{{$grades->where('type', 'Quiz')->count()}}">Quizzes</th>
-                <th id="th-grades" class="text-left" colspan="{{$grades->where('type', 'Asssignment')->count()}}">Assignments</th>
-                <th id="th-grades" class="text-left" colspan="{{$grades->where('type', 'Activity')->count()}}">Group Activity</th>
-                <th id="th-grades" class="text-left" colspan="{{$grades->where('type', 'Recitation')->count()}}">Recitation</th>
-                
-
-               
+                <tr >
+                <th>Student Name</th>
+                <th colspan="{{$grades->where('type', 'Quiz')->count()}}">Quizzes</th>
+                <th colspan="{{$grades->where('type', 'Asssignment')->count()}}">Assignments</th>
+                <th colspan="{{$grades->where('type', 'Activity')->count()}}">Group Activity</th>
+                <th colspan="{{$grades->where('type', 'Recitation')->count()}}">Recitation</th>
                 </tr>
                 </thead>
 
                 <tbody class="table-hover">
-                
-                <tr id="tr-grades">
-                 @foreach($grades as $grade) 
-                <td id="td-grades" class="text-left">{{$grade->user_profile->family_name}}, {{$grade->user_profile->given_name}} {{substr($grade->user_profile->middle_name, 0,1)}}.</td>
-                 @endforeach 
+                @foreach($classlist as $student)
+                <tr>
+                <td  class="text-left">{{$student->user_profile->family_name}}, {{$student->user_profile->given_name}} {{substr($student->user_profile->middle_name, 0, 1)}}.</td>
+                <td  class="text-left">{{$student->grades->grade}}.</td>
               </tr>
-                
+               @endforeach      
                 @if(empty($grades))
-                <tr id="tr-grades">
-                <td id="td-grades" class="text-center" colspan="2">No Grades Yet</td>
+                <tr >
+                <td  class="text-center" colspan="2">No Grades Yet</td>
                 
               </tr>
                 @endif

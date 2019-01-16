@@ -50,7 +50,7 @@ class UserProfile extends Model
     }
 
     public function grades(){
-        return $this->hasMany('App\UserProfile', 'usr_id');
+        return $this->hasMany('App\Grade', 'usr_id', 'id');
     }
 
 }

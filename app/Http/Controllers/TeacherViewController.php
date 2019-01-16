@@ -122,9 +122,15 @@ class TeacherViewController extends Controller
 
     public function scores($class_id)
     {
-        $grades = Grade::get()->where('class_id', $class_id);
-        $myClass = Klase::where('class_id', $class_id)->first();
-        return view('teacher.scores', compact('grades','myClass'));
+        $grades = Grade::where('class_id', $class_id)->orderBy('usr_id')->get();
+        $myClass = Klase::where('class_id', $class_id)->with('class_members')->first();
+        $klase = ClassMembers::where('class_id', $class_id)->first();
+
+        $classlist = ClassMembers::where('class_members.class_id', $class_id)
+        ->join('classes', 'classes.class_id', 'class_members.class_id')->get();
+
+
+        return view('teacher.scores', compact('grades','myClass', 'classlist'));
     }
 
 
