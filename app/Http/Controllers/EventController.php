@@ -24,7 +24,7 @@ class EventController extends Controller
                     $value->id,
                     // Add color and link on event
                     [
-                        'color' => '#f05050',
+                        'color' => $value->color,
                        'url' => route('event-single', $value->id),
                     ]
                 );
@@ -42,7 +42,7 @@ class EventController extends Controller
             foreach ($data as $key => $value) {
                 $events[] = Calendar::event(
                     $value->title,
-                    true,
+                    false,
                     new \DateTime($value->start_date),
                     new \DateTime($value->end_date.' +1 day'),
                     null,

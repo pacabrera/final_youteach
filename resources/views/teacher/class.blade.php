@@ -53,7 +53,7 @@
               <div class="col-lg-4">
                 <div class="card mb-4">
                   <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
-                    <h2 class="h6 text-uppercase mb-0">Notification</h2>
+                    <h2 class="h6 text-uppercase mb-0">Dashboard</h2>
                   </div>
                   <div class="card-body">
                     <div class="chart-holder">
@@ -81,7 +81,7 @@
                         <div class="flex-grow-1 d-flex align-items-center">
                           <div class="dot mr-3 bg-red"></div>
                           <div class="text">
-                            <h6 class="mb-0"><a href="{{route('grades', $myClass->class_id)}}">Grades</a></h6><span class="text-gray"></span>
+                            <h6 class="mb-0"><a href="{{route('grades', $myClass->class_id)}}">View Grades</a></h6><span class="text-gray"></span>
                           </div>
                         </div>
                         <div class="icon bg-red text-white"><i class="fas fa-clipboard-check"></i></div>

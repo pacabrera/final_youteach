@@ -10,6 +10,8 @@ use App\UserProfile;
 use App\StudentScore;
 use App\StudentAnswer;
 use App\ClassMembes;
+use App\Grade;
+use App\Question;
 
 use Illuminate\Support\Facades\DB;
 
@@ -31,7 +33,10 @@ class TakeQuizController extends Controller
         $answers = $request->input('answer');
         $quiz_event_id = $request->input('quiz_event_id');
         $student_id = Auth::user()->id;
+        $class_id = QuizEvent::where('quiz_event_id', $quiz_event_id)->first();
+         $sum = Question::where('questionnaire_id', $class_id->questionnaire_id)->sum('points');
 
+        $class_id = QuizEvent::where('quiz_event_id', $quiz_event_id)->first();
         $check_exisiting = StudentScore::where('student_id', $student_id)
                             ->where('quiz_event_id', $quiz_event_id)
                             ->count();
@@ -65,6 +70,14 @@ class TakeQuizController extends Controller
             'score' => $score,
             'recorded_on' => \Carbon\Carbon::now()
         ]);
+
+        $grade = new Grade;
+        $grade->usr_id = $student_id;
+        $grade->class_id = $class_id->class_id;
+        $grade->grade = $score;
+        $grade->type = 'Quiz';
+        $grade->hps = $sum;
+        $grade->save();
      
         return redirect()->route('quiz-score', $quiz_event_id);
     }

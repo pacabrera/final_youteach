@@ -114,7 +114,7 @@ class QuizEventController extends Controller
         $post = Post::create($new_post);
 
 
-        return redirect()->route('class-forum', $class_code);
+        return redirect()->route('quizzes', $class_code);
     }
 
 

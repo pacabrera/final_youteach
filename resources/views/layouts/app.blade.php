@@ -63,12 +63,6 @@
 
         <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
           <li class="nav-item">
-            <form id="searchForm" class="ml-auto d-none d-lg-block">
-              <div class="form-group position-relative mb-0">
-
-                <input type="search" placeholder="Search ..." class="form-control form-control-sm border-0 no-shadow pl-4">
-              </div>
-            </form>
           </li>
           <li class="nav-item dropdown mr-3"><a id="notifications" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-gray-400 px-1"><i class="fa fa-bell"></i><span class="notification-icon"></span></a>
             <div aria-labelledby="notifications" class="dropdown-menu"><a href="#" class="dropdown-item">
@@ -103,7 +97,6 @@
             <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family"> {!! Auth::user()->username() !!} </strong>
               <small>Teacher</small></a>
               <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log       </a>
-              <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log       </a>
               <div class="dropdown-divider"></div><a href="{{ route('logout')  }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
@@ -128,8 +121,6 @@
         </ul>
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MY PROFILE</div>
         <ul class="sidebar-menu list-unstyled">
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Schedule</span></a></li>
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Grades</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-user-details-1 mr-3 text-gray"></i><span>Account Settings</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('acc-settings') }}" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Help</span></a></li>
         </ul>
@@ -159,6 +150,7 @@
                 <li class="sidebar-list-item"><a href="{{ route('quizzes', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Quizzes</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('assignments', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Assignments</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('qr-attendance', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Attendance</a></li>
+                <li class="sidebar-list-item"><a href="{{ route('score-class', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Scores</a></li>
               </ul>
             </div>
           
@@ -168,7 +160,6 @@
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MY PROFILE</div>
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Schedule</span></a></li>
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Grades</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('acc-settings') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Account Settings</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Help</span></a></li>
         </ul>
@@ -196,7 +187,6 @@
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MY PROFILE</div>
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Schedule</span></a></li>
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Grades</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('acc-settings') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Account Settings</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Help</span></a></li>
         </ul>

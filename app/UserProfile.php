@@ -49,4 +49,8 @@ class UserProfile extends Model
         return $this->hasMany('App\Attendance', 'usr_id');
     }
 
+    public function grades(){
+        return $this->hasMany('App\UserProfile', 'usr_id');
+    }
+
 }

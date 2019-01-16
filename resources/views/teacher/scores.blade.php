@@ -29,20 +29,26 @@
                 <table id="table-fill">
                 <thead>
                 <tr id="tr-grades">
-                <th id="th-grades" class="text-left">Type</th>
-                <th id="th-grades" class="text-left">Score</th>
+                <th id="th-grades" class="text-left">Student Name</th>
+                <th id="th-grades" class="text-left" colspan="{{$grades->where('type', 'Quiz')->count()}}">Quizzes</th>
+                <th id="th-grades" class="text-left" colspan="{{$grades->where('type', 'Asssignment')->count()}}">Assignments</th>
+                <th id="th-grades" class="text-left" colspan="{{$grades->where('type', 'Activity')->count()}}">Group Activity</th>
+                <th id="th-grades" class="text-left" colspan="{{$grades->where('type', 'Recitation')->count()}}">Recitation</th>
+                
+
                
                 </tr>
                 </thead>
 
                 <tbody class="table-hover">
-                @foreach($grades as $grade)
+                
                 <tr id="tr-grades">
-                <td id="td-grades" class="text-left">{{$grade->type}}</td>
-                <td id="td-grades" class="text-left">{{$grade->grade}}@if(!empty($grade->hps))/{{$grade->hps}}@endif</td>
+                 @foreach($grades as $grade) 
+                <td id="td-grades" class="text-left">{{$grade->user_profile->family_name}}, {{$grade->user_profile->given_name}} {{substr($grade->user_profile->middle_name, 0,1)}}.</td>
+                 @endforeach 
               </tr>
-                @endforeach
-                @if(!empty($grades))
+                
+                @if(empty($grades))
                 <tr id="tr-grades">
                 <td id="td-grades" class="text-center" colspan="2">No Grades Yet</td>
                 

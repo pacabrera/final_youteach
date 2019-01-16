@@ -78,7 +78,7 @@ class TeacherViewController extends Controller
         $grade->usr_id = $request->input('usr_id');
         $grade->class_id = $request->input('class_id');
         $grade->grade = $request->input('grade');
-        $grade->gradeCategory = 4;
+        $grade->type = 'Recitation';
         $grade->save();
 
         $student_id = $request->input('usr_id') ;
@@ -94,7 +94,7 @@ class TeacherViewController extends Controller
         $grade->usr_id = $request->input('student_id');
         $grade->class_id = $request->input('class_id');
         $grade->grade = $request->input('grade');
-        $grade->gradeCategory = 5;
+        $grade->type = 'Activity';
         $grade->save();
     }
 
@@ -118,6 +118,13 @@ class TeacherViewController extends Controller
                 
         return view('teacher.groups', compact('myClass', 'classlist','numGroup'));
         
+    }
+
+    public function scores($class_id)
+    {
+        $grades = Grade::get()->where('class_id', $class_id);
+        $myClass = Klase::where('class_id', $class_id)->first();
+        return view('teacher.scores', compact('grades','myClass'));
     }
 
 

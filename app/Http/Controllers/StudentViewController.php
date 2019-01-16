@@ -125,7 +125,7 @@ class StudentViewController extends Controller
     }
 
     public function grades($class_id){
-        $grades = Grade::get()->where('class_id', $class_id);
+        $grades = Grade::get()->where('class_id', $class_id)->where('usr_id', Auth::user()->id);
         $myClass = Klase::where('class_id', $class_id)->first();
         return view('student.grades', compact('grades','myClass'));
     }

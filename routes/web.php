@@ -94,6 +94,7 @@ Route::post('/generate/{class_id}', 'TeacherViewController@groupGenPost')->name(
 Route::post('/group', 'TeacherViewController@gradeGroup')->name('grade-group');
 Route::get('submissions', 'AssignmentController@submissions')->name('submissions');
 
+Route::get('/scores/{class_id}', 'TeacherViewController@scores')->name('score-class');
 }); // End /teacher
 
 //All Student Routes
@@ -115,6 +116,8 @@ Route::post('/attendance', 'AttendanceController@attendance')->name('attendance'
 Route::get('/grades/{class_id}', 'StudentViewController@grades')->name('grades');
 Route::get('/quiz-score/{quiz_id}', 'StudentViewController@quizGrade')->name('quiz-score');
 }); // End /Student
+
+
 
 
 //Student Routes

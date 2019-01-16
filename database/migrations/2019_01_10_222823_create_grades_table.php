@@ -21,6 +21,7 @@ class CreateGradesTable extends Migration
             $table->string('class_id', 5);
             $table->foreign('class_id')->references('class_id')->on('classes');
             $table->string('type');
+            $table->integer('hps')->nullable();
             $table->timestamps();
         });
     }
