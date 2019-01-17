@@ -14,6 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 
     <!-- Styles -->
+
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link href="{{ asset('assets/css/orionicons.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.red.css') }}" rel="stylesheet">
@@ -25,6 +26,7 @@
 <link rel="manifest" href="{{ asset('assets/onesignal/manifest.json') }}" />
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 
    @include('vendor.sweetalert.cdn') 
 
@@ -44,6 +46,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
     <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
 </head>
  @if(Auth::guest())
     
@@ -95,8 +99,8 @@
           </li>
           <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="{!! Auth::user()->profile_photo() !!}" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
             <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family"> {!! Auth::user()->username() !!} </strong>
-              <small>Teacher</small></a>
-              <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log       </a>
+            </a>
+              <div class="dropdown-divider"></div><a href="{{ route('acc-settings')}}" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log       </a>
               <div class="dropdown-divider"></div><a href="{{ route('logout')  }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
@@ -159,7 +163,7 @@
 
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MY PROFILE</div>
         <ul class="sidebar-menu list-unstyled">
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Schedule</span></a></li>
+              <li class="sidebar-list-item"><a href="{{ route('schedule-teacher')}}" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Schedule</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('acc-settings') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Account Settings</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Help</span></a></li>
         </ul>
@@ -186,7 +190,7 @@
         </ul>
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MY PROFILE</div>
         <ul class="sidebar-menu list-unstyled">
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Schedule</span></a></li>
+              <li class="sidebar-list-item"><a href="{{ route('schedule')}}" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Schedule</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('acc-settings') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Account Settings</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Help</span></a></li>
         </ul>
@@ -246,15 +250,71 @@
                 <div class="form-group">
                     <label for="">Schedule</label> <br/>
                     <div class="row">
-                    <div class="col-lg-6 col-md-3">
-                    Monday <input type="time" name="monday" class="form-control">
-                    Tuesday <input type="time" name="tuesday" class="form-control">
-                    Wednesday <input type="time" name="wednesday" class="form-control">
+                    <div class="col-lg-12 col-md-3">
+                    Monday <input type="text" name="roomM" class="form-control" placeholder="Room">
+                    <br>
                   </div>
-                 <div class="col-lg-6 col-md-3">
-                    Thursday <input type="time" name="thursday" class="form-control">
-                    Friday <input type="time" name="friday" class="form-control">
-                    Saturday <input type="time" name="saturday" class="form-control">
+                    <div class="col-lg-6 col-md-3">
+                    <input type="time" name="monday" class="form-control">
+                    </div>
+                    <div class="col-lg-6 col-md-3">
+                    <input type="time" name="monday2" class="form-control">
+                    </div>
+
+                    <div class="col-lg-12 col-md-3">
+                    Tuesday <input type="text" name="roomT" class="form-control" placeholder="Room">
+                    <br>
+                  </div>
+                    <div class="col-lg-6 col-md-3">
+                     <input type="time" name="tuesday" class="form-control">
+                    </div>
+                    <div class="col-lg-6 col-md-3">
+                     
+                    <input type="time" name="tuesday2" class="form-control">
+</div>
+                    <div class="col-lg-12 col-md-3">
+                    Wednesday <input type="text" name="roomW" class="form-control" placeholder="Room">
+                    <br>
+                  </div>
+                    <div class="col-lg-6 col-md-3">
+                     <input type="time" name="wednesday" class="form-control">
+                    </div>
+                    <div class="col-lg-6 col-md-3">
+                     
+                    <input type="time" name="wednesday2" class="form-control">
+</div>
+                    <div class="col-lg-12 col-md-3">
+                    Thursday <input type="text" name="roomTH" class="form-control" placeholder="Room">
+                    <br>
+                  </div>
+                    <div class="col-lg-6 col-md-3">
+                     <input type="time" name="thursday" class="form-control">
+                    </div>
+                    <div class="col-lg-6 col-md-3">
+                      
+                    <input type="time" name="thursday2" class="form-control">
+</div>
+                    <div class="col-lg-12 col-md-3">
+                    Friday <input type="text" name="roomF" class="form-control" placeholder="Room">
+                    
+                  </div>
+                    <div class="col-lg-6 col-md-3">
+                     <input type="time" name="friday" class="form-control">
+                    </div>
+                    <div class="col-lg-6 col-md-3">
+                      
+                    <input type="time" name="friday2" class="form-control">
+                  </div>
+                    <div class="col-lg-12 col-md-3">
+                    Saturday <input type="text" name="roomS" class="form-control" placeholder="Room">
+                    <br>
+                  </div>
+                  <div class="col-lg-6 col-md-3">
+                     <input type="time" name="saturday" class="form-control">
+                    </div>
+                    <div class="col-lg-6 col-md-3">
+                      
+                    <input type="time" name="saturday2" class="form-control">
                   </div>
                 </div>
               </div>

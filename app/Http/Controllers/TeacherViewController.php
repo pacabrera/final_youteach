@@ -19,7 +19,7 @@ use Softon\SweetAlert\Facades\SWAL;
 use App\PostFiles;
 use Illuminate\Support\Facades\Storage;
 use App\Event;
-
+use App\Schedule;
 
 class TeacherViewController extends Controller
 {
@@ -126,13 +126,24 @@ class TeacherViewController extends Controller
         $myClass = Klase::where('class_id', $class_id)->with('class_members')->first();
         $klase = ClassMembers::where('class_id', $class_id)->first();
 
-        $classlist = ClassMembers::where('class_members.class_id', $class_id)
-        ->join('classes', 'classes.class_id', 'class_members.class_id')->get();
+        $classlist = Klase::join('class_members', 'classes.class_id', 'class_members.class_id')
+        ->join('grades', 'grades.class_id', 'classes.class_id')
+        ->get();
 
 
         return view('teacher.scores', compact('grades','myClass', 'classlist'));
     }
 
+    public function schedule()
+    {
+        $schedule = Schedule::get();
+
+        $classes = Klase::where('instructor_id', Auth::user()->id)
+        ->join('schedules', 'schedules.class_id', 'classes.class_id')
+        ->get();
+
+        return view('teacher.schedule', compact('schedule', 'classes'));
+    }
 
 
 }

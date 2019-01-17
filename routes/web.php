@@ -95,6 +95,8 @@ Route::post('/group', 'TeacherViewController@gradeGroup')->name('grade-group');
 Route::get('submissions', 'AssignmentController@submissions')->name('submissions');
 
 Route::get('/scores/{class_id}', 'TeacherViewController@scores')->name('score-class');
+
+Route::get('/schedule', 'TeacherViewController@schedule')->name('schedule-teacher');
 }); // End /teacher
 
 //All Student Routes
@@ -104,7 +106,7 @@ Route::prefix('/student')->group(function(){
 Route::get('/', 'StudentViewController@studentPanel')->name('student-panel');
 
 Route::post('/join', 'StudentViewController@JoinClass')->name('join-class');
-Route::get('/settings', 'StudentViewController@settingsView')->name('acc-settings');
+
 
 Route::post('profile', 'AccountController@changeProfilePic')->name('profile-pic');
 Route::resource('take', 'TakeQuizController', ['only' => [//Related to taking of quiz
@@ -115,6 +117,8 @@ Route::post('/attendance', 'AttendanceController@attendance')->name('attendance'
 
 Route::get('/grades/{class_id}', 'StudentViewController@grades')->name('grades');
 Route::get('/quiz-score/{quiz_id}', 'StudentViewController@quizGrade')->name('quiz-score');
+
+Route::get('/schedule', 'StudentViewController@schedule')->name('schedule');
 }); // End /Student
 
 
@@ -122,7 +126,7 @@ Route::get('/quiz-score/{quiz_id}', 'StudentViewController@quizGrade')->name('qu
 
 //Student Routes
 
-
+Route::get('/settings', 'StudentViewController@settingsView')->name('acc-settings');
 Route::put('/account/{account}', 'AccountController@changePassStud')->name('change-pass');
 
 Route::get('/class/{class_id}', 'PostsController@viewClass')->name('class-forum'); //Go to Class

@@ -41,7 +41,9 @@ class ClassesController extends Controller
             $schedule = new Schedule;
             $schedule->class_id = $klase->class_id;
             $schedule->day = 'M';
-            $schedule->time = $request->input('monday');
+            $schedule->timeFrom = $request->input('monday');
+            $schedule->timeTo = $request->input('monday2');
+            $schedule->room = $request->input('roomM');
             $schedule->save();
         }
 
@@ -49,35 +51,45 @@ class ClassesController extends Controller
             $schedule = new Schedule;
             $schedule->class_id = $klase->class_id;
             $schedule->day = 'T';
-            $schedule->time = $request->input('tuesday');
+            $schedule->timeFrom = $request->input('tuesday');
+            $schedule->timeTo = $request->input('tuesday2');
+            $schedule->room = $request->input('roomT');
             $schedule->save();
         }
         if($request->input('wednesday')){
              $schedule = new Schedule;
             $schedule->class_id = $klase->class_id;
             $schedule->day = 'W';
-            $schedule->time = $request->input('wednesday');
+            $schedule->timeFrom = $request->input('wednesday2');
+            $schedule->timeTo = $request->input('wednesday2');
+            $schedule->room = $request->input('roomW');
             $schedule->save();
         }
         if($request->input('thursday')){
              $schedule = new Schedule;
             $schedule->class_id = $klase->class_id;
             $schedule->day = 'TH';
-            $schedule->time = $request->input('thursday');
+            $schedule->timeFrom = $request->input('thursday');
+            $schedule->timeTo = $request->input('thursday2');
+            $schedule->room = $request->input('roomTH');
             $schedule->save();
         }
         if($request->input('friday')){
              $schedule = new Schedule;
             $schedule->class_id = $klase->class_id;
             $schedule->day = 'F';
-            $schedule->time = $request->input('friday');
+            $schedule->timeFrom = $request->input('friday');
+            $schedule->timeTo = $request->input('friday2');
+            $schedule->room = $request->input('roomF');
             $schedule->save();
         }
         if($request->input('saturday')){
              $schedule = new Schedule;
             $schedule->class_id = $klase->class_id;
             $schedule->day = 'S';
-            $schedule->time = $request->input('saturday');
+            $schedule->timeFrom = $request->input('saturday');
+            $schedule->timeTo = $request->input('saturday2');
+            $schedule->room = $request->input('roomS');
             $schedule->save();
         }
        

@@ -1,13 +1,20 @@
 @extends('layouts.app')
-@section('title', 'Quiz - TeckQuiz')
+@section('title', 'YouTeach | Settings')
+
 @section('content')
-<main>
 <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
-          <div class="container">
-            
-            <h1 class="mt-5">Account Settings</h1>
-          </div>
+          <section class="py-5">
+          <!-- Post -->   
+            <div class="row mb-4">            
+              <div class="col-lg-12 mb-6 mb-lg-0">
+                <div class="card">
+                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                    <h3>YOUTEACH - LMS </h3>
+                  </div>
+                                    <div class="card-body" >
+                      <div class="card gedf-card" >
+                          <div class="card-body">
 
 <div class="container-fluid">
         <div class="row">
@@ -113,7 +120,13 @@
         </div>
     </div>
 
-
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
 <script>
     $.ajaxSetup({
         headers: {

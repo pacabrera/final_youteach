@@ -16,6 +16,7 @@ use App\Grade;
 use App\Question;
 use App\QuizEvent;
 use App\StudentScore;
+use App\Schedule;
 
 
 class StudentViewController extends Controller
@@ -140,5 +141,17 @@ class StudentViewController extends Controller
             $sum = Question::where('questionnaire_id', $qtn_id)->sum('points');
 
             return view('student.quiz.results', compact('results', 'sum'));
+    }
+
+    public function schedule()
+    {
+        $schedule = Schedule::get();
+
+        $classes = Klase::join('class_members', 'classes.class_id', 'class_members.class_id')
+        ->where('class_members.student_id', Auth::user()->id)
+        ->join('schedules', 'schedules.class_id', 'classes.class_id')
+        ->get();
+
+        return view('student.schedule', compact('schedule', 'classes'));
     }
 }

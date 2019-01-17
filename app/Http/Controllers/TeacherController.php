@@ -30,4 +30,7 @@ class TeacherController extends Controller
         
         return view('admin.teachers', compact('teachers'));
     }
+
+
+
 }

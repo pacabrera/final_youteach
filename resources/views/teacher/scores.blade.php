@@ -26,22 +26,64 @@
             <div class="row">
               <div id="table-title">
                 </div>
-               <table id="dataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+               <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr >
                 <th>Student Name</th>
-                <th colspan="{{$grades->where('type', 'Quiz')->count()}}">Quizzes</th>
-                <th colspan="{{$grades->where('type', 'Asssignment')->count()}}">Assignments</th>
-                <th colspan="{{$grades->where('type', 'Activity')->count()}}">Group Activity</th>
-                <th colspan="{{$grades->where('type', 'Recitation')->count()}}">Recitation</th>
+                @if($grades->where('type', 'Quiz')->count() > 0)
+                @foreach($grades->where('type', 'Quiz') as $quizG)
+                <th>Quiz {{ $loop->iteration }}</th>
+                @endforeach
+                @endif
+
+                @if($grades->where('type', 'Asssignment')->count() > 0)
+                @foreach($grades->where('type', 'Asssignment') as $assG)
+                <th>Assignment {{ $loop->iteration }}</th>
+                 @endforeach
+                 @endif
+
+                @if($grades->where('type', 'Activity')->count() > 0)
+                @foreach($grades->where('type', 'Activity') as $actG)
+                <th>Activity {{ $loop->iteration }}</th>
+                 @endforeach
+                 @endif
+
+                @if($grades->where('type', 'Recitation')->count() > 0)
+                @foreach($grades->where('type', 'Recitation') as $recG)
+                <th>Recitation {{ $loop->iteration }} </th>
+                  @endforeach
+                @endif
                 </tr>
                 </thead>
 
                 <tbody class="table-hover">
-                @foreach($classlist as $student)
+                @foreach($classlist->unique() as $student)
                 <tr>
-                <td  class="text-left">{{$student->user_profile->family_name}}, {{$student->user_profile->given_name}} {{substr($student->user_profile->middle_name, 0, 1)}}.</td>
-                <td  class="text-left">{{$student->grades->grade}}.</td>
+                <td class="text-left">{{$student->user->user_profile->family_name}}, {{$student->user_profile->given_name}} {{substr($student->user_profile->middle_name, 0, 1)}}.</td>
+                
+                @if($grades->where('type', 'Quiz')->count() > 0)
+                @foreach($classlist->where('type', 'Quiz') as $quiz)
+                <td  class="text-left">{{$quiz->grade}}</td>
+                @endforeach
+                @endif
+
+                @if($grades->where('type', 'Asssignment')->count() > 0)
+                @foreach($classlist->where('type', 'Asssignment') as $ass)
+                <td  class="text-left">{{$ass->grade}}</td>
+                @endforeach
+                @endif
+
+                @if($grades->where('type', 'Activity')->count() > 0)
+                @foreach($classlist->where('type', 'Activity') as $act)
+                <td  class="text-left">{{$act->grade}}</td>
+                @endforeach
+                 @endif
+
+                @if($grades->where('type', 'Recitation')->count() > 0)
+                @foreach($classlist->where('type', 'Recitation') as $rec)
+                <td  class="text-left">{{$rec->grade}}</td>
+                @endforeach
+                @endif
               </tr>
                @endforeach      
                 @if(empty($grades))
@@ -68,4 +110,12 @@
 
 </section>
 </div>
+<script type="text/javascript">$(document).ready(function() {
+    $('#dataTable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'print'
+        ]
+    } );
+} );</script>
 @endsection

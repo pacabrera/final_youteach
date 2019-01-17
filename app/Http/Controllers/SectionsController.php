@@ -46,7 +46,7 @@ class SectionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
-        $section = section::find($id);
+        $section = Section::find($id);
         $section->section_name = $request->input('s_code');
         $section->save();
         swal()->success('Successfully Added!',[]);
@@ -59,7 +59,7 @@ class SectionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
-        section::destroy($id);
-        swal()->success('Successfully Added!',[]);
+        Section::destroy($id);
+        swal()->success('Successfully Deleted!',[]);
     }
 }
