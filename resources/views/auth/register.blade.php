@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'TeckQuiz - An Online Quiz Management System')
+@section('title', 'YouTeach')
 @section('content')
     <main>
         <style>
@@ -24,10 +24,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 text-left mr-auto">
-                        <img src="/assets/img/logo.png" alt="" class="img-fluid">
-                        <p class="lead text-center" style="margin-top: -8rem; font-size: 2rem">
-                            Learning Management System for Junior High School Department of Holy Angel University
-                        </p>
+                        <img src="{{ asset('assets/img/illustration.svg') }}" alt="" class="img-fluid">
+
                     </div>
                     @if (Auth::guest())
                     <div class="col-lg-5 col-md-12 col-sm-12">
@@ -92,23 +90,6 @@
             </div>
         </div>
     </main>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-12">
-                    <h3 class="text-muted">TeckQuiz</h3>
-                    <p class="text-muted">An Online Quiz System built for the Web.</p>
-                </div>
-                <div class="col-lg-8 col-md-12">
-                    <ul class="list-unstyled">
-                        <li><a href="">Home</a></li>
-                        <li><a href="">Report a bug</a></li>
-                        <li><a href="/aboutus">About us</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-        </div>
-    </footer>
+
     
 @endsection

@@ -76,7 +76,7 @@
                         </div>
                         <div class="icon bg-red text-white"><i class="fas fa-clipboard-check"></i></div>
                       </div>
-
+                      @if(Auth::user()->permissions == 2)
                       <div class="bg-white shadow roundy px-4 py-3 d-flex align-items-center justify-content-between mb-4">
                         <div class="flex-grow-1 d-flex align-items-center">
                           <div class="dot mr-3 bg-red"></div>
@@ -96,7 +96,7 @@
                         </div>
                         <div class="icon bg-red text-white"><i class="fas fa-clipboard-check"></i></div>
                       </div>
-
+                      @endif
                     </div>
                   </div>
                 </div>
