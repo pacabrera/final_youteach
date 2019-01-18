@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Subjects - TeckQuiz')
+@section('title', 'Audits - YouTeach')
 @section('content')
 <br>
 

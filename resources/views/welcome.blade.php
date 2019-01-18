@@ -1,6 +1,5 @@
 @extends('layouts.app')
-
-@section('title', 'TeckQuiz - An Online Quiz Management System')
+@section('title', 'Sections - YouTeach')
 @section('content')
     <main>
         <style>

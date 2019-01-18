@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title')
+@section('title', 'Attendance - YouTeach')
 
 @section('content')
 <div class="page-holder w-100 d-flex flex-wrap">
