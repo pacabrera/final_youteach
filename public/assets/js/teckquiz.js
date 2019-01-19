@@ -7,7 +7,7 @@
 //         return null;
 //     }
 // }
-console.log("Trying to warn you of using a feature intended for web developers!");
+
 
 function MoveQuestion(id){
     $('.nav-item a[href="#q' + id + '"]').tab('show');

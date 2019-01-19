@@ -53,7 +53,7 @@
                         <input id="id" name="id" type="text" placeholder="Student Number or Employee Number" value="{{ old('id') }}" class="form-control border-0 shadow form-control-lg  {{ $errors->has('id') ? 'is-invalid' : '' }}" required autofocus>
                     </div>
                     <div class="form-group mb-4 {{ $errors->has('password') ? ' has-error' : '' }}">
-                        <input id="password" name="password" type="password" placeholder="Password" class="form-control border-0 shadow form-control-lg text-violet {{ $errors->has('id') ? 'is-invalid' : '' }}" required>
+                        <input id="password" name="password" type="password" placeholder="Password" class="form-control border-0 shadow form-control-lg text-violet {{ $errors->has('id') ? 'is-invalid' : '' }}" required  autocomplete="current-password">
                         <div class="invalid-feedback">
                             {{ $errors->first('id') }}
                         </div>
