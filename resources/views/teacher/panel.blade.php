@@ -7,42 +7,53 @@
           <section class="py-5">
           <!-- Post -->   
             <div class="row mb-4">            
-              <div class="col-lg-12 mb-4 mb-lg-0">
+              <div class="col-lg-8 mb-4 mb-lg-0">
                 <div class="card">
-
                   <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
-                  	 <h3>YouTeach - LMS </h3>
+                     <h3>YouTeach - LMS </h3>
                   </div>
-                             <form method="POST" action="{{route('post-store')}}" enctype="multipart/form-data">
+                  
+                <form method="POST" action="{{ route('post-store') }}" enctype="multipart/form-data">
                   <div class="card-body" >
                       <div class="card gedf-card" >
                           <div class="card-body">
-                                     <div class="form-group">
-                                            @csrf
-                                            <input type="text" name="title" class="form-control" placeholder="Thread Title">
-                                      </div>
-                                      <div class="form-group">
-                                            <textarea id="my-editor" name="body" class="form-control"></textarea>
-                                      </div>
-                                        <div class="form-group">
-                                           <select class="form-control" name="class_id">
-                                           	@foreach($myClass as $class)
-                                           		<option value="{{ $class->class_id}}">{{ $class->class_name }}</option>
-                                           	@endforeach
-                                           </select>
-                                      </div>
+                              <div class="form-group">
+                                @csrf
+                                <input type="text" name="title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" placeholder="Thread Title" value="{{ old('title')}}">
+                                <div class="invalid-feedback">
+                                  {{ $errors->first('title') }}
+                                </div>
+                              </div>
 
-                                      <div class="form-group">
-                                          <div class="custom-file">
-                                              <label class="custom-file-label" for="customFile">Attach File</label>
-                                              <input type='file' 
-                                              class="custom-file-input" onchange="readURL(this);" name="file[]" multiple />
-                                             <hr>
-                                          </div>
-                                      </div>
+                              <div class="form-group">
+                                <textarea id="my-editor" name="body" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}">{{ old('body')}}</textarea>
+                                <div class="invalid-feedback">
+                                  {{ $errors->first('body') }}
+                                </div>
+                              </div>
 
-
-                                
+                              <div class="form-group">
+                                  <div class="custom-file">
+                                      <label class="custom-file-label" for="customFile">Attach File</label>
+                                      <input type='file' class="custom-file-input {{ $errors->has('file.*') ? 'is-invalid' : '' }}" onchange="readURL(this);" name="file[]" multiple />
+                                        <div class="invalid-feedback">
+                                        @if ($errors->has('file.*'))
+                                          <div class="help-block">
+                                            <ul role="alert"><li>{{ $errors->first('file.*') }}</li></ul>
+                                         </div>
+                                        @endif
+                                        </div>
+                                      <hr>
+                                  </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                  <select class="form-control" name="class_id">
+                                    @foreach($myClass as $class)
+                                      <option value="{{ $class->class_id}}">{{ $class->class_name }}</option>
+                                    @endforeach
+                                  </select>
+                              </div>
 
                               <div class="btn-toolbar justify-content-between" style="margin-top: 25px;">
                                   <div class="btn-group">
@@ -56,12 +67,26 @@
                 </div>
               </div>   
 
+
+            <!-- Side Notification -->
+              <div class="col-lg-4">
+                <div class="card mb-4">
+                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                    <h2 class="h6 text-uppercase mb-0">Dashboard</h2>
+                  </div>
+                  <div class="card-body">
+
+                  </div>
+                </div>
+              </div>
+            <!-- //Side Notification -->  
+
             </div>
 
-  @foreach($myClass as $klase)
+              @foreach($myClass as $klase)
               @foreach($klase->thread as $xd)
             <div class="row mb-4">
-              <div class="col-lg-12 mb-4 mb-lg-0">
+              <div class="col-lg-8 mb-4 mb-lg-0">
                 <div class="card">
                   <div class="card-body">
                     <div class="row">
@@ -103,10 +128,12 @@
             </div>
             @endforeach
             @endforeach
+          </div>
 <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
 <script>
   CKEDITOR.replace('my-editor');
 </script>
+
 
 <script>
   

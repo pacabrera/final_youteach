@@ -19,6 +19,7 @@
         "pusher/pusher-php-server": "~3.0",
         "simplesoftwareio/simple-qrcode": "^2.0",
         "softon/sweetalert": "^1.0",
+        "spatie/laravel-activitylog": "^3.1",
         "unisharp/laravel-ckeditor": "^4.7",
         "unisharp/laravel-filemanager": "dev-master"
     },

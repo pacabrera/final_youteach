@@ -106,7 +106,11 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="">Subject Code</label>
-                            <input id="s_code_new" type="text" class="form-control" placeholder="">
+                            <input id="s_code_new" name="s_code" type="text" class="form-control {{ $errors->has('s_code') ? 'is-invalid' : '' }}" placeholder="">
+                                                                    <div class="invalid-feedback">
+                                            {{ $errors->first('s_code') }}
+                                        </div>
+                            
                         </div>
                         <div class="form-group">
                             <label for="">Subject Description</label>

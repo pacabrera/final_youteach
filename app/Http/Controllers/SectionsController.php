@@ -31,11 +31,18 @@ class SectionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        $sections = new section;
+        $sections = new Section;
         $sections->section_name = $request->input('s_code');
         $sections->save();
 
-        swal()->success('Successfully Added!',[]);
+        //creating the newsItem will cause an activity being logged
+$activity = Activity::all()->last();
+
+$activity->description; //returns 'created'
+$activity->subject; //returns the instance of NewsItem that was created
+$activity->changes(); //returns ['attributes' => ['name' => 'original name', 'text' => 'Lorum']]
+
+        
     }
 
     /**
@@ -49,7 +56,7 @@ class SectionsController extends Controller
         $section = Section::find($id);
         $section->section_name = $request->input('s_code');
         $section->save();
-        swal()->success('Successfully Added!',[]);
+        
     }
 
     /**
@@ -60,6 +67,6 @@ class SectionsController extends Controller
      */
     public function destroy($id){
         Section::destroy($id);
-        swal()->success('Successfully Deleted!',[]);
+        
     }
 }

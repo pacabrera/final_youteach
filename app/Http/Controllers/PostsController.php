@@ -40,6 +40,16 @@ class PostsController extends Controller
 
     public function postStore(Request $request){
 
+        $request->validate([
+            'title' => 'required|string|max:191',
+            'class_id' => 'required',
+            'body' => 'required|string|max:225',
+            'file.*' => 'mimes:jpeg,gif,png,mp4,mp3,wav,ogg,avi,mkv,doc,csv,xlsx,xls,docx,ppt,odt,ods,odp,rtf,txt,pptx,zip,rar|max:25000'
+            ]);
+
+        $input_data = $request->all();
+
+
         $new_thread = [
             'title'               =>  $request->input('title'),
             'usr_id'               => Auth::user()->id,
@@ -56,6 +66,7 @@ class PostsController extends Controller
         $post = Post::create($new_post);
 
         if($request->hasFile('file')) {
+
         foreach ($request->file as $file) {
             $filename = $file->getClientOriginalName();
             $file->storeAs($filename, 's3');

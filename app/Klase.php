@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Spatie\Activitylog\Traits\LogsActivity;
 class Klase extends Model
 {
+  use LogsActivity;
+
   protected $primaryKey = 'class_id';
   protected $table = 'classes';
   public $incrementing = false;
@@ -18,6 +20,8 @@ class Klase extends Model
         'section_id',
         'class_active'
     ];
+
+  protected static $logAttributes = ['class_name'];
 
   public function subject(){
     return $this->belongsTo('App\Subject', 'subject_id', 'subject_id');

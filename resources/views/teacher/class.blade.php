@@ -14,27 +14,40 @@
                     <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
                   </div>
                   
-                             <form method="POST" action="{{ route('post-store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('post-store') }}" enctype="multipart/form-data">
                   <div class="card-body" >
                       <div class="card gedf-card" >
                           <div class="card-body">
-                                     <div class="form-group">
-                                            @csrf
-                                            <input type="text" name="title" class="form-control" placeholder="Thread Title">
-                                      </div>
-                                      <div class="form-group">
-                                            <textarea id="my-editor" name="body" class="form-control"></textarea>
-                                      </div>
+                              <div class="form-group">
+                                @csrf
+                                <input type="text" name="title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" placeholder="Thread Title" value="{{ old('title')}}">
+                                <div class="invalid-feedback">
+                                  {{ $errors->first('title') }}
+                                </div>
+                              </div>
 
-                                      <div class="form-group">
-                                          <div class="custom-file">
-                                              <label class="custom-file-label" for="customFile">Attach File</label>
-                                              <input type='file' 
-                                              class="custom-file-input" onchange="readURL(this);" name="file[]" multiple />
-                                             <hr>
-                                          </div>
-                                      </div>
-                                
+                              <div class="form-group">
+                                <textarea id="my-editor" name="body" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}">{{ old('body')}}</textarea>
+                                <div class="invalid-feedback">
+                                  {{ $errors->first('body') }}
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <div class="custom-file">
+                                      <label class="custom-file-label" for="customFile">Attach File</label>
+                                      <input type='file' class="custom-file-input {{ $errors->has('file.*') ? 'is-invalid' : '' }}" onchange="readURL(this);" name="file[]" multiple />
+                                        <div class="invalid-feedback">
+                                        @if ($errors->has('file.*'))
+                                          <div class="help-block">
+                                            <ul role="alert"><li>{{ $errors->first('file.*') }}</li></ul>
+                                         </div>
+                                        @endif
+                                        </div>
+                                      <hr>
+                                  </div>
+                              </div>
+                              
                               <input type="hidden" name="class_id" value="{{ $myClass->class_id}}">
                               <div class="btn-toolbar justify-content-between" style="margin-top: 25px;">
                                   <div class="btn-group">
@@ -153,6 +166,7 @@
 <script>
   CKEDITOR.replace('my-editor');
 </script>
+
 
 <script>
   

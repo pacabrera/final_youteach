@@ -11,7 +11,6 @@
 
     <title>@yield('title')</title>
   @yield('css')
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 
     <!-- Styles -->
 
@@ -363,7 +362,12 @@
     <script src="{{ asset('assets/laravel-ckeditor/ckeditor.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
-
+<script src="{{ asset('assets/js/bootstrap-timepicker.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
+<script type="text/javascript">
+$('#timepickerFrom').timepicker();
+$('#timepickerTo').timepicker();
+</script>
 
      <script type="text/javascript">
 

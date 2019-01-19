@@ -11,11 +11,9 @@
 
     <title>@yield('title')</title>
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-
     <!-- Styles -->
     <link href="{{ asset('assets/css/orionicons.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/style.sea.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/style.red.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
 
 
@@ -26,16 +24,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
 
     <!-- Favicon-->
-    <link rel="shortcut icon" href="img/favicon.png?3">
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}">
 
 
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/popper.js/umd/popper.min.js') }}"> </script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery.cookie/jquery.cookie.js') }}"> </script>
-    <script src="{{ asset('assets/vendor/chart.js/Chart.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-    <script src="{{ asset('assets/js/charts-home.js') }}"></script>
     <script src="{{ asset('assets/js/front.js') }}"></script>
 
 </head>
@@ -60,6 +55,7 @@
                         <div class="invalid-feedback">
                             {{ $errors->first('id') }}
                         </div>
+                        
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary shadow px-5">Log in</button>

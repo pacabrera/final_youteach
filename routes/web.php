@@ -47,8 +47,11 @@ Route::get('manage-events', 'EventController@addEvent')->name('add-event');
 //Events
 Route::get('events', 'EventController@admin')->name('events-admin');
 
-
-
+//Classes Dashboard
+Route::get('classes', 'AdminViewPanel@viewClasses')->name('view-classes');
+Route::get('new-class', 'AdminViewPanel@newClassView')->name('new-class');
+Route::post('add-class', 'AdminViewPanel@addClass')->name('add-class');
+Route::get('edit-class/{class_id}', 'AdminViewPanel@editClassView')->name('edit-class');
 }); // End /admin
 
 

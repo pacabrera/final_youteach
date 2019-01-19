@@ -1,3 +1,6 @@
+ .progress { position:relative; width:100%; }
+        .bar { background-color: #008000; width:0%; height:20px; }
+         .percent { position:absolute; display:inline-block; left:50%; color: #7F98B2;}
 .dot-online {
   height: 25px;
   width: 25px;
