@@ -11,6 +11,7 @@
 
     <title>@yield('title')</title>
 
+
     <!-- Styles -->
     <link href="{{ asset('assets/css/orionicons.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.red.css') }}" rel="stylesheet">
@@ -24,13 +25,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
 
     <!-- Favicon-->
-    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}">
+    <link rel="shortcut icon" href="img/favicon.png?3">
 
 
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/popper.js/umd/popper.min.js') }}"> </script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/jquery.cookie/jquery.cookie.js') }}"> </script>
+    <script src="{{ asset('assets/vendor/jquery.cookie/jquery.cookie.js') }}"> </script>>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="{{ asset('assets/js/front.js') }}"></script>
 
 </head>
