@@ -70,6 +70,31 @@
                   </div>
                   <div class="card-body">
                     <div class="chart-holder">
+                      @if(Auth::user()->permissions == 1)
+                      <div class="bg-white shadow roundy px-4 py-3 d-flex align-items-center justify-content-between mb-4">
+                        <div class="flex-grow-1 d-flex align-items-center">
+                          <div class="dot mr-3 bg-red"></div>
+                          <div class="text">
+                            <h6 class="mb-0">Class Code</h6><span class="text-gray">{{$myClass->class_id}}</span>
+                          </div>
+                        </div>
+                        <a data-toggle="modal" data-target="#myModal"> <div class="icon bg-red text-white"><i class="fas fa-share-alt"></i></div></a>
+                      </div>
+                      @endif
+
+                      <div class="bg-white shadow roundy px-4 py-3 d-flex align-items-center justify-content-between mb-4">
+                        <div class="flex-grow-1 d-flex align-items-center">
+                          <div class="dot mr-3 bg-red"></div>
+                          <div class="text">
+                            <h6 class="mb-0">Class Schedule</h6>
+                            @foreach($myClass->schedule->where('day', 'M') as $mon)
+                            <span class="text-gray">{{ $mon->timeFrom}}</span>
+                            @endforeach
+                          </div>
+                        </div>
+                        <div class="icon bg-red text-white"><i class="fas fa-clipboard-check"></i></div>
+                      </div>
+
                       <div class="bg-white shadow roundy px-4 py-3 d-flex align-items-center justify-content-between mb-4">
                         <div class="flex-grow-1 d-flex align-items-center">
                           <div class="dot mr-3 bg-red"></div>
@@ -89,6 +114,7 @@
                         </div>
                         <div class="icon bg-red text-white"><i class="fas fa-clipboard-check"></i></div>
                       </div>
+
                       @if(Auth::user()->permissions == 2)
                       <div class="bg-white shadow roundy px-4 py-3 d-flex align-items-center justify-content-between mb-4">
                         <div class="flex-grow-1 d-flex align-items-center">
@@ -162,6 +188,38 @@
             </div>
             @endforeach
           </div>
+
+                     <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+                      <div role="document" class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            Invite Students!
+                          </div>
+                          <div class="modal-body text-center">
+                            <h3> Invite your students using this</h3>
+                            <h2>Class Code: {{$myClass->class_id}}</h2>
+                            <a href="http://www.facebook.com/dialog/feed?  
+app_id=294434154588483&  
+link=http://developers.facebook.com/docs/reference/dialogs/&
+picture=http://fbrell.com/f8.jpg&  
+name=Facebook%20Dialogs&  
+caption=Reference%20Documentation& 
+description=Dialogs%20provide%20a%20simple,%20consistent%20interface%20for%20applications%20to%20interact%20with%20users.&
+message=Facebook%20Dialogs%20are%20so%20easy!&
+redirect_uri=http://www.example.com/response" target="_blank">
+ <div class="btn bg-red text-white"><i class="fab fa-facebook fa-lg"></i></div>
+</a>
+                             <a href="http://twitter.com/share?text=Join me in {{$myClass->class_name}} using this class code: {{$myClass->class_id}} &url=http://youteach-lms.herokuapp.com/&hashtags=YouTeach" target="_blank">
+<div class="btn bg-red text-white"><i class="fab fa-twitter"></i></div></a>
+                              </div>
+                          
+                          <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                             
 <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
 <script>
   CKEDITOR.replace('my-editor');

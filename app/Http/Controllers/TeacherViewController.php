@@ -35,10 +35,14 @@ class TeacherViewController extends Controller
     	$subjects = Subject::get();
     	$myClass = Klase::where('instructor_id', Auth::user()->id)->get();
         $eventsCount = Event::all()->count();
-        return view('teacher.panel', compact('sections', 'subjects', 'myClass', 'eventsCount'));
+        return view('teacher.panel', compact('sections', 'subjects', 'myClass', 'eventsCount', 'xd'));
     }
 
     public function recitation($class_id){
+                $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
+        $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
+        
+        if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
 
         $myClass = Klase::where('class_id', $class_id)->first();
 
@@ -48,8 +52,17 @@ class TeacherViewController extends Controller
 
         return view('teacher.recitation', compact('myClass', 'class'));
     }
+    else {
+        abort(403);
+    }
+    }
 
     public function recitationTool($class_id){
+                $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
+        $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
+        
+        if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
+
 
         $classlist = ClassMembers::where('class_members.class_id', $class_id)
         ->where('class_members.isCalled', 0) // 0 = not yet called , 1 = called not yet graded , 2 = graded and called
@@ -64,6 +77,10 @@ class TeacherViewController extends Controller
                 
         return response()->json(array('student_name'=> $student_name, 'student_id'=> $student_id), 200);
         return $myClass; 
+    }
+    else {
+        abort(403);
+    }
         
     }
 
@@ -74,6 +91,11 @@ class TeacherViewController extends Controller
      }
 
     public function gradeRec(Request $request){
+
+                $request->validate([
+    'grade' => 'required|integer|min:1',
+    ]);
+
         $grade = new Grade;
         $grade->usr_id = $request->input('usr_id');
         $grade->class_id = $request->input('class_id');
@@ -100,9 +122,18 @@ class TeacherViewController extends Controller
 
 
     public function groupGen($class_id){
+                $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
+        $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
+        
+        if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
+
         $myClass = Klase::where('class_id', $class_id)->first();
 
         return view('teacher.group-generator', compact('myClass'));
+    }
+    else {
+        abort(403);
+    }
     }
 
         public function groupGenPost(Request $request, $class_id){
@@ -122,16 +153,26 @@ class TeacherViewController extends Controller
 
     public function scores($class_id)
     {
+                $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
+        $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
+        
+        if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
+
         $grades = Grade::where('class_id', $class_id)->orderBy('usr_id')->get();
         $myClass = Klase::where('class_id', $class_id)->with('class_members')->first();
         $klase = ClassMembers::where('class_id', $class_id)->first();
 
-        $classlist = Klase::join('class_members', 'classes.class_id', 'class_members.class_id')
+        $classlist = ClassMembers::join('classes', 'classes.class_id', 'class_members.class_id')
         ->join('grades', 'grades.class_id', 'classes.class_id')
+        ->where('class_members.class_id', $class_id) 
         ->get();
 
 
         return view('teacher.scores', compact('grades','myClass', 'classlist'));
+    }
+    else {
+        abort(403);
+    }
     }
 
     public function schedule()

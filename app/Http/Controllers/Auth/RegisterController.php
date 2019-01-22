@@ -51,12 +51,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'given_name' => 'required|regex:[A-Za-z1-9 ]|max:50',
-            'family_name' => 'required|regex:[A-Za-z1-9 ]|max:50',
-            'middle_name' => 'required|regex:[A-Za-z1-9 ]|max:50',
+            'given_name' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
+            'family_name' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
+            'middle_name' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
+            'ext_name' => 'regex:/(^[A-Za-z ]+$)+/|max:50',
             'id' => 'required|integer|unique:users,id',
             //'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|regex:[A-Za-z1-9 ]|min:1|confirmed',
+            'password' => 'required|regex:/(^[A-Za-z ]+$)+/|min:1|confirmed',
             'gender' => 'required',
             //'class_code' => 'exists:classes,class_id|string',
         ]);
@@ -80,10 +81,10 @@ class RegisterController extends Controller
         
         UserProfile::create([
             'id' => $data['id'],
-            'given_name' => $data['n_given'],
-            'family_name' => $data['n_family'],
-            'middle_name' => $data['n_middle'],
-            'ext_name' => $data['n_ext'],
+            'given_name' => $data['given_name'],
+            'family_name' => $data['family_name'],
+            'middle_name' => $data['middle_name'],
+            'ext_name' => $data['ext_name'],
             'gender' => $data['gender'],
             'profile_pic' => 'no-profile.png'
         ]);

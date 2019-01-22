@@ -12,6 +12,7 @@ use App\AssignSubmission;
 use App\AssignSubmissionFile;
 use App\Thread;
 use App\Post;
+use App\Grade;
 
 class AssignmentController extends Controller
 {
@@ -49,6 +50,13 @@ class AssignmentController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate([
+            'body' => 'required|regex:/(^[A-Za-z ]+$)+/|max:225',
+            'title' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
+            'deadline' => 'required|after:now',
+            'status' => 'required',
+            'file.*' => 'mimes:jpeg,gif,png,mp4,mp3,wav,ogg,avi,mkv,doc,csv,xlsx,xls,docx,ppt,odt,ods,odp,rtf,txt,pptx,zip,rar|max:25000'
+        ]);
 
         $assignment = new Assignment;
         $assignment->body = $request->input('body');
@@ -133,10 +141,36 @@ class AssignmentController extends Controller
     {
 
         $submissions = AssignSubmission::where('assgn_id', $id)->get();
-        $xd = Assignment::where('id', $id)->first()->class_id;
-        $myClass = Klase::where('class_id', $xd)->first();
+        $xd = Assignment::where('id', $id)->first();
+        $myClass = Klase::where('class_id', $xd->class_id)->first();
 
 
-        return view('teacher.submissions', compact('submissions', 'myClass'));
+        return view('teacher.submissions', compact('submissions', 'myClass', 'xd'));
+    }
+
+    public function singleSubmission($id)
+    {
+
+        $submission = AssignSubmission::where('id', $id)->first();
+        $assign = Assignment::where('id', $submission->assgn_id)->first();
+        $myClass = Klase::where('class_id', $assign->class_id)->first();
+        return view('teacher.submission', compact('submission', 'assign', 'myClass'));
+    }
+
+    public function gradeAssign(Request $request){
+
+    $request->validate([
+    'grade' => 'required|integer|min:1',
+    ]);
+
+        $grade = new Grade;
+        $grade->usr_id = $request->input('usr_id');
+        $grade->class_id = $request->input('class_id');
+        $grade->grade = $request->input('grade');
+        $grade->type = 'Assignment';
+        $grade->save();
+
+        swal()->success('Successfully Graded',[]);
+        return back();
     }
 }

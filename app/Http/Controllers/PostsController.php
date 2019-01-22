@@ -32,9 +32,21 @@ class PostsController extends Controller
 
     public function viewClass($class_id)
     {
-        $threads = Thread::where('class_id',  $class_id)->orderBy('created_at', 'desc')->get();
-        $myClass = Klase::where('class_id', $class_id)->first();
-        return view('teacher.class', compact('myClass', 'threads'));
+        $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
+        $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
+
+        if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
+            $threads = Thread::where('class_id',  $class_id)->orderBy('created_at', 'desc')->get();
+            $myClass = Klase::where('class_id', $class_id)->first();
+            return view('teacher.class', compact('myClass', 'threads'));
+        }
+        else{
+            abort(403);
+        }
+
+
+
+
     }
 
 
@@ -103,9 +115,18 @@ class PostsController extends Controller
 
   public function showAssign($class_id)
     {
+                $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
+        $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
+        
+        if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
+
         $assignments = Assignment::where('class_id', $class_id)->get();
         $myClass = Klase::where('class_id', $class_id)->first();
         return view('teacher.assignment', compact('myClass', 'assignments'));
+    }
+    else {
+        abort(403);
+    }
     }
 
     /**

@@ -23,9 +23,7 @@
                             <div class="row">
 
                             <div class="col-lg-6 col-md-3">
-
             @csrf
-
                 <div class="form-group">
                     <label for="">Class Name</label>
                     <input  name="class_name" type="text" class="form-control {{ $errors->has('class_name') ? 'is-invalid' : '' }}">

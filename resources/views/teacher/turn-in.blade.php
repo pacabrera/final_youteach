@@ -19,8 +19,6 @@
                   <div class="card-body">
                     <form class="form-horizontal" method="POST" action="{{ route('turn-in.post', $assignment->id)}}" enctype="multipart/form-data">
                       @csrf
-
-
                       <div class="form-group row">
                          <div class="col-md-12 col-sm-12 col-lg-12">
                             <textarea class="form-control" placeholder="Text Response" name="body" rows="10"></textarea> 
@@ -29,9 +27,9 @@
                       <div class="form-group row">
                         <div class="col-md-12 col-sm-12 col-lg-12">
                           <label class="file">
-  <input type="file" id="file" aria-label="File browser example" name="file[]" multiple>
-  <span class="file-custom"></span>
-</label>
+                          <input type="file" id="file" aria-label="File browser example" name="file[]" multiple>
+                          <span class="file-custom"></span>
+                        </label>
                         </div>
                       </div>
                       <div class="line"></div>

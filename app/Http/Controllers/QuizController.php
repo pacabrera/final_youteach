@@ -13,6 +13,7 @@ use App\User;
 use App\StudentClass;
 use App\UserProfile;
 use App\Section;
+use App\ClassMembers;
 
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +23,12 @@ class QuizController extends Controller
         return view('home');
     }
 
-    public function quizEvents($class_id){    
+    public function quizEvents($class_id){   
+            $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
+        $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
+        
+        if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
+
         $id = Auth::user()->id;
                             
             $quiz_events = QuizEvent::with([
@@ -46,6 +52,10 @@ class QuizController extends Controller
                    ->where('class_id', '=', $class_id);
 
             return view('teacher.quiz', compact('quiz_events', 'finished_quiz_events', 'class_id'));
+        }
+        else {
+            abort(403);
+        }
         }
 
     public function RedirectToAppropriatePanel(){    

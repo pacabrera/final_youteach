@@ -93,7 +93,7 @@
                     //location.reload()
                  window.location.reload(true);
                   }else{
-                   return confirm('There is no user with this qr code'); 
+                   return confirm('Error! You Already take your Attendance or Invalid QR CODE'); 
                   }
             }
 

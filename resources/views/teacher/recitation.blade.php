@@ -98,7 +98,7 @@
                               <div class="form-group">
                             
                                   @csrf
-                                <input type="text" id="grade" name="grade" maxlength="3" 
+                                <input class="{{ $errors->has('grade') ? 'is-invalid' : '' }}" id="grade" name="grade" type="text" pattern="\d*" maxlength="3"
                                                             style="text-align: 
                                                             center; 
                                                             font-size: 30px; 
@@ -109,7 +109,8 @@
                                                             margin-right: auto;
                                                             padding: 20px;
                                                             border-radius: 5px;
-                                                            ">
+                                                            " required>
+
                                   <input type="hidden" id="student_id" name="usr_id">
                                   <input type="hidden" name="class_id" value="{{ $myClass->class_id }}">
                               </div>
@@ -117,18 +118,19 @@
                           <div class="modal-footer">
                             <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
                             <button type="submit" class="btn btn-primary">Grade </button>
-                        </form>
+                        
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+</form>
+        <!-- //Modal Form-->   
 
-        <!-- //Modal Form-->     
 
 </section>
 </div>
-
+ <audio id="audio" src="https://s3-ap-southeast-1.amazonaws.com/youteachlms/audio/recitation-%5BAudioTrimmer.com%5D.mp3" autostart="false" ></audio>
 <script>
    $.ajaxSetup({
         headers: {
@@ -148,6 +150,8 @@
                   $("#student_name").html(data.student_name);
                   $('#student_id').val(data.student_id);
                   $("#gradeButton").show();
+                  var sound = document.getElementById("audio");
+                  sound.play()
                }
             });
          }

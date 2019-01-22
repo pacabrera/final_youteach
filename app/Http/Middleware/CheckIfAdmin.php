@@ -19,7 +19,7 @@ class CheckIfAdmin
         if(
         Auth::check() == false ||
         Auth::user()->$type != "0") {
-            return redirect('/login');
+            abort(403);
         }
         return $next($request);
     }

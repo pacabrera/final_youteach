@@ -13,7 +13,7 @@ class ClassMembers extends Model
         'student_id'
     ];
     
-    public function Klase(){
+    public function klase(){
         return $this->belongsTo('App\Klase', 'class_id', 'class_id');
     }
 

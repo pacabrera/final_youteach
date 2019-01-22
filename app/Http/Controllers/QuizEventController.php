@@ -27,8 +27,17 @@ class QuizEventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create($class_id){
+                $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
+        $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
+        
+        if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
+
 			$myClass = Klase::where('class_id', $class_id)->first();
         return view('teacher.create-quiz-event', compact('myClass'));
+    }
+    else {
+        abort(403);
+    }
     }
 
     /**

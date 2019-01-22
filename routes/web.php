@@ -81,7 +81,8 @@ Route::resource('assignments', 'AssignmentController', ['only' => [//Sections an
     'index', 'store', 'update', 'destroy'
 ]]);
 Route::get('/assignment/{id}', 'AssignmentController@viewSubmissions')->name('assign-submissions');
-
+Route::post('/assign', 'AssignmentController@gradeAssign')->name('grade-assign');
+Route::get('/submission/{id}', 'AssignmentController@singleSubmission')->name('single-submission');
 Route::resource('question', 'QuestionController', ['only' => [//Question
     'store', 'update',  'destroy',
 ]]); 
@@ -143,5 +144,4 @@ Route::post('/turn-in/{assign_id}', 'PostsController@turnInPost')->name('turn-in
 
 //Attendance
 Route::get('/event/{id}', 'EventController@showSingle')->name('event-single');
-
 Route::get('/audits', 'AdminViewPanel@audits')->name('audits');

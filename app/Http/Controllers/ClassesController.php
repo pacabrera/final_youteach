@@ -94,8 +94,8 @@ class ClassesController extends Controller
         }
        
 
-
-        return redirect('/teacher');
+         swal()->success('Class Created!',[]);
+        return redirect('/class/'.$klase->class_id);
     }
     public function show($class_id){
         

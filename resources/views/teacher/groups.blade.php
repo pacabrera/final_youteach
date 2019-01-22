@@ -160,7 +160,7 @@
               <!-- start the realm of the buttons -->
               
               <div id="rndmBtn">
-                <a href="" class="btn red" data-toggle="modal" data-target="#myModal" >GENERATE</a>
+                <a href="" class="btn red" data-toggle="modal" data-target="#myModal">GENERATE</a>
               </div>
   <div class="line"></div>
   <div class="row" >
@@ -169,7 +169,11 @@
                 <table class="table-fill">
                   <thead>
                   <tr>
-                  <th class="text-center">GROUP: {{ $loop->iteration }}</th>
+                  <th class="text-center">GROUP: {{ $loop->iteration }}  
+                    <input type="hidden" value="{{$s->count()}}" id="studcount">
+                    @foreach($s as $ids)<input type="hidden" value="{{$ids->student_id}}" id="stud{{$loop->iteration}}">@endforeach
+
+                  </th>
                   </tr>
                   </thead>
                   <tbody class="table-hover">
@@ -199,7 +203,7 @@
                           <div class="modal-body">
                              
                               <div class="form-group">
-                                <input type="text" id="grade" name="grade" maxlength="3" 
+                                <input type="text" pattern="\d*" id="grade" name="grade" maxlength="3" 
                                                             style="text-align: 
                                                             center; 
                                                             font-size: 30px; 
@@ -294,6 +298,27 @@
             }
         });
     }
+
+  function addGradeGroup() {
+        var grade = $('#grade').val();
+        var class_id = $('#class_id').val();
+        
+        var student_id = $('#student_id').val();
+
+        $.ajax({
+            url: '/teacher/group/',
+            type: 'POST', //type is any HTTP method
+            data: {
+                grade, student_id, class_id
+            },//Data as js object
+                success: function () {
+                $('#myModal').modal('hide')
+                $('#gradeSuccess').modal('show')
+                $('#' + student_id).removeAttr("data-toggle");
+            }
+        });
+    }
+
 
 </script>
 

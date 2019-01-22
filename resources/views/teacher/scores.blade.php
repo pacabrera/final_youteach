@@ -24,32 +24,30 @@
                     <div class="container">
 
             <div class="row">
-              <div id="table-title">
-                </div>
                <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr >
                 <th>Student Name</th>
-                @if($grades->where('type', 'Quiz')->count() > 0)
-                @foreach($grades->where('type', 'Quiz') as $quizG)
+                @if($classlist->where('type', 'Quiz')->count() > 0)
+                @foreach($classlist->where('type', 'Quiz') as $quizG)
                 <th>Quiz {{ $loop->iteration }}</th>
                 @endforeach
                 @endif
 
-                @if($grades->where('type', 'Asssignment')->count() > 0)
-                @foreach($grades->where('type', 'Asssignment') as $assG)
+                @if($classlist->where('type', 'Asssignment')->count() > 0)
+                @foreach($classlist->where('type', 'Asssignment') as $assG)
                 <th>Assignment {{ $loop->iteration }}</th>
                  @endforeach
                  @endif
 
-                @if($grades->where('type', 'Activity')->count() > 0)
-                @foreach($grades->where('type', 'Activity') as $actG)
+                @if($classlist->where('type', 'Activity')->count() > 0)
+                @foreach($classlist->where('type', 'Activity') as $actG)
                 <th>Activity {{ $loop->iteration }}</th>
                  @endforeach
                  @endif
 
-                @if($grades->where('type', 'Recitation')->count() > 0)
-                @foreach($grades->where('type', 'Recitation') as $recG)
+                @if($classlist->where('type', 'Recitation')->count() > 0)
+                @foreach($classlist->where('type', 'Recitation') as $recG)
                 <th>Recitation {{ $loop->iteration }} </th>
                   @endforeach
                 @endif
@@ -59,39 +57,33 @@
                 <tbody class="table-hover">
                 @foreach($classlist->unique() as $student)
                 <tr>
-                <td class="text-left">{{$student->user->user_profile->family_name}}, {{$student->user_profile->given_name}} {{substr($student->user_profile->middle_name, 0, 1)}}.</td>
+                <td class="text-left">{{$student->user_profile->family_name}}, {{$student->user_profile->given_name}} {{substr($student->user_profile->middle_name, 0, 1)}}.</td>
                 
-                @if($grades->where('type', 'Quiz')->count() > 0)
+                @if($classlist->where('type', 'Quiz')->count() > 0)
                 @foreach($classlist->where('type', 'Quiz') as $quiz)
                 <td  class="text-left">{{$quiz->grade}}</td>
                 @endforeach
                 @endif
 
-                @if($grades->where('type', 'Asssignment')->count() > 0)
+                @if($classlist->where('type', 'Asssignment')->count() > 0)
                 @foreach($classlist->where('type', 'Asssignment') as $ass)
                 <td  class="text-left">{{$ass->grade}}</td>
                 @endforeach
                 @endif
 
-                @if($grades->where('type', 'Activity')->count() > 0)
+                @if($classlist->where('type', 'Activity')->count() > 0)
                 @foreach($classlist->where('type', 'Activity') as $act)
                 <td  class="text-left">{{$act->grade}}</td>
                 @endforeach
                  @endif
 
-                @if($grades->where('type', 'Recitation')->count() > 0)
+                @if($classlist->where('type', 'Recitation')->count() > 0)
                 @foreach($classlist->where('type', 'Recitation') as $rec)
                 <td  class="text-left">{{$rec->grade}}</td>
                 @endforeach
                 @endif
               </tr>
                @endforeach      
-                @if(empty($grades))
-                <tr >
-                <td  class="text-center" colspan="2">No Grades Yet</td>
-                
-              </tr>
-                @endif
                 </tbody>
                 </table>
 </div>
@@ -114,7 +106,7 @@
     $('#dataTable').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-            'print'
+            'copy', 'excel', 'pdf', 'print'
         ]
     } );
 } );</script>

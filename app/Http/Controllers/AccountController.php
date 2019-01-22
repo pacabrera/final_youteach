@@ -116,6 +116,11 @@ class AccountController extends Controller
     }
 
     public function changeProfilePic(Request $request){
+
+            $request->validate([
+            'file' => 'required|image',
+            ]);
+
        $file = $request->file('file');
         if($request->hasFile('file')) {
             $filename = $file->getClientOriginalName();

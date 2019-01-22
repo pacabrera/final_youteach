@@ -20,6 +20,10 @@
                     <h3 class="h6 text-uppercase mb-0">Assignment Submissions</h3>
                   </div>
                   <div class="card-body">
+                    <h3>{{ $xd->title }}</h3>
+                    <p>Deadline: {{ \Carbon\Carbon::parse($xd->deadline)->format('M d, Y - g:i A')}}</p>
+                    <div class="line">
+                    </div>
             <table id="dataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
@@ -31,12 +35,10 @@
                 <tbody>
                     @foreach($submissions as $submission)
                     <tr>
-                        <td>{{ $submission->usr_id }}</td>
-                        <td>{{$submission->created_at}}</td>
-                        <td>
-                          <a href="" class="btn btn-primary">View</a></td>
+                        <td>{{ $submission->user_profile->family_name }}, {{ $submission->user_profile->given_name }}</td>
+                        <td>{{ \Carbon\Carbon::parse($submission->created_at)->format('M d, Y - g:i A')}}</td>
+                        <td><a href="{{route('single-submission', $submission->id)}}" class="btn btn-primary">View</a></td>
                     </tr>
-
                     @endforeach
                 </tbody>
             </table>

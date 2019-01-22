@@ -15,7 +15,7 @@
                   </div>
                   <div class="card-body" >
                       <div class="card gedf-card" >
-                                         <div class="card">
+                       <div class="card">
                   <div class="card-header">
                     <h3 class="h6 text-uppercase mb-0">Assignment</h3>
                   </div>
@@ -24,30 +24,50 @@
                     	@csrf
                       <div class="form-group row">
                          <div class="col-md-2 col-sm-2 col-lg-12">
-                            <input type="text" class="form-control" placeholder="Assignment Title" name="title">
+                            <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" placeholder="Assignment Title" name="title">
+                <div class="invalid-feedback">
+                    {{ $errors->first('title') }}
+                </div>                            
                       </div>
                     </div>
                       <div class="form-group row">
                          <div class="col-md-2 col-sm-2 col-lg-12">
-                            <textarea class="form-control" placeholder="Instructions" name="body" rows="10"></textarea> 
+                            <textarea class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" placeholder="Instructions" name="body" rows="10"></textarea> 
+                <div class="invalid-feedback">
+                    {{ $errors->first('body') }}
+                </div>                            
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="col-md-6">
                 <div class="input-group date form_datetime col-md-12"  data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-                    <input class="form-control" size="16" type="text" value="" readonly placeholder="Deadline Date"> 
+                    <input class="form-control {{ $errors->has('deadline') ? 'is-invalid' : '' }}" size="16" type="text" value="" readonly placeholder="Deadline Date"> 
                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                          <div class="invalid-feedback">
+                    {{ $errors->first('deadline') }}
                 </div>
-				<input type="hidden" id="dtp_input1" value="" name="deadline" /><br/>
+                </div>
+				<input type="hidden" id="dtp_input1" value="" name="deadline" class="{{ $errors->has('deadline') ? 'is-invalid' : '' }}" />
+
+                        <br/>
+
                         </div>
                         <div class="col-md-6">
-                          <input type="file" class="form-control-file" name="file[]" placeholder="Mobile Number" multiple>
+                          <input type="file" class="form-control-file {{ $errors->has('file.*') ? 'is-invalid' : '' }}" name="file[]" placeholder="Mobile Number" multiple>
+
+                                        <div class="invalid-feedback">
+                                        @if ($errors->has('file.*'))
+                                          <div class="help-block">
+                                            <ul role="alert"><li>{{ $errors->first('file.*') }}</li></ul>
+                                         </div>
+                                        @endif
+                                        </div>                       
                         </div>
                       </div>
                       <div class="custom-control custom-radio custom-control-inline">
   <input type="checkbox" id="customRadioInline1" name="status" class="custom-control-input" value="0">
-  <label class="custom-control-label" for="customRadioInline1">Open Assignment</label>
+  <label class="custom-control-label" for="customRadioInline1">Allow Submissions Now</label>
 </div>
                      <input type="hidden" id="xd" value="{{$myClass->class_id}}" name="class_id" /><br/>
                       <div class="line"></div>
@@ -59,20 +79,24 @@
                       </div>
                     </form>
                   </div>
-
+                      <div class="line"></div>
                   <div class="card-body">
-                  	<table width="100%">
-                  		<tr>
-                  		<th>Assignment No.</th>
-                  		<th>Action</th>
-						</tr>
-						@foreach($assignments as $ass)
-						<tr>
-							<td>{{$ass->id}}</td>
-							<td><a href="{{ route('assign-submissions', $ass->id)}}">View Submissions</a></td>
-						</tr>
-						@endforeach
-                  	</table>
+                <table id="dataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                      <th>Assignment Title</th>
+                      <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($assignments as $ass)
+                    <tr>
+                         <td>{{$ass->title}}</td>
+                         <td><a href="{{ route('assign-submissions', $ass->id)}}">View Submissions</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
                   </div>
                 </div>
             </div>

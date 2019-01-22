@@ -8,6 +8,7 @@ use App\Klase;
 use App\AttendanceQr;
 use Carbon\Carbon;
 use App\Attendance;
+use App\ClassMembers;
 
 class AttendanceController extends Controller
 {
@@ -18,10 +19,21 @@ class AttendanceController extends Controller
 
     public function index($class_id)
     {
+                $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
+        $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
+        
+        if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
+
     	$today =  Carbon::today();
     	$myClass = Klase::where('class_id', $class_id)->first();
     	$qrcode = AttendanceQr::where('class_id', $class_id)->whereDate('created_at', Carbon::today())->first();
-    	return view('teacher.qr-attendace', compact('myClass', 'qrcode'));
+        $attendances = Attendance::where('qr_id', $qrcode->id)->whereDate('created_at', Carbon::today())->get();
+        $class_members = ClassMembers::where('class_id', $class_id)->count();
+    	return view('teacher.qr-attendace', compact('myClass', 'qrcode','attendances', 'class_members'));
+    }
+    else {
+        abort(403);
+    }
     }
 
     public function attendance(Request $request)
@@ -57,8 +69,16 @@ class AttendanceController extends Controller
 
     public function student($class_id)
     {
+        $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
+        $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
+        
+        if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
     	$myClass = Klase::where('class_id', $class_id)->first();
     	return view('student.qr-attendace', compact('myClass'));
+    }
+    else{
+        abort(403);
+    }
     }
 
     public function getAttendance($id)
@@ -66,6 +86,9 @@ class AttendanceController extends Controller
         $xd = AttendanceQr::where('id', $id)->first()->class_id;
         $attendances = Attendance::where('qr_id', $id)->whereDate('created_at', Carbon::today())->get();
         $myClass = Klase::where('class_id', $xd)->first();
-        return view('teacher.attendances', compact('myClass', 'attendances'));
+        $result = ClassMembers::whereNotIn('student_id', function($q){
+            $q->select('usr_id')->from('attendances');
+        })->get();
+        return view('teacher.attendances', compact('myClass', 'attendances', 'result'));
     }
 }

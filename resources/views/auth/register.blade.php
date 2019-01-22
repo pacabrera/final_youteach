@@ -41,10 +41,22 @@
                                     <div class="form-group">
                                         <label for="">Name</label>
                                         <div class="form">
-                                            <input name="n_given" id="n_given" type="text" placeholder="Given name" class="form-control mb-2" value="{{ old('n_given') }}">
-                                            <input name="n_middle" id="n_middle" type="text" placeholder="M.I." class="form-control mb-2" value="{{ old('n_middle') }}">
-                                            <input name="n_family" id="n_family" type="text" placeholder="Family name" class="form-control mb-2" value="{{ old('n_family') }}">
-                                            <input name="n_ext" id="n_ext" type="text" placeholder="Ext." class="form-control mb-2" value="{{ old('n_ext') }}">
+                                            <input name="given_name" id="n_given" type="text" placeholder="Given name" class="form-control mb-2 {{ $errors->has('given_name') ? 'is-invalid' : '' }}" value="{{ old('given_name') }}">
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('given_name') }}
+                                        </div>                                            
+                                            <input name="middle_name" id="n_middle" type="text" placeholder="M.I." class="form-control mb-2 {{ $errors->has('middle_name') ? 'is-invalid' : '' }}" value="{{ old('middle_name') }}">
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('middle_name') }}
+                                        </div>
+                                            <input name="family_name" id="n_family" type="text" placeholder="Family name" class="form-control mb-2 {{ $errors->has('family_name') ? 'is-invalid' : '' }}" value="{{ old('family_name') }}">
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('family_name') }}
+                                        </div>
+                                            <input name="ext_name" id="ext_name" type="text" placeholder="Ext." class="form-control mb-2 {{ $errors->has('ext_name') ? 'is-invalid' : '' }}" value="{{ old('ext_name') }}">
+                                        <div class="ext_name-feedback">
+                                            {{ $errors->first('ext_name') }}
+                                        </div>                                            
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -91,5 +103,4 @@
         </div>
     </main>
 
-    
 @endsection

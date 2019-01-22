@@ -28,6 +28,13 @@
                     <tr>
                         <td>{{$attendance->user_profile->family_name}}, {{$attendance->user_profile->given_name}} {{substr($attendance->user_profile->middle_name, 0)}} </td>
                         <td>{{$attendance->created_at}}</td>
+                        
+                    </tr>
+                    @endforeach
+                    @foreach($result as $attendance2)
+                    <tr>
+                        <td>{{$attendance2->user_profile->family_name}}, {{$attendance2->user_profile->given_name}} {{substr($attendance2->user_profile->middle_name, 0)}} </td>
+                        <td>Absent</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -36,5 +43,12 @@
                 </div>
               </div>
             </div>
-
+<script type="text/javascript">$(document).ready(function() {
+    $('#dataTable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );</script>
 @endsection
