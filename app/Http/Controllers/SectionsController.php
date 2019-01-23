@@ -44,7 +44,7 @@ class SectionsController extends Controller
         $sections->section_name = $request->input('section_name');
         $sections->save();
 
-       
+        return redirect()->route('sections.index');
 
         
     }

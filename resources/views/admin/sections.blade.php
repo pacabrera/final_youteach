@@ -14,7 +14,7 @@
                              <h3>Sections</h3>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
-                             <button class="btn btn-warning" data-toggle="modal" data-target="#addSection">Add new Section</button>
+                             <a class="btn btn-warning" href="{{ route('add-section')}}">Add new Section</a>
                         </div>
                     </div>
                 </div>

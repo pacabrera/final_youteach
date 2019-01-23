@@ -60,7 +60,7 @@
 
                 <div class="form-group">
                   @php( $instructors = \App\User::where('permissions', 1)->get() )  
-                    <label for="">Subject</label>
+                    <label for="">Instructor</label>
                     <select name="instructor" class="form-control {{ $errors->has('instructor') ? 'is-invalid' : '' }}">
                       @foreach($instructors as $instructor)
                       <option value="{{ $instructor->id }}">{{ $instructor->user_profile->given_name }} {{ $instructor->user_profile->family_name }}</option>
