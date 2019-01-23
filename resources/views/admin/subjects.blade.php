@@ -11,7 +11,7 @@
                   <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
                     <div class="row">
                         <div class="col-lg-9 col-md-6 col-sm-6">
-                             <h3>Teachers</h3>
+                             <h3>Subjects</h3>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
                              <button class="btn btn-warning" data-toggle="modal" data-target="#addSubject">Add new subject</button>

@@ -93,7 +93,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <input type="hidden" id="usrid" value="-1">
                     <div class="form-group">
                         <div class="form-group">
                             <label for="">Section Name</label>
