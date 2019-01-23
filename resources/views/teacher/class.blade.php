@@ -86,19 +86,6 @@
                         <div class="flex-grow-1 d-flex align-items-center">
                           <div class="dot mr-3 bg-red"></div>
                           <div class="text">
-                            <h6 class="mb-0">Class Schedule</h6>
-                            @foreach($myClass->schedule->where('day', 'M') as $mon)
-                            <span class="text-gray">{{ $mon->timeFrom}}</span>
-                            @endforeach
-                          </div>
-                        </div>
-                        <div class="icon bg-red text-white"><i class="fas fa-clipboard-check"></i></div>
-                      </div>
-
-                      <div class="bg-white shadow roundy px-4 py-3 d-flex align-items-center justify-content-between mb-4">
-                        <div class="flex-grow-1 d-flex align-items-center">
-                          <div class="dot mr-3 bg-red"></div>
-                          <div class="text">
                             <h6 class="mb-0">Assignment</h6><span class="text-gray">{{ $myClass->assignment->where('status', 0)->count()}} new cases</span>
                           </div>
                         </div>

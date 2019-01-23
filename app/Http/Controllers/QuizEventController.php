@@ -12,6 +12,9 @@ use App\UserProfile;
 use Auth;
 use App\Thread;
 use App\Post;
+use App\ClassMembers;
+use App\Notifications\QuizPosted;
+use App\User;
 
 
 class QuizEventController extends Controller
@@ -122,6 +125,11 @@ class QuizEventController extends Controller
 
         $post = Post::create($new_post);
 
+ $users = User::join('class_members', 'class_members.student_id', '=', 'users.id')->where('class_id', $class_code)->get();
+
+        foreach ($users as $user) {
+        $user->notify(new QuizPosted($thread));
+        }
 
         return redirect()->route('quizzes', $class_code);
     }

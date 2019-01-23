@@ -36,6 +36,8 @@ Route::resource('sections', 'SectionsController', ['only' => [//Sections and Gra
     'index', 'store', 'update', 'destroy'
 ]]);
 
+Route::get('add-section', 'SectionsController@create')->name('add-section');
+Route::get('edit-section/{section_id}', 'SectionsController@edit')->name('edit-section');
 
 
 Route::resource('events', 'EventsController', ['only' => [//Questionnaire
@@ -144,4 +146,11 @@ Route::post('/turn-in/{assign_id}', 'PostsController@turnInPost')->name('turn-in
 
 //Attendance
 Route::get('/event/{id}', 'EventController@showSingle')->name('event-single');
-Route::get('/audits', 'AdminViewPanel@audits')->name('audits');
+Route::get('/audits/{id}', 'ActivityLog@getAudits')->name('audits');
+
+
+//Notif
+Route::get('markAsRead', function(){
+    Auth::user()->unReadNotifications->markAsRead();
+    return back();
+})->name('markAsRead');

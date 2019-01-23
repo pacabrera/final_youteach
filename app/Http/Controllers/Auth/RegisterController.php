@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'given_name' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
             'family_name' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
             'middle_name' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
-            'ext_name' => 'regex:/(^[A-Za-z ]+$)+/|max:50',
+            'ext_name' => 'nullable|regex:/(^[A-Za-z ]+$)+/|max:50',
             'id' => 'required|integer|unique:users,id',
             //'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|regex:/(^[A-Za-z ]+$)+/|min:1|confirmed',

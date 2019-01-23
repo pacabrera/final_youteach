@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Storage;
 use App\AssignFile;
 use App\AssignSubmission;
 use App\AssignSubmissionFile;
+use App\Notifications\ThreadPosted;
+
 
 class PostsController extends Controller
 {
@@ -90,8 +92,12 @@ class PostsController extends Controller
             $fileModel->save();         
         }
     }
+        $users = User::join('class_members', 'class_members.student_id', '=', 'users.id')->where('class_id', $request->input('class_id'))->get();
 
-        
+        foreach ($users as $user) {
+        $user->notify(new ThreadPosted($thread));
+        }
+
         return redirect()->route('class-forum', $request->input('class_id'));
     }
 
@@ -137,19 +143,24 @@ class PostsController extends Controller
      */
     public function turnIn($id)
     {
+        $checkIfAlreadySubmitted = AssignSubmission::where('assgn_id', $id)->where('usr_id', Auth::user()->id)->first();
         $assignment = Assignment::where('id', $id)->first();
         $myClass = Klase::where('class_id', $assignment->class_id)->first();
-
+        if(!empty($checkIfAlreadySubmitted)){
+            return view('teacher.submitted', compact('myClass', 'assignment', 'checkIfAlreadySubmitted'));
+        }
+        else {
         return view('teacher.turn-in', compact('myClass', 'assignment'));
+    }
     }
     public function turnInPost(Request $request, $id)
     {
         $checkIfLocked = Assignment::where('id', $id)->where('status', 1);
-        $checkIfAlreadySubmitted = AssignSubmission::where('assgn_id', $id)->where('usr_id', Auth::user()->id);
+        $checkIfAlreadySubmitted = AssignSubmission::where('assgn_id', $id)->where('usr_id', Auth::user()->id)->first();
         if($checkIfLocked->count() > 0){
             swal()->warning('Assignment is Currently Locked',[]);
         }
-        elseif($checkIfAlreadySubmitted->count()  > 0){
+        elseif(!empty($checkIfAlreadySubmitted)){
             swal()->warning('You already submit your Assignment!',[]);
         }
         else {

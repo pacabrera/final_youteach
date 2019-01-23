@@ -17,6 +17,11 @@ class SectionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function create()
+    {
+        return view('admin.section.add-section');
+    }
     public function index(){
         $sections = section::with('klase')->get();
         //return $sections;
@@ -31,16 +36,15 @@ class SectionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+
+        $request->validate([
+    'section_name' => 'required|string|unique:sections,section_name|max:191',
+    ]);
         $sections = new Section;
-        $sections->section_name = $request->input('s_code');
+        $sections->section_name = $request->input('section_name');
         $sections->save();
 
-        //creating the newsItem will cause an activity being logged
-$activity = Activity::all()->last();
-
-$activity->description; //returns 'created'
-$activity->subject; //returns the instance of NewsItem that was created
-$activity->changes(); //returns ['attributes' => ['name' => 'original name', 'text' => 'Lorum']]
+        return redirect()->route('sections.index');
 
         
     }

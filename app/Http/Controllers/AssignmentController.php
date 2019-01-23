@@ -13,6 +13,8 @@ use App\AssignSubmissionFile;
 use App\Thread;
 use App\Post;
 use App\Grade;
+use App\Notifications\AssignmentPosted;
+use App\User;
 
 class AssignmentController extends Controller
 {
@@ -96,6 +98,13 @@ class AssignmentController extends Controller
             ];
 
         $post = Post::create($new_post);
+
+
+ $users = User::join('class_members', 'class_members.student_id', '=', 'users.id')->where('class_id', $request->input('class_id'))->get();
+
+        foreach ($users as $user) {
+        $user->notify(new AssignmentPosted($thread));
+        }
 
         return back();
     }

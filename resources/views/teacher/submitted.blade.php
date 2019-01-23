@@ -14,28 +14,41 @@
                     <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
                   </div>
                   <div class="card-header">
-                    <h3 class="h6 text-uppercase mb-0">Assignment</h3>
+                    <h3 class="h6 text-uppercase mb-0">Assignment Submission</h3>
                   </div>
                   <div class="card-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('turn-in.post', $assignment->id)}}" enctype="multipart/form-data">
-                      @csrf
-                      <div class="form-group row">
-                         <div class="col-md-12 col-sm-12 col-lg-12">
-                            <textarea class="form-control" placeholder="Text Response" name="body" rows="10"></textarea> 
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="col-md-12 col-sm-12 col-lg-12">
-                          <label class="file">
-                          <input type="file" id="file" aria-label="File browser example" name="file[]" multiple>
-                          <span class="file-custom"></span>
-                        </label>
-                        </div>
-                      </div>
+                    @if(!empty($checkIfAlreadySubmitted->response))
+                    <h6>Text Response:</h6>
+                    <p>{{ $checkIfAlreadySubmitted->response }}</p>
+                    @endif
+                    <br>
+                    @if(!empty($checkIfAlreadySubmitted->assignSubmissionFile))
+                    <table class="table card-text">
+                        <tbody>
+                    <hr><h6>Attached Files: </h6>
+                    @foreach($checkIfAlreadySubmitted->assignSubmissionFile as $file)
+                            <tr>
+                              <td width="10%">
+                                <p><i class="fa fa-file-archive" style="font-size:45px;color:#f55b5b"></i></p>
+                             </td>
+                             <td width="80%">
+                                <p style="color: #737373;"><strong>{{$file->file}}</strong><br> {{ ConvertToMB::bytesToHuman(Storage::cloud()->getSize('assign_files/'.$file->file, 's3')) }} </p>
+                              
+                             </td>
+                             <td width="10%">
+                                <a href="{{ Storage::cloud()->url('post_files/'.$file->file, 's3') }}" style="float: right; padding-top: 15px; "> 
+                                  <i class="fa fa-download" style="font-size: 20px;"></i>
+                                </a>
+                             </td>
+                            </tr> 
+                    @endforeach
+                        </tbody>
+                      </table>
+                    @endif
                       <div class="line"></div>
                       <div class="form-group row">
                         <div class="col-md-4 ml-auto">
-                          <button type="submit" class="btn btn-primary">Submit Assignment</button>
+                          <button type="submit" class="btn btn-primary" disabled="">Submit Assignment</button>
                         </div>
                       </div>
                     </form>

@@ -7,7 +7,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Section extends Model
 {
-
+	protected $primaryKey = "section_id";
 	 use LogsActivity;
 
     public function Klase(){

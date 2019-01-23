@@ -73,39 +73,46 @@
         <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
           <li class="nav-item">
           </li>
-          <li class="nav-item dropdown mr-3"><a id="notifications" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-gray-400 px-1"><i class="fa fa-bell"></i><span class="notification-icon"></span></a>
-            <div aria-labelledby="notifications" class="dropdown-menu"><a href="#" class="dropdown-item">
+          <li class="nav-item dropdown mr-3"><a id="notifications" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-gray-400 px-1"><i class="fa fa-bell"></i>@if(Auth::user()->unReadNotifications->count() > 0)<span class="notification-icon">@endif</span></a>
+            <div aria-labelledby="notifications" class="dropdown-menu">
+           @foreach(Auth::user()->unReadNotifications as $notification) 
+              <a href="{{$notification->data['url']}}" class="dropdown-item" style="background: lightgray">
                 <div class="d-flex align-items-center">
-                  <div class="icon icon-sm bg-violet text-white"><i class="fab fa-twitter"></i></div>
+                  <div class="icon icon-sm bg-violet text-white"><i class="fa fa-book-open"></i></div>
                   <div class="text ml-2">
-                    <p class="mb-0">You have 2 followers</p>
+                    <p class="mb-0">{{$notification->data['user']}} {{ $notification->data['data']}} on {{$notification->data['class']}}</p>
                   </div>
-                </div></a><a href="#" class="dropdown-item"> 
+                </div>
+              </a>
+            @endforeach
+          @foreach(Auth::user()->readNotifications as $notification) 
+              <a href="{{$notification->data['url']}}" class="dropdown-item">
                 <div class="d-flex align-items-center">
-                  <div class="icon icon-sm bg-green text-white"><i class="fas fa-envelope"></i></div>
+                  <div class="icon icon-sm bg-violet text-white"><i class="fa fa-book-open"></i></div>
                   <div class="text ml-2">
-                    <p class="mb-0">You have 6 new messages</p>
+                    <p class="mb-0">{{$notification->data['user']}} {{ $notification->data['data']}} on {{$notification->data['class']}}</p>
                   </div>
-                </div></a><a href="#" class="dropdown-item">
+                </div>
+              </a>
+            @endforeach
+
+            @if(Auth::user()->notifications->count() <= 0)
+              <a href="" class="dropdown-item">
                 <div class="d-flex align-items-center">
-                  <div class="icon icon-sm bg-blue text-white"><i class="fas fa-upload"></i></div>
+                  <div class="icon icon-sm bg-violet text-white"><i class="fa fa-book-open"></i></div>
                   <div class="text ml-2">
-                    <p class="mb-0">Server rebooted</p>
+                    <p class="mb-0">No notifications</p>
                   </div>
-                </div></a><a href="#" class="dropdown-item">
-                <div class="d-flex align-items-center">
-                  <div class="icon icon-sm bg-violet text-white"><i class="fab fa-twitter"></i></div>
-                  <div class="text ml-2">
-                    <p class="mb-0">You have 2 followers</p>
-                  </div>
-                </div></a>
-              <div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center"><small class="font-weight-bold headings-font-family text-uppercase">View all notifications</small></a>
+                </div>
+              </a>
+            @endif 
+              <div class="dropdown-divider"></div><a href="{{ route('markAsRead')}}" class="dropdown-item text-center"><small class="font-weight-bold headings-font-family text-uppercase">Mark all as Read</small></a>
             </div>
           </li>
           <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="{!! Auth::user()->profile_photo() !!}" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
             <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family"> {!! Auth::user()->username() !!} </strong>
             </a>
-              <div class="dropdown-divider"></div><a href="{{ route('acc-settings')}}" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log       </a>
+              <div class="dropdown-divider"></div><a href="{{ route('acc-settings')}}" class="dropdown-item">Settings</a><a href="{{route('audits', Auth::user()->id)}}" class="dropdown-item">Activity log       </a>
               <div class="dropdown-divider"></div><a href="{{ route('logout')  }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
