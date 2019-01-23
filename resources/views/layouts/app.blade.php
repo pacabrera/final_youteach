@@ -130,6 +130,7 @@
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="{{ route('home') }}" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
+              <li class="sidebar-list-item"><a href="{{ route('view-classes') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Classes</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('subjects.index') }}" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Subjects</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('teachers.index') }}" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Teachers</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('sections.index') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Sections</span></a></li>

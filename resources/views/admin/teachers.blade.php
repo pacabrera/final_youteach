@@ -27,7 +27,6 @@
                     <tr>
                         <th>#</th>
                         <th>Teacher's Name</th>
-                        <th>Username</th>
                         <th>Classes</th>
                         <th>Active</th>
                         <th></th>
@@ -36,12 +35,11 @@
                 <tbody>
                     @foreach($teachers as $t)
                     <tr>
-                        <th scope="row">{{ $t->usr_id }}</th>
+                        <th scope="row">{{ $t->id }}</th>
                         <td>
                             {{ $t->user_profile->family_name }}, {{ $t->user_profile->given_name }} {{ $t->user_profile->ext_name}} {{ $t->user_profile->middle_name
                             }}.
                         </td>
-                        <td>{{$t->usr}}</td>
                         <td>{{ $t->klase->count() }}</td>
                         <td>@if($t->isOnline()) <span class="dot-online"></span> @else <span class="dot-offline"></span> @endif</td>
                         <td>
