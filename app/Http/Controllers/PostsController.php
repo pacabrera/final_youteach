@@ -102,6 +102,9 @@ class PostsController extends Controller
     }
 
     public function postComment(Request $request, $id){
+            $request->validate([
+            'comment' => 'required|string|max:225',
+            ]);
 
         $comment = new Post;
         $comment->body = $request->input('comment');
