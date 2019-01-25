@@ -11,18 +11,18 @@
                 <div class="card">
                   <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
                     <div class="row">
-                        <div class="col-lg-9 col-md-6 col-sm-6">
-                             <h3>Edit Section</h3>
+                        <div class="col-lg-12 col-md-6 col-sm-6">
+                             <h3>Edit Section : {{$section->section_name}}</h3>
                         </div>
                     </div>
                 </div>
                   <div class="card-body" >
 <div class="card gedf-card" >
                           <div class="card-body">
-                            <form action="{{ route('sections.update, $section->section_id' )}}" method="POST">
+                            <form action="{{ route('edit-section', $section->section_id )}}" method="POST">
                             <div class="row">
 
-                            <div class="col-lg-6 col-md-3">
+                            <div class="col-lg-12 col-md-6">
             @csrf
                 <div class="form-group">
                     <label for="">Section Name</label>
@@ -33,8 +33,8 @@
                 </div>
 
                 </div>
-                           <div class="form-group">
-                <button type="reset" class="btn btn-secondary" data-dismiss="modal">Reset</button>
+                <div class="form-group">
+                <a href="{{route('sections.index') }}" class="btn btn-secondary">Back</a>
                 <button type="submit" class="btn btn-primary">Submit</button>
 
             </div>

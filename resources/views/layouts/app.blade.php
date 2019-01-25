@@ -2,6 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 
 <head>
+  @laravelPWA
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -384,10 +385,34 @@ $('#timepickerFrom').timepicker();
 $('#timepickerTo').timepicker();
 </script>
 
+
      <script type="text/javascript">
+      function confirmDeleteFunction() {
+event.preventDefault(); // prevent form submit
+var form = event.target.form; // storing the form
+        swal({
+  title: "Are you sure?",
+  text: "Do you really want to delete this data?",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Yes!",
+  cancelButtonText: "No, cancel please!",
+},
+function(isConfirm){
+  if (isConfirm) {
+    form.submit();          // submitting the form when user press yes
+  } else {
+    swal("Cancelled", "Your data is safe.", "error");
+  }
+});
+}
+
 
       $(document).ready( function () {
-    $('#dataTable').DataTable();
+    $('#dataTable').DataTable( {
+        "scrollX": true
+    } );
 } );
 
     $('.form_datetime').datetimepicker({        //language:  'fr',

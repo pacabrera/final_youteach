@@ -33,12 +33,13 @@ Route::resource('account', 'AccountController', ['only' => [//Account management
 ]]);
 
 Route::resource('sections', 'SectionsController', ['only' => [//Sections and Grade Levels
-    'index', 'store', 'update', 'destroy'
+    'index', 'store', 
 ]]);
 
 Route::get('add-section', 'SectionsController@create')->name('add-section');
 Route::get('edit-section/{section_id}', 'SectionsController@edit')->name('edit-section');
-
+Route::post('edit-section/{section_id}', 'SectionsController@update')->name('edit-section');
+Route::post('/delete-section/{id}', 'SectionsController@deleteSection')->name('delete-section');
 
 Route::resource('events', 'EventsController', ['only' => [//Questionnaire
      'index', 'store', 'update', 'destroy'

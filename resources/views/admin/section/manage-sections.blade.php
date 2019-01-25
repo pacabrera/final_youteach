@@ -15,7 +15,7 @@
                              <h3>Sections: {{$sections->count()}}</h3>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
-                             <a class="btn btn-warning" href="{{ route('add-section')}}">Add New Class</a>
+                             <a class="btn btn-warning" href="{{ route('add-section')}}">Add New Section</a>
                         </div>
                     </div>
                 </div>
@@ -33,21 +33,30 @@
                 </thead>
                 <tbody>
                     @foreach($sections as $s)
+                    <form action="{{ route('delete-section', $s->section_id) }}" method="POST">
+@csrf
                     <tr>
                         <th scope="row">{{ $s->section_id }}</th>
                         <td>{{$s->section_name}}</td>
                         <td>{{$s->klase->count()}}</td>
                         <td>
-                            <a href="{{ route('edit-section', $s->section_id)}}" class="btn btn-primary btn-sm" class="btn btn-primary btn-sm">
+                            <a href="{{ route('edit-section', $s->section_id)}}" class="btn btn-success btn-sm" class="btn btn-primary btn-sm">
                                 Edit
                             </a>
-                            <button class="btn btn-danger btn-sm" data-subid_del="{{ $s->section_id }}" data-toggle="modal" data-target="#deleteSection" {{ $s->klase->count() > 0 ? 'disabled' : '' }}>Delete</button>
+                            <input type="submit" class="btn btn-danger btn-sm" {{ $s->klase->count() > 0 ? 'disabled' : '' }}>
                         </td>
                     </tr>
-
+</form>
                     @endforeach
                 </tbody>
             </table>
         </div>
+</div>
+</div>
+</div>
+</div>
 
+</div>
+</section>
+</div>
 @endsection

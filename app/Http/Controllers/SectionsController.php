@@ -20,13 +20,15 @@ class SectionsController extends Controller
     
     public function create()
     {
-        return view('admin.section.add-section');
+        $sections = section::with('klase')->get();
+
+        return view('admin.section.add-section', compact('sections'));
     }
     public function index(){
         $sections = section::with('klase')->get();
         //return $sections;
         $section = section::first();
-        return view('admin.sections', compact('sections'));
+        return view('admin.section.manage-sections', compact('sections'));
     }
 
     /**
@@ -44,6 +46,7 @@ class SectionsController extends Controller
         $sections->section_name = $request->input('section_name');
         $sections->save();
 
+        swal()->success('Successfully Created',[]);
         return redirect()->route('sections.index');
 
         
@@ -56,10 +59,22 @@ class SectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
+    
+    public function edit($id)
+    {
         $section = Section::find($id);
-        $section->section_name = $request->input('s_code');
+        return view('admin.section.edit-section', compact('section'));
+    }
+    public function update(Request $request, $id){
+        $request->validate([
+        'section_name' => 'required|string|max:191',
+        ]);
+
+        $section = Section::find($id);
+        $section->section_name = $request->input('section_name');
         $section->save();
+        swal()->success('Successfully Edited',[]);
+        return redirect()->route('sections.index');
         
     }
 
@@ -69,8 +84,16 @@ class SectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
-        Section::destroy($id);
-        
+    public function deleteSection(Request $request, $id){
+        $section = Section::find($id);
+        if($section) {
+            $section->delete();
+            swal()->success('Successfully Deleted',[]);
+            return redirect()->route('sections.index');
+        }
+
+        else {
+          return back()->with('error', 'Error.');
+        }
     }
 }
