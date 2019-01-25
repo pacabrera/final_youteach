@@ -86,10 +86,10 @@
                                             <textarea id="my-editor" name="comment" class="form-control" {{ $errors->has('comment') ? 'is-invalid' : '' }}></textarea>
                                                             <div class="invalid-feedback">
                     {{ $errors->first('comment') }}
-                </div
+                </div>
                                       </div>
                               
->
+
                               <div class="btn-toolbar justify-content-between" style="margin-top: 25px;">
                                   <div class="btn-group">
                                       <button type="submit" class="btn btn-primary" class="btn">Post</button>
