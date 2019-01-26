@@ -11,7 +11,7 @@
 
     <title>@yield('title')</title>
 
-
+<title>Login | Youteach</title>
     <!-- Styles -->
     <link href="{{ asset('assets/css/orionicons.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.red.css') }}" rel="stylesheet">
