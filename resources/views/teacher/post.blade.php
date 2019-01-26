@@ -83,10 +83,10 @@
                   <div class="card-body" >
                                               @csrf
                                       <div class="form-group">
-                                            <textarea id="my-editor" name="comment" class="form-control" {{ $errors->has('comment') ? 'is-invalid' : '' }}></textarea>
-                                                            <div class="invalid-feedback">
-                    {{ $errors->first('comment') }}
-                </div>
+                                            <textarea id="my-editor" name="comment" class="form-control {{ $errors->has('comment') ? 'is-invalid' : '' }}"></textarea>
+                                            <div class="invalid-feedback">
+                                               {{ $errors->first('comment') }}
+                                            </div>
                                       </div>
                               
 
