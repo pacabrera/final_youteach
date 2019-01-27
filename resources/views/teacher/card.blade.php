@@ -34,7 +34,7 @@
                 <td id="td-grades" class="text-left">{{$grade->grade}}@if(!empty($grade->hps))/{{$grade->hps}}@endif</td>
               </tr>
                 @endforeach
-                @if(!empty($grades))
+                @if(empty($grades))
                 <tr id="tr-grades">
                 <td id="td-grades" class="text-center" colspan="2">No Grades Yet</td>
                 
