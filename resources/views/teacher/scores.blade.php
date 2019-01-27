@@ -9,7 +9,7 @@
             <div class="row mb-4">            
               <div class="col-lg-12 mb-4 mb-lg-0">
                 <div class="card">
-                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                  <div class="card-header"  >
                     <h3> {{ $myClass->class_name}} </h3>
                     <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
                   </div>
@@ -24,7 +24,7 @@
                     <div class="container">
 
             <div class="row">
-               <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
+               <table id="gradesTable" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr >
                 <th>Student Name</th>
@@ -103,7 +103,7 @@
 </section>
 </div>
 <script type="text/javascript">$(document).ready(function() {
-    $('#dataTable').DataTable( {
+    $('#gradesTable').DataTable( {
         dom: 'Bfrtip',
         buttons: [
             'copy', 'excel', 'pdf', 'print'

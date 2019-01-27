@@ -7,6 +7,10 @@ use App\Klase;
 use App\ClassMembers;
 use Auth;
 use Announce;
+use App\User;
+use App\UserProfile;
+use App\Grade;
+
 class HomeController extends Controller
 {
     /**
@@ -37,4 +41,12 @@ class HomeController extends Controller
         return redirect()->route('student-panel');
         }
     }
+
+    public function viewProfile($id){
+       $user = User::where('id', $id)->first();
+       $grades = Grade::where('usr_id', $id)->get();
+
+       return view('profile', compact('user', 'grades'));
+        }
+    
 }

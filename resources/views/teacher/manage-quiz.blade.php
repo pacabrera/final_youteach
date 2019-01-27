@@ -8,7 +8,7 @@
             <div class="row mb-4">            
               <div class="col-lg-12 mb-4 mb-lg-0">
                 <div class="card">
-                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                  <div class="card-header"  >
                     <h3> {{ $myClass->class_name}} </h3>
                     <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
                   </div>

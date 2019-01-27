@@ -1583,8 +1583,8 @@ STYLE SWITCHER FOR DEMO
 
 .btn-primary {
   color: #fff;
-  background-color: #f55b5b;
-  border-color: #f55b5b;
+  background-color: #700f20;
+  border-color: #700f20;
 }
 
 .btn-primary:hover {
@@ -2838,7 +2838,7 @@ a {
 
 a:hover, a:focus {
   color: #f11313;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 h1,

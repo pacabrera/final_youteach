@@ -9,7 +9,7 @@
             <div class="row mb-4">            
               <div class="col-lg-12 mb-4 mb-lg-0">
                 <div class="card">
-                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                  <div class="card-header"  >
                     <div class="row">
                         <div class="col-lg-9 col-md-6 col-sm-6">
                              <h3>New Class</h3>

@@ -9,7 +9,7 @@
             <div class="row mb-4">            
               <div class="col-lg-12 mb-6 mb-lg-0">
                 <div class="card">
-                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                  <div class="card-header"  >
                     <h3>YOUTEACH - LMS </h3>
                   </div>
                                     <div class="card-body" >

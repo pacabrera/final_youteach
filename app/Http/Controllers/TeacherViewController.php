@@ -186,6 +186,22 @@ class TeacherViewController extends Controller
         return view('teacher.schedule', compact('schedule', 'classes'));
     }
 
+    public function cards($class_id)
+    {
+        $myClass = Klase::where('class_id', $class_id)->first();
+        $classlist = ClassMembers::where('class_id', $class_id)->get();
+        return view('teacher.listcards', compact('myClass','classlist'));
+    }
+
+        public function singleCard($class_id, $id)
+    {
+        $myClass = Klase::where('class_id', $class_id)->first();
+        $classlist = ClassMembers::where('class_id', $class_id)->get();
+        $grades = Grade::where('class_id', $class_id)->where('usr_id', $id)->get();
+        return view('teacher.card', compact('myClass','classlist', 'grades'));
+    }
+
+
 
 }
 

@@ -9,7 +9,7 @@
             <div class="row mb-4">            
               <div class="col-lg-8 mb-4 mb-lg-0">
                 <div class="card">
-                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                  <div class="card-header"  >
                     <h3> {{ $myClass->class_name}} </h3>
                     <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
                   </div>
@@ -65,7 +65,7 @@
             <!-- Side Notification -->
               <div class="col-lg-4">
                 <div class="card mb-4">
-                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                  <div class="card-header"  >
                     <h2 class="h6 text-uppercase mb-0">Dashboard</h2>
                   </div>
                   <div class="card-body">

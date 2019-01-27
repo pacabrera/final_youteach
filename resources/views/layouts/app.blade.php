@@ -169,6 +169,7 @@
                 <li class="sidebar-list-item"><a href="{{ route('assignments', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Assignments</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('qr-attendance', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Attendance</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('score-class', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Scores</a></li>
+                <li class="sidebar-list-item"><a href="{{ route('cards', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Cards</a></li>
               </ul>
             </div>
           

@@ -104,6 +104,9 @@ Route::get('submissions', 'AssignmentController@submissions')->name('submissions
 Route::get('/scores/{class_id}', 'TeacherViewController@scores')->name('score-class');
 
 Route::get('/schedule', 'TeacherViewController@schedule')->name('schedule-teacher');
+
+Route::get('cards/{class_id}', 'TeacherViewController@cards')->name('cards');
+Route::get('cards/{class_id}/{id}', 'TeacherViewController@singleCard')->name('single-cards');
 }); // End /teacher
 
 //All Student Routes
@@ -148,6 +151,8 @@ Route::post('/turn-in/{assign_id}', 'PostsController@turnInPost')->name('turn-in
 //Attendance
 Route::get('/event/{id}', 'EventController@showSingle')->name('event-single');
 Route::get('/audits/{id}', 'ActivityLog@getAudits')->name('audits');
+
+Route::get('profile/{id}', 'HomeController@viewProfile')->name('view-profile');
 
 
 //Notif
