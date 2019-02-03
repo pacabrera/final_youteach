@@ -95,7 +95,7 @@ class ClassesController extends Controller
        
 
          swal()->success('Class Created!',[]);
-        return redirect('/class/'.$klase->class_id);
+        return redirect()->route('class-forum', $klase->class_id);
     }
     public function show($class_id){
         

@@ -3,6 +3,22 @@
 
 @section('content')
 <div class="page-holder w-100 d-flex flex-wrap">
+       @if($checkClass->count() <= 0)
+          <div style="text-align: center; margin: 0 auto; margin-top: 50px; margin-bottom: 50px;">      
+              <p style="font-size: 70px; color: #afafaf;"> NO CLASS </p>
+
+              <i style="font-size: 100px; color: #afafaf;" class="fa fa-home"></i> <br> <br>
+
+              <p style="font-size: 30px; color: #afafaf;"> Looks like there's no class yet. Get your online classroom by joining a class. </p>
+
+
+
+              <div id="rndmBtn">
+                <a href="" class="btn red" data-toggle="modal" data-target="#joinClass" > JOIN CLASS </a>
+              </div>
+        </div>
+        @else
+
         <div class="container-fluid px-xl-5">
           <section class="py-5">
           <!-- Post -->   
@@ -100,6 +116,7 @@
             </div>
             @endforeach
             @endforeach
+
 <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
 <script>
   CKEDITOR.replace('my-editor');
@@ -124,6 +141,6 @@
          }
 
       </script>
-
+  @endif
 @endsection
 

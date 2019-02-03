@@ -79,6 +79,8 @@ class StudentViewController extends Controller
                 'student_id' => Auth::user()->id,
                 'class_id' => $request->input('class_code'),
             ]);
+            swal()->success('Successfully Joined Class!',[]);
+            return redirect()->route('class-forum', $request->input('class_code'));
         }
       }
 

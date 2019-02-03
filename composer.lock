@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e50e286675b7d131d762948b0e8f4b4",
+    "content-hash": "dea938e4bdf192b3af6fc5fbc3cc6ab6",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -184,6 +184,52 @@
             "description": "BaconQrCode is a QR code generator for PHP.",
             "homepage": "https://github.com/Bacon/BaconQrCode",
             "time": "2017-10-17T09:59:25+00:00"
+        },
+        {
+            "name": "cohensive/embed",
+            "version": "v5.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KaneCohen/embed.git",
+                "reference": "efbfbd529497f18471d4ac4c2aea7b6b8eb1a336"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KaneCohen/embed/zipball/efbfbd529497f18471d4ac4c2aea7b6b8eb1a336",
+                "reference": "efbfbd529497f18471d4ac4c2aea7b6b8eb1a336",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Cohensive\\Embed": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kane Cohen",
+                    "email": "kanecohen@gmail.com"
+                }
+            ],
+            "description": "Media Embed (for Laravel or as a standalone).",
+            "keywords": [
+                "embed",
+                "laravel",
+                "media",
+                "vimeo",
+                "youtube"
+            ],
+            "time": "2018-05-16T20:03:36+00:00"
         },
         {
             "name": "container-interop/container-interop",
@@ -3407,6 +3453,52 @@
             "time": "2018-07-19T23:38:55+00:00"
         },
         {
+            "name": "secrethash/trickster",
+            "version": "v2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/secrethash/trickster.git",
+                "reference": "2030f6455cec0b72c3b2ca832b6e72e4b3696993"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/secrethash/trickster/zipball/2030f6455cec0b72c3b2ca832b6e72e4b3696993",
+                "reference": "2030f6455cec0b72c3b2ca832b6e72e4b3696993",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Secrethash\\Trickster\\TricksterServiceProvider"
+                    ],
+                    "aliases": {
+                        "Trickster": "Secrethash\\Trickster\\Facade\\Trickster"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Secrethash\\Trickster\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shashwat Mishra",
+                    "email": "shashwat9630@gmail.com"
+                }
+            ],
+            "description": "Trickster is a package for laravel that has many useful tricks that can be used for quick and easy website management.",
+            "time": "2017-09-14T02:33:49+00:00"
+        },
+        {
             "name": "silviolleite/laravelpwa",
             "version": "1.0.2",
             "source": {
@@ -4977,6 +5069,66 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2017-11-27T11:13:29+00:00"
+        },
+        {
+            "name": "unicodeveloper/laravel-password",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/unicodeveloper/laravel-password.git",
+                "reference": "c2e532cbbb0c579f5a9fabd105edb4185b192cf2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/unicodeveloper/laravel-password/zipball/c2e532cbbb0c579f5a9fabd105edb4185b192cf2",
+                "reference": "c2e532cbbb0c579f5a9fabd105edb4185b192cf2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~5.6|~7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0||~5.0",
+                "scrutinizer/ocular": "~1.1",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Unicodeveloper\\DumbPassword\\DumbPasswordServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Unicodeveloper\\DumbPassword\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": ":Prosper Otemuyiwa",
+                    "email": "prosperotemuyiwa@gmail.com",
+                    "homepage": "http://goodheads.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Protect your users from entering dumb and common passwords",
+            "homepage": "https://github.com/unicodeveloper/laravel-password",
+            "keywords": [
+                "dumb",
+                "passwords",
+                "security",
+                "unicodeveloper"
+            ],
+            "time": "2018-01-25T18:03:37+00:00"
         },
         {
             "name": "unisharp/laravel-ckeditor",

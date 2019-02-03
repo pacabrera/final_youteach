@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Subjects - TeckQuiz')
+@section('title', 'Subjects')
 @section('content')
 <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
@@ -14,7 +14,7 @@
                              <h3>Subjects</h3>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
-                             <button class="btn btn-warning" data-toggle="modal" data-target="#addSubject">Add new subject</button>
+                             <a class="btn btn-warning" href="{{route('subjects.create')}}">Add new subject</a>
                         </div>
                     </div>
                 </div>
@@ -39,17 +39,12 @@
                         <td>{{$s->subject_desc}}</td>
                         <td>{{$s->klase->count()}}</td>
                         <td>
-                            <button href="" class="btn btn-primary btn-sm" type="button" class="btn btn-primary btn-sm"
-                                data-toggle="modal" data-target="#editSubject"
-                                data-subid="{{ $s->subject_id }}"
-                                data-code="{{ $s->subject_code }}"
-                                data-dscr="{{ $s->subject_desc }}">
+                            <a  class="btn btn-primary btn-sm" href="{{route('edit-subject', $s->subject_id)}}">
                                 Edit
-                            </button>
+                            </a>
                             <button class="btn btn-danger btn-sm" data-subid="{{ $s->subject_id }}" data-toggle="modal" data-target="#deleteSubject" {{ $s->klase->count() > 0 ? 'disabled' : '' }}>Delete</button>
                         </td>
                     </tr>
-
                     @endforeach
                 </tbody>
             </table>

@@ -18,12 +18,14 @@ class CreateUsersTable extends Migration
             $table->integer('id')->unique();
             $table->string('password');
             $table->integer('permissions');
+            $table->string('email');
             $table->rememberToken();
             $table->timestamps();
         });
 
         User::create([
             'id' => '100',
+            'email' => 'youteach@youteachlms.com',
             'permissions' => 0,
             'password' => Hash::make("password"),
         ]);

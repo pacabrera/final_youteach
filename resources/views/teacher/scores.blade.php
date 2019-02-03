@@ -28,26 +28,26 @@
                 <thead>
                 <tr >
                 <th>Student Name</th>
-                @if($classlist->where('type', 'Quiz')->count() > 0)
-                @foreach($classlist->where('type', 'Quiz') as $quizG)
+                @if($grades->where('type', 'Quiz')->count() > 0)
+                @foreach($grades->where('type', 'Quiz') as $quizG)
                 <th>Quiz {{ $loop->iteration }}</th>
                 @endforeach
                 @endif
 
-                @if($classlist->where('type', 'Asssignment')->count() > 0)
-                @foreach($classlist->where('type', 'Asssignment') as $assG)
+                @if($grades->where('type', 'Asssignment')->count() > 0)
+                @foreach($grades->where('type', 'Asssignment') as $assG)
                 <th>Assignment {{ $loop->iteration }}</th>
                  @endforeach
                  @endif
 
-                @if($classlist->where('type', 'Activity')->count() > 0)
-                @foreach($classlist->where('type', 'Activity') as $actG)
+                @if($grades->where('type', 'Activity')->count() > 0)
+                @foreach($grades->where('type', 'Activity') as $actG)
                 <th>Activity {{ $loop->iteration }}</th>
                  @endforeach
                  @endif
 
-                @if($classlist->where('type', 'Recitation')->count() > 0)
-                @foreach($classlist->where('type', 'Recitation') as $recG)
+                @if($grades->where('type', 'Recitation')->count() > 0)
+                @foreach($grades->where('type', 'Recitation') as $recG)
                 <th>Recitation {{ $loop->iteration }} </th>
                   @endforeach
                 @endif
@@ -55,30 +55,30 @@
                 </thead>
 
                 <tbody class="table-hover">
-                @foreach($classlist->unique() as $student)
+                @foreach($grades as $student)
                 <tr>
-                <td class="text-left">{{$student->user_profile->family_name}}, {{$student->user_profile->given_name}} {{substr($student->user_profile->middle_name, 0, 1)}}.</td>
+                <td class="text-left">{{$student->usr_id}}</td>
                 
-                @if($classlist->where('type', 'Quiz')->count() > 0)
-                @foreach($classlist->where('type', 'Quiz') as $quiz)
+                @if($grades->where('type', 'Quiz')->count() > 0)
+                @foreach($grades->where('type', 'Quiz') as $quiz)
                 <td  class="text-left">{{$quiz->grade}}</td>
                 @endforeach
                 @endif
 
-                @if($classlist->where('type', 'Asssignment')->count() > 0)
-                @foreach($classlist->where('type', 'Asssignment') as $ass)
+                @if($grades->where('type', 'Asssignment')->count() > 0)
+                @foreach($grades->where('type', 'Asssignment') as $ass)
                 <td  class="text-left">{{$ass->grade}}</td>
                 @endforeach
                 @endif
 
-                @if($classlist->where('type', 'Activity')->count() > 0)
-                @foreach($classlist->where('type', 'Activity') as $act)
+                @if($grades->where('type', 'Activity')->count() > 0)
+                @foreach($grades->where('type', 'Activity') as $act)
                 <td  class="text-left">{{$act->grade}}</td>
                 @endforeach
                  @endif
 
-                @if($classlist->where('type', 'Recitation')->count() > 0)
-                @foreach($classlist->where('type', 'Recitation') as $rec)
+                @if($grades->where('type', 'Recitation')->count() > 0)
+                @foreach($grades->where('type', 'Recitation') as $rec)
                 <td  class="text-left">{{$rec->grade}}</td>
                 @endforeach
                 @endif

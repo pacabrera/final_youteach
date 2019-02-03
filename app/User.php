@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use App\Notifications\PasswordReset;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +23,7 @@ class User extends Authenticatable
         'id',
         'permissions',
         'password',
+        'email'
     ];
 
     /**

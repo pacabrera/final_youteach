@@ -67,6 +67,12 @@ class EventController extends Controller
         return view('admin.add-event', compact('events'));
     }
 
+    public function newEvent()
+    {
+        
+        return view('admin.events.add-event');
+    }
+
     public function addEventPost(Request $request)
     {
         $this->validate($request,[

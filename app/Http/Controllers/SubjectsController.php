@@ -20,7 +20,7 @@ class SubjectsController extends Controller
         $subjects = Subject::with('klase')->get();
         //return $subjects;
         
-        return view('admin.subjects', compact('subjects'));
+        return view('admin.subjects.subjects', compact('subjects'));
     }
 
     /**
@@ -31,10 +31,20 @@ class SubjectsController extends Controller
      */
     public function store(Request $request){
 
+        $this->validate($request,[
+            'Subject_Code' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50|unique:subjects,subject_code',
+            'Subject_Description' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
+        ]);
+
         $subject = new Subject;
-        $subject->subject_code = $request->input('s_code');
-        $subject->subject_desc = $request->input('s_des');
+        $subject->subject_code = $request->input('Subject_Code');
+        $subject->subject_desc = $request->input('Subject_Description');
+
+
         $subject->save();
+        swal()->success('Successfully Created',[]);
+        return redirect()->route('subjects.index');
+
 
 
     }
@@ -47,10 +57,18 @@ class SubjectsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
+        $this->validate($request,[
+            'Subject_Code' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50|',
+            'Subject_Description' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
+        ]);
+
         $subject = Subject::find($id);
-        $subject->subject_code = $request->input('s_code');
-        $subject->subject_desc = $request->input('s_des');
+        $subject->subject_code = $request->input('Subject_Code');
+        $subject->subject_desc = $request->input('Subject_Description');
         $subject->save();
+
+        swal()->success('Successfully Edited',[]);
+        return redirect()->route('subjects.index');
     }
 
     /**
@@ -61,5 +79,16 @@ class SubjectsController extends Controller
      */
     public function destroy($id){
         Subject::destroy($id);
+        swal()->success('Successfully Deleted',[]);
+    }
+
+    public function create(){
+        return view('admin.subjects.add-subject');
+    }
+
+    public function edit($id){
+        $subject = Subject::find($id);
+         return view('admin.subjects.edit-subject', compact('subject'));
+
     }
 }

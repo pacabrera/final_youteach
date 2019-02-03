@@ -27,6 +27,11 @@
                   <div class="card-body">
                     <p>{!! nl2br($threads->post[0]->body) !!}</p>
                     @if(!empty($threads->post[0]->postFiles))
+                     @foreach($threads->post[0]->postFiles as $image)
+                        @if (pathinfo(Storage::cloud()->url('post_files/'.$image->file, 's3'), PATHINFO_EXTENSION) == 'png')
+                        <img src="{{ Storage::cloud()->url('post_files/'.$image->file, 's3') }}" class="img-content">
+                        @endif
+                     @endforeach
                     <table class="table card-text">
                         <tbody>
                     @foreach($threads->post[0]->postFiles as $file)
@@ -136,7 +141,8 @@
                 </div>
               </div>
             <!-- //Side Notification -->  
-
+</div>
+</section>
             </div>
 <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
 <script>

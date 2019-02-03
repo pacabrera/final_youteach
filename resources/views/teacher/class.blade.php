@@ -47,7 +47,14 @@
                                       <hr>
                                   </div>
                               </div>
-                              
+
+                              <div class="form-group">
+
+                                <input type="url" name="video" class="form-control {{ $errors->has('video') ? 'is-invalid' : '' }}" placeholder="Paste YouTube link here." value="{{ old('video')}}" >
+                                <div class="invalid-feedback">
+                                  {{ $errors->first('video') }}
+                                </div>
+                              </div>                        
                               <input type="hidden" name="class_id" value="{{ $myClass->class_id}}">
                               <div class="btn-toolbar justify-content-between" style="margin-top: 25px;">
                                   <div class="btn-group">
@@ -185,18 +192,10 @@
                           <div class="modal-body text-center">
                             <h3> Invite your students using this</h3>
                             <h2>Class Code: {{$myClass->class_id}}</h2>
-                            <a href="http://www.facebook.com/dialog/feed?  
-app_id=294434154588483&  
-link=http://developers.facebook.com/docs/reference/dialogs/&
-picture=http://fbrell.com/f8.jpg&  
-name=Facebook%20Dialogs&  
-caption=Reference%20Documentation& 
-description=Dialogs%20provide%20a%20simple,%20consistent%20interface%20for%20applications%20to%20interact%20with%20users.&
-message=Facebook%20Dialogs%20are%20so%20easy!&
-redirect_uri=http://www.example.com/response" target="_blank">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://youteachlms.com&quote=Join me in {{$myClass->class_name}} using this class code: {{$myClass->class_id}} " target="_blank">
  <div class="btn bg-red text-white"><i class="fab fa-facebook fa-lg"></i></div>
 </a>
-                             <a href="http://twitter.com/share?text=Join me in {{$myClass->class_name}} using this class code: {{$myClass->class_id}} &url=http://youteach-lms.herokuapp.com/&hashtags=YouTeach" target="_blank">
+                             <a href="http://twitter.com/share?text=Join me in {{$myClass->class_name}} using this class code: {{$myClass->class_id}} &url=https://youteachlms.com/&hashtags=YouTeach" target="_blank">
 <div class="btn bg-red text-white"><i class="fab fa-twitter"></i></div></a>
                               </div>
                           
@@ -212,7 +211,15 @@ redirect_uri=http://www.example.com/response" target="_blank">
   CKEDITOR.replace('my-editor');
 </script>
 
-
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip({
+     html: true
+  }
+   
+    );   
+});
+</script>
 <script>
   
     $.ajaxSetup({

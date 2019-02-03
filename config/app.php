@@ -175,7 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Jorenvh\Share\Providers\ShareServiceProvider::class,
-
+        Cohensive\Embed\EmbedServiceProvider::class,
     ],
 
     /*
@@ -226,7 +226,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'ConvertToMB' => App\Helpers\ConvertToMB::class,
          'Share' => Jorenvh\Share\ShareFacade::class,
-
+'Embed' => Cohensive\Embed\Facades\Embed::class,
     ],
 
 ];

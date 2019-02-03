@@ -19,7 +19,8 @@ class CreateThreadsTable extends Migration
             $table->integer('usr_id');
             $table->foreign('usr_id')->references('id')->on('users');
             $table->string('class_id', 5);
-            $table->foreign('class_id')->references('class_id')->on('classes')->onDelete('cascade');;
+            $table->foreign('class_id')->references('class_id')->on('classes')->onDelete('cascade');
+            $table->string('video')->nullable();
             $table->unsignedInteger('assign_id')->nullable();
             $table->foreign('assign_id')->references('id')->on('assignments')->onDelete('cascade');
             $table->unsignedInteger('quiz_id')->nullable();

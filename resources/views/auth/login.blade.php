@@ -64,7 +64,11 @@
                     </div>
                     <p class="text-center text-muted">
                         Don't have an account?
-                        <a href="{{ route('register') }}">Register here!</a>
+                        <a href="{{ route('register') }}">Register here!</a> <br>
+                         Forgot Your Password?
+                                                                            <a href="{{ route('password.request') }}">
+                                    Reset your Password here!
+                                </a>
                     </p>
                 </form>
 

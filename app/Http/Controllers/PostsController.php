@@ -58,6 +58,7 @@ class PostsController extends Controller
             'title' => 'required|string|max:191',
             'class_id' => 'required',
             'body' => 'required|string|max:225',
+            'video' => ['regex:@(https?://)?(?:www\.)?(youtu(?:\.be/([-\w]+)|be\.com/watch\?v=([-\w]+)))\S*@'],
             'file.*' => 'mimes:jpeg,gif,png,mp4,mp3,wav,ogg,avi,mkv,doc,csv,xlsx,xls,docx,ppt,odt,ods,odp,rtf,txt,pptx,zip,rar|max:25000'
             ]);
 

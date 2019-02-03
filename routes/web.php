@@ -21,8 +21,10 @@ Route::prefix('/admin')->group(function(){
 Route::get('/', 'AdminViewPanel@index')->name('admin-panel');
 
 Route::resource('subjects', 'SubjectsController', ['only' => [//Subject
-    'index', 'store', 'update', 'destroy'
+    'index', 'store', 'destroy', 'create'
 ]]);
+Route::get('edit-subject/{subject_id}', 'SubjectsController@edit')->name('edit-subject');
+Route::post('edit-subject/{subject_id}', 'SubjectsController@update')->name('edit-subject');
 
 Route::resource('teachers', 'TeacherController', ['only' => [//Teacher list
     'index'
@@ -42,13 +44,15 @@ Route::post('edit-section/{section_id}', 'SectionsController@update')->name('edi
 Route::post('/delete-section/{id}', 'SectionsController@deleteSection')->name('delete-section');
 
 Route::resource('events', 'EventsController', ['only' => [//Questionnaire
-     'index', 'store', 'update', 'destroy'
+     'index', 'store', 'update', 'destroy', 'edit'
 ]]);
-
+Route::post('edit-event/{id}', 'EventsController@updatePost')->name('edit-event');
 Route::get('manage-events', 'EventController@addEvent')->name('add-event');
-
+Route::get('new-event', 'EventController@newEvent')->name('new-event');
 //Events
 Route::get('events', 'EventController@admin')->name('events-admin');
+
+
 
 //Classes Dashboard
 Route::get('classes', 'AdminViewPanel@viewClasses')->name('view-classes');
@@ -67,7 +71,7 @@ Route::resource('class', 'ClassesController',  ['only' => [//Class
 ]]);
 Route::get('/attendances/{id}', 'AttendanceController@getAttendance')->name('attendances');
 
-Route::get('/recitation/{class_id}', 'TeacherViewController@recitation')->name('recitation');
+Route::get('/recitation/{id}', 'TeacherViewController@recitation')->name('recitation');
 Route::post('/randomize/{class_id}', 'TeacherViewController@recitationTool')->name('randomize');
 Route::post('/recitation', 'TeacherViewController@gradeRec')->name('grade-recitation');
 Route::post('/reset/{class_id}', 'TeacherViewController@resetRecitation')->name('resetRecitation');
@@ -107,6 +111,9 @@ Route::get('/schedule', 'TeacherViewController@schedule')->name('schedule-teache
 
 Route::get('cards/{class_id}', 'TeacherViewController@cards')->name('cards');
 Route::get('cards/{class_id}/{id}', 'TeacherViewController@singleCard')->name('single-cards');
+
+Route::post('gradecategory', 'TeacherViewController@createGradeCategory')->name('grade-categ');
+Route::get('start-recitation/{class_id}', 'TeacherViewController@startRec')->name('start-rec');
 }); // End /teacher
 
 //All Student Routes
@@ -160,3 +167,8 @@ Route::get('markAsRead', function(){
     Auth::user()->unReadNotifications->markAsRead();
     return back();
 })->name('markAsRead');
+
+
+Route::get('about', function(){
+    return view('about');
+})->name('about');

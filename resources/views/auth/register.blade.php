@@ -60,6 +60,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="">Email Address</label>
+                                        <input name="email" id="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}">
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('email') }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                       <label for="gender">Gender</label>
                                       <select id="gender" class="form-control" name="gender">
                                         <option selected value="Male">Male</option>

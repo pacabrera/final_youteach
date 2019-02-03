@@ -14,7 +14,7 @@
                              <h3>Events</h3>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
-                             <button class="btn btn-warning" data-toggle="modal" data-target="#addEvent">Add new Event</button>
+                             <a class="btn btn-warning" href="{{ route('new-event')}}">Add new Event</a>
                         </div>
                     </div>
                 </div>
@@ -42,16 +42,9 @@
                         <td>{{$s->end_date}}</td>
                         
                         <td>
-                            <button href="" class="btn btn-primary btn-sm" type="button" class="btn btn-primary btn-sm"
-                                data-toggle="modal" data-target="#editEvent"
-
-                                data-title="{{ $s->title }}"
-                                data-event_id="{{ $s->id }}"
-                                data-color="{{ $s->color }}"
-                                data-start_date="{{ $s->start_date }}"
-                                data-end_date="{{ $s->end_date }}">
+                            <a href="{{route('events.edit', $s->id)}}" class="btn btn-primary btn-sm" >
                                 Edit
-                            </button>
+                            </a>
                             <button class="btn btn-danger btn-sm" data-event_id="{{ $s->id }}" data-toggle="modal" data-target="#deleteEvent">Delete</button>
                         </td>
                     </tr>

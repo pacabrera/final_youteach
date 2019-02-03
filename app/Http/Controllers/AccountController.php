@@ -8,6 +8,7 @@ use App\UserProfile;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
@@ -25,10 +26,22 @@ class AccountController extends Controller
      */
     public function store(Request $request){
         if (Auth::user()->permissions == 0){//Only the admin can store teachers
+
+       $this->validate($request,[
+            'email' => 'required|email|regex:/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/|max:50|unique:users',
+            'given_name' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
+            'family_name' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
+            'middle_name' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
+            'ext_name' => 'nullable|regex:/(^[A-Za-z ]+$)+/|max:50',
+            'id' => 'required|integer|unique:users,id',
+            'gender' => 'required',
+        ]);
+
             $out =[
                 'id' => $request->input('id'),
-                'permissions' => $request->input('permission'),
-                'password' => bcrypt($request->input('password')),
+                'email' => $request->input('email'),
+                'permissions' =>1,
+                'password' => bcrypt('password'),
             ];
 
             $usr = User::create($out);
@@ -37,11 +50,11 @@ class AccountController extends Controller
             //$usr = User::select('id')->where('usr', $request->input('usr'))->first();
             
             UserProfile::create([
-                'given_name' => $request->input('n_given'),
-                'family_name' => $request->input('n_family'),
+                'given_name' => $request->input('given_name'),
+                'family_name' => $request->input('family_name'),
                 'gender' => $request->input('gender'),
-                'middle_name' => $request->input('n_middle'),
-                'ext_name' => $request->input('n_ext'),
+                'middle_name' => $request->input('middle_name'),
+                'ext_name' => $request->input('ext_name'),
                 'profile_pic' => 'no-profile.png',
                 'id' => $request->input('id'),
             ]);

@@ -55,6 +55,8 @@ class EventsController extends Controller
         $events->end_date = $request->input('end_date');
 
         $events->save();
+        swal()->success('Successfully Created',[]);
+        return redirect()->route('add-event');
 
     }
 
@@ -77,7 +79,8 @@ class EventsController extends Controller
      */
     public function edit($id)
     {
-
+        $event = Event::find($id);
+        return view('admin.events.edit-event', compact('event'));
     }
 
     /**
@@ -87,7 +90,7 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updatePost(Request $request, $id)
     {
         $this->validate($request,[
             'title' => 'required',
@@ -100,10 +103,13 @@ class EventsController extends Controller
 
         $events->title = $request->input('title');
         $events->color = $request->input('color');
+        $events->venue = $request->input('venue');
         $events->start_date = $request->input('start_date');
         $events->end_date = $request->input('end_date');
 
         $events->save();
+        swal()->success('Successfully Edited',[]);
+        return redirect()->route('add-event');
 
         
     }

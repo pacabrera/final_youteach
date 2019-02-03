@@ -44,11 +44,11 @@
                         <td>@if($t->isOnline()) <span class="dot-online"></span> @else <span class="dot-offline"></span> @endif</td>
                         <td>
                             <button href="" class="btn btn-danger btn-sm" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#deleteTeacher"
-                                data-tid="{{ $t->usr_id }}">
+                                data-tid="{{ $t->id }}">
                                 Delete
                             </button>
                             <button href="" class="btn btn-warning btn-sm" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#resetTeacherPassword"
-                                data-tid="{{ $t->usr_id }}">
+                                data-tid="{{ $t->id }}">
                                 Reset Password
                             </button>
                         </td>
@@ -73,16 +73,35 @@
                 <div class="modal-body">
                     <form method="POST" action="{{ route('account.store') }}">
                         {{ csrf_field() }}
-                        <div class="form-group">
-                            <label for="">Name</label>
-                            <div class="form">
-                                <input name="n_given" id="n_given" type="text" placeholder="Given name" class="form-control mb-2">
-                                <input name="n_middle" id="n_middle" type="text" placeholder="M.I." class="form-control mb-2">
-                                <input name="n_family" id="n_family" type="text" placeholder="Family name" class="form-control mb-2">
-                                <input name="n_ext" id="n_ext" type="text" placeholder="Ext." class="form-control mb-2">
-                            </div>
-                        </div>
-                                                            <div class="form-group">
+                         <div class="form-group">
+                                        <label for="">Name</label>
+                                        <div class="form">
+                                            <input name="given_name" id="n_given" type="text" placeholder="Given name" class="form-control mb-2 {{ $errors->has('given_name') ? 'is-invalid' : '' }}" value="{{ old('given_name') }}">
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('given_name') }}
+                                        </div>                                            
+                                            <input name="middle_name" id="n_middle" type="text" placeholder="M.I." class="form-control mb-2 {{ $errors->has('middle_name') ? 'is-invalid' : '' }}" value="{{ old('middle_name') }}">
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('middle_name') }}
+                                        </div>
+                                            <input name="family_name" id="n_family" type="text" placeholder="Family name" class="form-control mb-2 {{ $errors->has('family_name') ? 'is-invalid' : '' }}" value="{{ old('family_name') }}">
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('family_name') }}
+                                        </div>
+                                            <input name="ext_name" id="ext_name" type="text" placeholder="Ext." class="form-control mb-2 {{ $errors->has('ext_name') ? 'is-invalid' : '' }}" value="{{ old('ext_name') }}">
+                                        <div class="ext_name-feedback">
+                                            {{ $errors->first('ext_name') }}
+                                        </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Email Address</label>
+                                        <input name="email" id="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}">
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('email') }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                       <label for="gender">Gender</label>
                                       <select id="gender" class="form-control" name="gender">
                                         <option selected value="Male">Male</option>
@@ -97,17 +116,11 @@
                                         </div>
                                     </div>
 
-                        <div class="form-group">
-                            <label for="">Password</label>
-                            <input pattern=".{8,}" name="password" id="password" type="password" class="form-control">
-                            <small class="form-text text-muted">At least 8 characters</small>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" onclick="" class="btn btn-success btn-block">Register</button>
-                            <small class="form-text text-muted text-center">By clicking "Register", the teacher agree to our terms of service and privacy policy.</small>
-                        </div>
-                        <input type="hidden" name="permission" id="permission" value="1">
-                    </form>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success btn-block">Register</button>
+                                        <small class="form-text text-muted text-center">By clicking "Register", you agree to our terms of service and privacy policy.</small>
+                                    </div>
+                                </form>
                 </div>
             </div>
         </div>
@@ -169,12 +182,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete this teacher? Any klases under this teacher will also be deleted. <b>This is irreversible!</b>
+                    Are you sure you want to delete this teacher? Any classes under this teacher will also be deleted. <b>This is irreversible!</b>
                     <input type="hidden" id="tid_del" value="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="DeleteTeacher()">Delete Question</button>
+                    <button type="button" class="btn btn-danger" onclick="DeleteTeacher()">Delete Teacher</button>
                 </div>
             </div>
         </div>
