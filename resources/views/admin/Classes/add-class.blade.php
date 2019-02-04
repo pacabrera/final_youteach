@@ -75,7 +75,6 @@
                 <div class="form-group">
                     <label for=""><strong>Schedule</strong></label> <br/>
                     <div class="row">
-
                     <!--monday-->
                     <div class="col-lg-4 col-md-3">
                         <label for=""><strong>Monday</strong></label> 

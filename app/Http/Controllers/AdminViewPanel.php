@@ -9,7 +9,7 @@ use App\User;
 use App\Event;
 use App\Klase;
 use App\Schedule;
-
+use Spatie\Activitylog\Models\Activity;
 class AdminViewPanel extends Controller
 {
     public function __construct()
@@ -25,13 +25,6 @@ class AdminViewPanel extends Controller
         return view('admin.panel', compact('students', 'events'));
     }
 
-    public function audits()
-    {
-
-$audits = Post::find(1)->audits;
-
-        return view('admin.audits', compact('audits'));
-    }
 
     public function viewClasses()
     {
@@ -156,13 +149,39 @@ $audits = Post::find(1)->audits;
             $schedule->room = $request->input('roomS');
             $schedule->save();
         }
-       
+       swal()->success('Successfully Created',[]);
         return redirect()->route('view-classes');
     }
 
-    public function editClassView()
+    public function editClassView($class_id)
     {
-        return view('admin.classes.edit-class');
+        $klase = Klase::find($class_id);
+        return view('admin.classes.edit-class', compact('klase'));
     }
+
+    public function editClassPost(Request $request, $class_id)
+    {
+        
+        $request->validate([
+    'class_name' => 'required|string|unique:classes,class_name|max:191',
+    ]);
+
+        $klase = Klase::find($class_id);
+        $klase->instructor_id = $request->input('instructor');//gets the id of the user
+        $klase->class_name = $request->input('class_name');
+        $klase->section_id = $request->input('section_id');
+        $klase->subject_id = $request->input('subject_id');
+        $klase->save();
+
+        swal()->success('Successfully Edited',[]);
+        return redirect()->route('view-classes');
+    }
+
+       public function audits()
+    {
+        $audits = Activity::all();
+        return view('audits', compact('audits'));
+
+   }
 
 }

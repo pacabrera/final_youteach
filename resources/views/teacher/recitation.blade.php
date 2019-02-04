@@ -112,7 +112,7 @@
                                                             " required>
 
                                   <input type="hidden" id="student_id" name="usr_id">
-                                  <input type="hidden" name="category" value="{{ $gradecateg }}">
+                                  <input type="hidden" name="class_id" value="{{ $myClass->class_id }}">
                               </div>
                           </div>
                           <div class="modal-footer">
@@ -155,13 +155,12 @@
                }
             });
          }
-
         function reset() {
         $.ajax({
             url: '{{ route('resetRecitation', $myClass->class_id )}}',
             type: 'POST', //type is any HTTP method
                         success: function () {
-                window.location = '{{ route("start-rec" , $myClass->class_id) }}';
+                window.location.reload(true);
             }
         });
     }

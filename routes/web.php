@@ -19,7 +19,7 @@ Auth::routes();
 //All Admin Routes
 Route::prefix('/admin')->group(function(){
 Route::get('/', 'AdminViewPanel@index')->name('admin-panel');
-
+Route::get('all-audits', 'AdminViewPanel@audits')->name('all-audits');
 Route::resource('subjects', 'SubjectsController', ['only' => [//Subject
     'index', 'store', 'destroy', 'create'
 ]]);
@@ -59,6 +59,7 @@ Route::get('classes', 'AdminViewPanel@viewClasses')->name('view-classes');
 Route::get('new-class', 'AdminViewPanel@newClassView')->name('new-class');
 Route::post('add-class', 'AdminViewPanel@addClass')->name('add-class');
 Route::get('edit-class/{class_id}', 'AdminViewPanel@editClassView')->name('edit-class');
+Route::post('edit-class/{class_id}', 'AdminViewPanel@editClassPost')->name('edit-classPost');
 }); // End /admin
 
 
@@ -71,7 +72,7 @@ Route::resource('class', 'ClassesController',  ['only' => [//Class
 ]]);
 Route::get('/attendances/{id}', 'AttendanceController@getAttendance')->name('attendances');
 
-Route::get('/recitation/{id}', 'TeacherViewController@recitation')->name('recitation');
+Route::get('/recitation/{class_id}', 'TeacherViewController@recitation')->name('recitation');
 Route::post('/randomize/{class_id}', 'TeacherViewController@recitationTool')->name('randomize');
 Route::post('/recitation', 'TeacherViewController@gradeRec')->name('grade-recitation');
 Route::post('/reset/{class_id}', 'TeacherViewController@resetRecitation')->name('resetRecitation');

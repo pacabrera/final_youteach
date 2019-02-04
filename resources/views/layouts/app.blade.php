@@ -66,8 +66,8 @@
           <i class="fas fa-align-left"></i>
         </a>
         
-        <a href="index.html" class="navbar-brand font-weight-bold text-uppercase text-base" style="color: white;">
-          YOUTEACH LMS
+        <a href="{{ route('home') }}" class="navbar-brand font-weight-bold text-uppercase text-base" style="color: white;">
+          <img src="{{ asset('assets/img/logo.png') }}" style="max-width: 140px; ">
         </a>
 
         <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
@@ -135,6 +135,7 @@
               <li class="sidebar-list-item"><a href="{{ route('teachers.index') }}" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Teachers</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('sections.index') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Sections</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('events-admin') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Events</span></a></li>
+              <li class="sidebar-list-item"><a href="{{ route('all-audits') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Audits</span></a></li>
         </ul>
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MY PROFILE</div>
         <ul class="sidebar-menu list-unstyled">
@@ -151,7 +152,7 @@
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="{{ route('home') }}" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>About</span></a></li>
+              <li class="sidebar-list-item"><a href="{{route('about')}}" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>About</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('events') }}" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Events</span></a></li>
             </ul>
  <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MY CLASSES</div>
@@ -167,7 +168,6 @@
                 <li class="sidebar-list-item"><a href="{{ route('quizzes', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Quizzes</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('assignments', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Assignments</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('qr-attendance', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Attendance</a></li>
-                <li class="sidebar-list-item"><a href="{{ route('score-class', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Scores</a></li>
                 <li class="sidebar-list-item"><a href="{{ route('cards', $classes->class_id) }}"class="sidebar-link text-muted pl-lg-5">Cards</a></li>
               </ul>
             </div>
@@ -179,7 +179,6 @@
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="{{ route('schedule-teacher')}}" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Schedule</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('acc-settings') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Account Settings</span></a></li>
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Help</span></a></li>
         </ul>
       </div>
 @else
@@ -190,7 +189,7 @@
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="{{ route('home') }}" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>About</span></a></li>
+              <li class="sidebar-list-item"><a href="{{route('about')}}" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>About</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('events') }}" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Events</span></a></li>
           <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>My Classes</span></a>
             <div id="pages" class="collapse">

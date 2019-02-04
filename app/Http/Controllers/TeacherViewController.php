@@ -39,18 +39,20 @@ class TeacherViewController extends Controller
         return view('teacher.panel', compact('sections', 'subjects', 'myClass', 'eventsCount', 'xd'));
     }
 
-    public function recitation($id){
-        $klase = GradeCategory::find($id)->class_id;
-        $gradecateg = GradeCategory::find($id)->id;
-        $myClass = Klase::where('class_id', $klase)->first();
-
-        $class = ClassMembers::where('class_members.class_id', $klase)
+    public function recitation($class_id){
+                $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
+        $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
+        
+        if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
+        $myClass = Klase::where('class_id', $class_id)->first();
+        $class = ClassMembers::where('class_members.class_id', $class_id)
         ->where('class_members.isCalled', 0) // 0 = not yet called , 1 = called not yet graded , 2 = graded and called
         ->join('classes', 'classes.class_id', '=', 'class_members.class_id')->get();
-
-        return view('teacher.recitation', compact('myClass', 'class', 'gradecateg'));
-    
-
+        return view('teacher.recitation', compact('myClass', 'class'));
+    }
+    else {
+        abort(403);
+    }
     }
 
     public function recitationTool($class_id){
@@ -87,31 +89,30 @@ class TeacherViewController extends Controller
      }
 
     public function gradeRec(Request $request){
-
                 $request->validate([
     'grade' => 'required|integer|min:1',
     ]);
-
         $grade = new Grade;
         $grade->usr_id = $request->input('usr_id');
-        $grade->category = $request->input('category');
+        $grade->class_id = $request->input('class_id');
         $grade->grade = $request->input('grade');
+        $grade->type = 'Recitation';
         $grade->save();
-
         $student_id = $request->input('usr_id') ;
         $class = ClassMembers::where('student_id', $student_id);
         $class->update(['isCalled' => 1]);
-
         swal()->success('Successfully Graded',[]);
         return back();
     }
-
     public function gradeGroup(Request $request){
         $grade = new Grade;
         $grade->usr_id = $request->input('student_id');
+        $grade->class_id = $request->input('class_id');
         $grade->grade = $request->input('grade');
+        $grade->type = 'Activity';
         $grade->save();
     }
+
 
 
     public function groupGen($class_id){
@@ -153,31 +154,6 @@ class TeacherViewController extends Controller
                 
         return view('teacher.groups', compact('myClass', 'classlist','numGroup'));
         
-    }
-
-    public function scores($class_id)
-    {
-        $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
-        $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
-        
-        if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
-
-        $grades = ClassMembers::where('class_members.class_id', $class_id)
-        ->join('grade_categories', 'class_members.class_id', '=', 'grade_categories.class_id')
-        ->join('grades', 'grade_categories.id', '=', 'grades.category')
-        ->orderBy('usr_id')
-        ->distinct('usr_id')
-        ->get();
-        $myClass = Klase::where('class_id', $class_id)->with('class_members')->first();
-        $klase = ClassMembers::where('class_id', $class_id)->first();
-
-
-
-        return view('teacher.scores', compact('myClass', 'grades'));
-    }
-    else {
-        abort(403);
-    }
     }
 
     public function schedule()

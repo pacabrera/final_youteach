@@ -1,9 +1,7 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
 class CreateGradesTable extends Migration
 {
     /**
@@ -18,12 +16,13 @@ class CreateGradesTable extends Migration
             $table->integer('grade');
             $table->integer('usr_id');
             $table->foreign('usr_id')->references('id')->on('users');
-            $table->unsignedInteger('category');
-            $table->foreign('category')->references('id')->on('grade_categories')->onDelete('cascade');
+            $table->string('class_id', 5);
+            $table->foreign('class_id')->references('class_id')->on('classes');
+            $table->string('type');
+            $table->integer('hps')->nullable();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
