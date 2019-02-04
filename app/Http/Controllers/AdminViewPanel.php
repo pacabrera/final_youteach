@@ -177,6 +177,11 @@ class AdminViewPanel extends Controller
         return redirect()->route('view-classes');
     }
 
+    public function destroyClass($class_id){
+        Klase::destroy($class_id);
+        swal()->success('Successfully Deleted',[]);
+    }
+
        public function audits()
     {
         $audits = Activity::all();
