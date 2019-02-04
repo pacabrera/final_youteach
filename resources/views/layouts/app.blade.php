@@ -140,7 +140,6 @@
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MY PROFILE</div>
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-user-details-1 mr-3 text-gray"></i><span>Account Settings</span></a></li>
-              <li class="sidebar-list-item"><a href="{{ route('acc-settings') }}" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Help</span></a></li>
         </ul>
       </div>
 
@@ -205,7 +204,6 @@
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="{{ route('schedule')}}" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Schedule</span></a></li>
               <li class="sidebar-list-item"><a href="{{ route('acc-settings') }}" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Account Settings</span></a></li>
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Help</span></a></li>
         </ul>
       </div>
 @endif
