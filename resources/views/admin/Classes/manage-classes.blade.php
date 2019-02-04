@@ -47,7 +47,6 @@
                             <a href="{{ route('edit-class', $klase->class_id)}}" class="btn btn-warning btn-sm" class="btn btn-primary btn-sm">
                                 Edit
                             </a>
-                            <button class="btn btn-danger btn-sm" data-subid="{{ $klase->class_id }}" data-toggle="modal" data-target="#deleteSubject">Delete</button>
 
                         </td>
                     </tr>
@@ -62,53 +61,5 @@
 </div>
 </section>
 </div>
-<!-- Delete Subject Confirmation Modal -->
-<div class="modal fade" id="deleteSubject" tabindex="-1" role="dialog" aria-labelledby="DeleteSubjectModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this subject? This is irreversible!
-                <input type="hidden" id="sub_id_del" value="">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" onclick="DeleteSubject()">Delete Subject</button>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
-    $('#deleteSubject').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var s_id = button.data('subid')
-
-        var modal = $(this)
-        modal.find('#sub_id_del').val(s_id)
-    });
-
-    function DeleteSubject() {
-        var s_id = $('#sub_id_del').val();
-
-        $.ajax({
-            url: '/admin/delete-class/' + s_id,
-            type: 'POST', //type is any HTTP method
-            success: function () {
-                window.location.reload(true);
-            }
-        });
-    }
-</script>
 @endsection

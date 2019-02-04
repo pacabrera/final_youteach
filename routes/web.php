@@ -60,7 +60,7 @@ Route::get('new-class', 'AdminViewPanel@newClassView')->name('new-class');
 Route::post('add-class', 'AdminViewPanel@addClass')->name('add-class');
 Route::get('edit-class/{class_id}', 'AdminViewPanel@editClassView')->name('edit-class');
 Route::post('edit-class/{class_id}', 'AdminViewPanel@editClassPost')->name('edit-classPost');
-Route::post('delete-class/{class_id}', 'AdminViewPanel@destroyClass')->name('delete-class');
+Route::delete('delete-class/{class_id}', 'AdminViewPanel@destroyClass')->name('delete-class');
 }); // End /admin
 
 
