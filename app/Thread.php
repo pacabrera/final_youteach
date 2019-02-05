@@ -12,6 +12,7 @@ class Thread extends Model
         'usr_id',
         'assign_id',
         'quiz_id',
+        'video'
     ];
     public function post()
     {

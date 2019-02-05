@@ -82,11 +82,23 @@
                         <div class="flex-grow-1 d-flex align-items-center">
                           <div class="dot mr-3 bg-red"></div>
                           <div class="text">
+                            <a href="{{route('class-settings', $myClass->class_id)}}"><h6 class="mb-0">Manage Class</h6></a>
+                          </div>
+                        </div>
+                        <div class="icon bg-red text-white"><i class="fa fa-cog"></i></div>
+                      </div>
+
+                      <div class="bg-white shadow roundy px-4 py-3 d-flex align-items-center justify-content-between mb-4">
+                        <div class="flex-grow-1 d-flex align-items-center">
+                          <div class="dot mr-3 bg-red"></div>
+                          <div class="text">
                             <h6 class="mb-0">Class Code</h6><span class="text-gray">{{$myClass->class_id}}</span>
                           </div>
                         </div>
                         <a data-toggle="modal" data-target="#myModal"> <div class="icon bg-red text-white"><i class="fas fa-share-alt"></i></div></a>
                       </div>
+
+
                       @endif
 
                       <div class="bg-white shadow roundy px-4 py-3 d-flex align-items-center justify-content-between mb-4">

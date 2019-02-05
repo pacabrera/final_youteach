@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Event;
 use App\Schedule;
 use App\GradeCategory;
+use App\Notifications\GradedNotif;
 
 class TeacherViewController extends Controller
 {
@@ -102,15 +103,24 @@ class TeacherViewController extends Controller
         $class = ClassMembers::where('student_id', $student_id);
         $class->update(['isCalled' => 1]);
         swal()->success('Successfully Graded',[]);
+
+        $user = User::find($request->input('usr_id'));
+        $user->notify(new GradedNotif($grade));
+      
         return back();
     }
     public function gradeGroup(Request $request){
+
         $grade = new Grade;
         $grade->usr_id = $request->input('student_id');
         $grade->class_id = $request->input('class_id');
         $grade->grade = $request->input('grade');
         $grade->type = 'Activity';
         $grade->save();
+
+        $user = User::find($request->input('student_id'));
+        $user->notify(new GradedNotif($grade));
+
     }
 
 
@@ -178,7 +188,7 @@ class TeacherViewController extends Controller
     {
         $myClass = Klase::where('class_id', $class_id)->first();
         $classlist = ClassMembers::where('class_id', $class_id)->get();
-        $grades = Grade::where('class_id', $class_id)->where('usr_id', $id)->get();
+        $grades = Grade::where('class_id', $class_id)->where('usr_id', $id)->with('user_profile')->get();
         return view('teacher.card', compact('myClass','classlist', 'grades'));
     }
     public function startRec($class_id)
@@ -186,6 +196,128 @@ class TeacherViewController extends Controller
         $myClass = Klase::where('class_id', $class_id)->first();
        
         return view('teacher.start', compact('myClass'));
+    }
+
+    public function classSettings($class_id){
+        $myClass = Klase::where('class_id', $class_id)->first();
+        return view('teacher.settings', compact('myClass'));
+    }
+
+        public function editClassPost(Request $request, $class_id)
+    {
+        
+        $request->validate([
+    'class_name' => 'required|string|unique:classes,class_name|max:191',
+    ]);
+
+        $klase = Klase::find($class_id);
+        $klase->class_name = $request->input('class_name');
+        $klase->section_id = $request->input('section_id');
+        $klase->subject_id = $request->input('subject_id');
+        $klase->save();
+
+        swal()->success('Successfully Edited',[]);
+        return redirect()->route('class-forum', $class_id);
+    }
+
+    public function schedules($class_id)
+    {
+        $myClass = Klase::where('class_id', $class_id)->first();
+        return view('teacher.sched', compact('myClass'));
+    }
+
+    public function editSched(Request $request, $class_id)
+    {
+        $schedule = Schedule::find($class_id);
+
+        if($request->input('monday')){
+            $request->validate([
+            'roomM' => 'required|string|max:191',
+            'monday' => 'required|date_format:H:i',
+            'monday2' => 'required|date_format:H:i|after:'.$request->input('monday'),
+            ]);
+
+            $schedule = new Schedule;
+            $schedule->class_id = $class_id;
+            $schedule->day = 'M';
+            $schedule->timeFrom = $request->input('monday');
+            $schedule->timeTo = $request->input('monday2');
+            $schedule->room = $request->input('roomM');
+            $schedule->save();
+        }
+
+        if($request->input('tuesday')){
+        $request->validate([
+            'roomT' => 'required|string|max:191',
+            'tuesday' => 'required|date_format:H:i',
+            'tuesday2' => 'required|date_format:H:i|after:'.$request->input('tuesday'),
+            ]);
+            $schedule = new Schedule;
+            $schedule->class_id =  $class_id;
+            $schedule->day = 'T';
+            $schedule->timeFrom = $request->input('tuesday');
+            $schedule->timeTo = $request->input('tuesday2');
+            $schedule->room = $request->input('roomT');
+            $schedule->save();
+        }
+        if($request->input('wednesday')){
+            $request->validate([
+            'roomW' => 'required|string|max:191',
+            'wednesday' => 'required|date_format:H:i',
+            'wednesday2' => 'required|date_format:H:i|after:'.$request->input('wednesday'),
+            ]);
+             $schedule = new Schedule;
+            $schedule->class_id =  $class_id;
+            $schedule->day = 'W';
+            $schedule->timeFrom = $request->input('wednesday');
+            $schedule->timeTo = $request->input('wednesday2');
+            $schedule->room = $request->input('roomW');
+            $schedule->save();
+        }
+        if($request->input('thursday')){
+            $request->validate([
+            'roomTH' => 'required|string|max:191',
+            'thursday' => 'required|date_format:H:i',
+            'thursday2' => 'required|date_format:H:i|after:'.$request->input('thursday'),
+            ]);
+            $schedule = new Schedule;
+            $schedule->class_id =  $class_id;
+            $schedule->day = 'TH';
+            $schedule->timeFrom = $request->input('thursday');
+            $schedule->timeTo = $request->input('thursday2');
+            $schedule->room = $request->input('roomTH');
+            $schedule->save();
+        }
+        if($request->input('friday')){
+            $request->validate([
+            'roomF' => 'required|string|max:191',
+            'friday' => 'required|date_format:H:i',
+            'friday2' => 'required|date_format:H:i|after:'.$request->input('friday'),
+            ]);
+             $schedule = new Schedule;
+            $schedule->class_id =  $class_id;
+            $schedule->day = 'F';
+            $schedule->timeFrom = $request->input('friday');
+            $schedule->timeTo = $request->input('friday2');
+            $schedule->room = $request->input('roomF');
+            $schedule->save();
+        }
+        if($request->input('saturday')){
+            $request->validate([
+            'roomS' => 'required|string|max:191',
+            'saturday' => 'required|date_format:H:i',
+            'saturday2' => 'required|date_format:H:i|after:'.$request->input('saturday'),
+            ]);
+             $schedule = new Schedule;
+            $schedule->class_id =  $class_id;
+            $schedule->day = 'S';
+            $schedule->timeFrom = $request->input('saturday');
+            $schedule->timeTo = $request->input('saturday2');
+            $schedule->room = $request->input('roomS');
+            $schedule->save();
+        }
+       swal()->success('Successfully Created',[]);
+       return redirect()->route('class-forum', $class_id);
     }
 
 }

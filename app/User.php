@@ -46,6 +46,10 @@ class User extends Authenticatable
         return $this->hasMany('App\ClassMembers', 'student_id', 'id');
     }
 
+        public function grades(){
+        return $this->hasMany('App\Grade', 'usr_id', 'id');
+    }
+
     public function posts(){
         return $this->hasMany(Post::Class);
     }

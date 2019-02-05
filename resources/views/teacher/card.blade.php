@@ -14,7 +14,7 @@
                     <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
                   </div>
                   <div class="card-body text-center" >
-                    <h1>Name</h1>
+                    <h1>{{$grades->user->id}}</h1>
                     <h5> {{ $myClass->subject->subject_code}} </h5>
                     <h5> {{ $myClass->section->section_name}} </h5>
 

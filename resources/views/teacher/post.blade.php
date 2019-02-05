@@ -26,6 +26,23 @@
                   </div>
                   <div class="card-body">
                     <p>{!! nl2br($threads->post[0]->body) !!}</p>
+                    
+                      @php
+$embed = Embed::make($threads->video)->parseUrl();
+// Will return Embed class if provider is found. Otherwie will return false - not found. No fancy errors for now.
+if ($embed) {
+  // Set width of the embed.
+  $embed->setAttribute(['width' => 600]);
+
+  // Print html: '<iframe width="600" height="338" src="//www.youtube.com/embed/uifYHNyH-jA" frameborder="0" allowfullscreen></iframe>'.
+  // Height will be set automatically based on provider width/height ratio.
+  // Height could be set explicitly via setAttr() method.
+  echo $embed->getHtml();
+}
+
+@endphp
+
+
                     @if(!empty($threads->post[0]->postFiles))
                      @foreach($threads->post[0]->postFiles as $image)
                         @if (pathinfo(Storage::cloud()->url('post_files/'.$image->file, 's3'), PATHINFO_EXTENSION) == 'png')

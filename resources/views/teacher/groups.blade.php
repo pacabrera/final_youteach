@@ -13,7 +13,6 @@
       position: relative;
       display: inline-block;
       width: 150px;}
-
  
       /* Table Styles */
       .table-fill {
@@ -41,7 +40,6 @@
         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         vertical-align:middle;
       }
-
       th:first-child {
         border-top-left-radius:3px;
       }
@@ -69,7 +67,6 @@
       tr:first-child {
         border-top:none;
       }
-
       tr:last-child {
         border-bottom:none;
       }
@@ -81,7 +78,6 @@
       tr:nth-child(odd):hover td {
         background:#f55b5b;
       }
-
       tr:last-child td:first-child {
         border-bottom-left-radius:3px;
       }
@@ -100,31 +96,24 @@
         text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
         border-right: 1px solid #C1C3D1;
       }
-
       td:last-child {
         border-right: 0px;
       }
-
       th.text-left {
         text-align: left;
       }
-
       th.text-center {
         text-align: center;
       }
-
       th.text-right {
         text-align: right;
       }
-
       td.text-left {
         text-align: left;
       }
-
       td.text-center {
         text-align: center;
       }
-
       td.text-right {
         text-align: right;
       }
@@ -138,7 +127,7 @@
               <!-- Form Elements -->
               <div class="col-lg-12 mb-5">
                 <div class="card">
-                  <div class="card-header"  >
+                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
                     <h3> {{ $myClass->class_name}} </h3>
                     <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
                   </div>
@@ -160,7 +149,7 @@
               <!-- start the realm of the buttons -->
               
               <div id="rndmBtn">
-                <a href="{{route('group', $myClass->class_id)}}" class="btn red">GENERATE</a>
+                <a href="" class="btn red" data-toggle="modal" data-target="#myModal">GENERATE</a>
               </div>
   <div class="line"></div>
   <div class="row" >
@@ -169,13 +158,10 @@
                 <table class="table-fill">
                   <thead>
                   <tr>
-                  <th class="text-center"><button data-toggle="modal" data-target="#myModalGroup"> GROUP: {{ $loop->iteration }} 
-                  @foreach($s as $stud) 
-                    <input type="text" name="studids[]" value="{{$stud->student_id}}" id="studcount">
-                     <input type="hidden" id="class_id" value="{{ $myClass->class_id }}">
-                    @endforeach
+                  <th class="text-center">GROUP: {{ $loop->iteration }}  
+                    <input type="hidden" value="{{$s->count()}}" id="studcount">
                     @foreach($s as $ids)<input type="hidden" value="{{$ids->student_id}}" id="stud{{$loop->iteration}}">@endforeach
-                  </button>
+
                   </th>
                   </tr>
                   </thead>
@@ -195,44 +181,6 @@
 </div>
 </div>
 <!-- Modal Form-->
-                   <div class="card-body">
-                    <!-- Modal-->
-                    <div id="myModalGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
-                      <div role="document" class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            Input Grade:
-                          </div>
-                          <div class="modal-body">
-                             
-                              <div class="form-group">
-                                <input type="text" pattern="\d*" id="gradeG" name="grade" maxlength="3" 
-                                                            style="text-align: 
-                                                            center; 
-                                                            font-size: 30px; 
-                                                            height: 100px; 
-                                                            width: 120px; 
-                                                            display: block; 
-                                                            margin-left: auto; 
-                                                            margin-right: auto;
-                                                            padding: 20px;
-                                                            border-radius: 5px;
-                                                            ">
-                                  <input type="hidden" id="student_id" name="usr_id" >
-                                  <input type="hidden" id="class_id" value="{{ $myClass->class_id }}">
-                              </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                            <button type="submit" class="btn btn-primary" onclick="addGradeGroup()" id="b{{$item->student_id}}">Grade </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-        <!-- //Modal Form-->  
-
-        <!-- Modal Form-->
                    <div class="card-body">
                     <!-- Modal-->
                     <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
@@ -268,7 +216,7 @@
                       </div>
                     </div>
                   </div>
-        <!-- //Modal Form--> 
+        <!-- //Modal Form-->  
 
 <!-- Change password Success Modal -->
 <div class="modal fade" id="gradeSuccess" tabindex="-1" role="dialog" aria-labelledby="gradeSuccess"
@@ -295,7 +243,6 @@
 </section>
 </div>
 <script>
-
   $(function () {
     $('.list-group-item').on('mouseover', function(event) {
     event.preventDefault();
@@ -306,13 +253,11 @@
     $(this).closest('li').removeClass('open');
   });
 });
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
     $('#myModal').on('show.bs.modal', function (event) {
         var td = $(event.relatedTarget) // Button that triggered the modal
         var studid = td.data('studid')
@@ -320,12 +265,10 @@
         var modal = $(this)
         modal.find('#student_id').val(studid);
     });
-
   function addGrade() {
         var grade = $('#grade').val();
         var student_id = $('#student_id').val();
         var class_id = $('#class_id').val();
-
         $.ajax({
             url: '/teacher/group/',
             type: 'POST', //type is any HTTP method
@@ -334,41 +277,29 @@
             },//Data as js object
                 success: function () {
                 $('#myModal').modal('hide')
-                $('#grade').val('')
                 $('#gradeSuccess').modal('show')
                 $('#' + student_id).removeAttr("data-toggle");
             }
         });
     }
-
   function addGradeGroup() {
-        var grade = $('#gradeG').val();
+        var grade = $('#grade').val();
         var class_id = $('#class_id').val();
         
         var student_id = $('#student_id').val();
-
-        var values = $("input[name='studids[]']")
-              .map(function(){return $(this).val();}).get();
-
-        values.forEach(function(student_id) {
-             $.ajax({
+        $.ajax({
             url: '/teacher/group/',
             type: 'POST', //type is any HTTP method
             data: {
                 grade, student_id, class_id
             },//Data as js object
                 success: function () {
-                $('#myModalGroup').modal('hide')
-                $('#gradeG').val('')
+                $('#myModal').modal('hide')
                 $('#gradeSuccess').modal('show')
                 $('#' + student_id).removeAttr("data-toggle");
             }
         });
-          });
-
     }
-
-
 </script>
 
 

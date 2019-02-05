@@ -82,19 +82,6 @@
                 </div>
               </div>   
 
-
-            <!-- Side Notification -->
-              <div class="col-lg-4">
-                <div class="card mb-4">
-                  <div class="card-header"  >
-                    <h2 class="h6 text-uppercase mb-0">Dashboard</h2>
-                  </div>
-                  <div class="card-body">
-                  </div>
-                </div>
-              </div>
-            <!-- //Side Notification -->  
-
             </div>
 
               @foreach($myClass as $klase)

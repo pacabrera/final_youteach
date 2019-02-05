@@ -69,6 +69,7 @@ class PostsController extends Controller
             'title'               =>  $request->input('title'),
             'usr_id'               => Auth::user()->id,
             'class_id'            => $request->input('class_id'),
+            'video'                 => $request->input('video'),
             ];
 
         $thread = Thread::create($new_thread);

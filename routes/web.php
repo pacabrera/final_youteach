@@ -116,6 +116,12 @@ Route::get('cards/{class_id}/{id}', 'TeacherViewController@singleCard')->name('s
 
 Route::post('gradecategory', 'TeacherViewController@createGradeCategory')->name('grade-categ');
 Route::get('start-recitation/{class_id}', 'TeacherViewController@startRec')->name('start-rec');
+
+Route::get('class-settings/{class_id}', 'TeacherViewController@classSettings')->name('class-settings');
+Route::get('class-schedule/{class_id}', 'TeacherViewController@schedules')->name('sched');
+
+Route::post('class-edit/{class_id}', 'TeacherViewController@editClassPost')->name('edit-classT');
+Route::post('class-sched/{class_id}', 'TeacherViewController@editSched')->name('edit-schedule');
 }); // End /teacher
 
 //All Student Routes

@@ -47,6 +47,10 @@ class Klase extends Model
         return $this->hasMany('App\Thread', 'class_id');
     }
 
+        public function grade(){
+        return $this->hasMany('App\Grade', 'class_id');
+    }
+
     public function assignment(){
         return $this->hasMany('App\Assignment', 'class_id');
     }
