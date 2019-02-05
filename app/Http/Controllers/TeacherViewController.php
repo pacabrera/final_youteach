@@ -188,8 +188,9 @@ class TeacherViewController extends Controller
     {
         $myClass = Klase::where('class_id', $class_id)->first();
         $classlist = ClassMembers::where('class_id', $class_id)->get();
-        $grades = Grade::where('class_id', $class_id)->where('usr_id', $id)->with('user_profile')->get();
-        return view('teacher.card', compact('myClass','classlist', 'grades'));
+        $user = UserProfile::where('id', $id)->first();
+        $grades = Grade::where('class_id', $class_id)->where('usr_id', $id)->join('user_profiles', 'grades.usr_id', 'user_profiles.id')->get();
+        return view('teacher.card', compact('myClass','classlist', 'grades', 'user'));
     }
     public function startRec($class_id)
     {
