@@ -21,6 +21,15 @@
                     <div class="col-xs-11 col-md-11">
                     <h3 class="h3 text-uppercase mb-0">{{$threads->title}}</h3>
                     <p class="date">{{ $threads->created_at->diffForHumans() }}</p>
+                    @if($threads->usr_id == Auth::user()->id)
+                 <div  style="float: right; margin-right: 10px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn dropdown-toggle"> 
+                    <img src="http://2016.igem.org/wiki/images/e/e0/Uclascrolldown.png" class="arrow" />
+                    </div>
+                    <div class="dropdown-menu" style="text-align: left;">
+                      <a href="#" class="dropdown-item">Edit <i class="fa fa-edit" aria-hidden="true"> </i>  </a>
+                      <a href="#" class="dropdown-item">Delete <i class="fa fa-trash" aria-hidden="true"></i></a> 
+                    </div>
+                    @endif
                   </div>
                 </div>
                   </div>
@@ -32,7 +41,7 @@ $embed = Embed::make($threads->video)->parseUrl();
 // Will return Embed class if provider is found. Otherwie will return false - not found. No fancy errors for now.
 if ($embed) {
   // Set width of the embed.
-  $embed->setAttribute(['width' => 600]);
+  $embed->setAttribute(['class' => 'img-content', ]);
 
   // Print html: '<iframe width="600" height="338" src="//www.youtube.com/embed/uifYHNyH-jA" frameborder="0" allowfullscreen></iframe>'.
   // Height will be set automatically based on provider width/height ratio.
@@ -41,8 +50,6 @@ if ($embed) {
 }
 
 @endphp
-
-
                     @if(!empty($threads->post[0]->postFiles))
                      @foreach($threads->post[0]->postFiles as $image)
                         @if (pathinfo(Storage::cloud()->url('post_files/'.$image->file, 's3'), PATHINFO_EXTENSION) == 'png')
@@ -84,8 +91,9 @@ if ($embed) {
                       <img src="http://2016.igem.org/wiki/images/e/e0/Uclascrolldown.png" class="arrow" />
                     </div>
                     <div class="dropdown-menu" style="text-align: left;">
-                      <a href="#" class="dropdown-item">Edit <i class="fa fa-edit" aria-hidden="true"> </i>  </a>
-                      <a href="#" class="dropdown-item">Delete <i class="fa fa-trash" aria-hidden="true"></i></a> 
+                      <button data-toggle="modal" data-target="#editPost" class="dropdown-item" data-postid="{{ $post->id }}"
+                                data-body="{{ $post->body }}">Edit <i class="fa fa-edit" aria-hidden="true"> </i>  </button>
+                      <button href="#" class="dropdown-item" data-subid="{{ $post->id }}" data-toggle="modal" data-target="#deleteSubject">Delete <i class="fa fa-trash" aria-hidden="true"></i></button> 
                     </div>
                     @endif
                     <a href=#><img class='profile-pic' src="{{ Storage::cloud()->url('avatar/'.$post->user_profile->profile_pic) }}"></a>
@@ -161,10 +169,116 @@ if ($embed) {
 </div>
 </section>
             </div>
+
+      <div class="modal fade" id="editPost" tabindex="-1" role="dialog" aria-labelledby="editPost" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                                      <div class="form-group">
+                                        <input type="hidden" value="" id="postid">
+                                            <textarea id="editor" name="comment" class="form-control {{ $errors->has('comment') ? 'is-invalid' : '' }}"></textarea>
+                                            <div class="invalid-feedback">
+                                               {{ $errors->first('comment') }}
+                                            </div>
+                                      </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="editPost()">Edit Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Delete Subject Confirmation Modal -->
+<div class="modal fade" id="deleteSubject" tabindex="-1" role="dialog" aria-labelledby="DeleteSubjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this post? This is irreversible!
+                <input type="hidden" id="sub_id_del" value="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" onclick="DeleteSubject()">Delete Post</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
 <script>
   CKEDITOR.replace('my-editor');
+  CKEDITOR.replace('editor');
 </script>
 
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('#editPost').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var postid = button.data('postid')
+        var body = button.data('body')
+        
+
+        var modal = $(this)
+        modal.find('#editor').val(body)
+        modal.find('#postid').val(postid)
+    });
+
+    $('#deleteSubject').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var s_id = button.data('subid')
+
+        var modal = $(this)
+        modal.find('#sub_id_del').val(s_id)
+    });
+
+    function DeleteSubject() {
+        var s_id = $('#sub_id_del').val();
+
+        $.ajax({
+            url: '/delete-post/' + s_id,
+            type: 'POST', //type is any HTTP method
+            success: function () {
+                window.location.reload(true);
+            }
+        });
+    }
+
+
+    function editPost() {
+        var body = CKEDITOR.instances['editor'].getData();
+        var post_id = $('#postid').val();
+;
+
+
+        $.ajax({
+            url: '/edit-post/' + post_id,
+            type: 'POST', //type is any HTTP method
+            data: {
+                body
+            }, //Data as js object
+            success: function () {
+                window.location.reload(true);
+            }
+        });
+    }
+  </script>
 
 @endsection

@@ -163,6 +163,9 @@ Route::get('/assignments/{class_id}', 'PostsController@showAssign')->name('assig
 Route::get('/turn-in/{assign_id}', 'PostsController@turnIn')->name('assign-turnIn');
 Route::post('/turn-in/{assign_id}', 'PostsController@turnInPost')->name('turn-in.post');
 
+Route::post('/edit-post/{id}', 'PostsController@editPost')->name('editpost');
+Route::post('/delete-post/{id}', 'PostsController@delPost')->name('deletepost');
+
 //Attendance
 Route::get('/event/{id}', 'EventController@showSingle')->name('event-single');
 Route::get('/audits/{id}', 'ActivityLog@getAudits')->name('audits');

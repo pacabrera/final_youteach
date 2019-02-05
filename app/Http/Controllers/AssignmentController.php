@@ -15,7 +15,8 @@ use App\Post;
 use App\Grade;
 use App\Notifications\AssignmentPosted;
 use App\User;
-
+use Carbon\Carbon;
+use App\Notifications\GradedNotif;
 class AssignmentController extends Controller
 {
     /**
@@ -168,6 +169,13 @@ class AssignmentController extends Controller
 
     public function gradeAssign(Request $request){
 
+    if(Grade::where('grade', $request->input('grade'))->whereDate('created_at', Carbon::today())->count() > 0 ){
+        swal()->warning('Already Graded',[]);
+        return back();
+    }
+    else {
+
+
     $request->validate([
     'grade' => 'required|integer|min:1',
     ]);
@@ -179,7 +187,11 @@ class AssignmentController extends Controller
         $grade->type = 'Assignment';
         $grade->save();
 
+        $user = User::find($request->input('usr_id'));
+        $user->notify(new GradedNotif($grade));
+
         swal()->success('Successfully Graded',[]);
         return back();
     }
+}
 }

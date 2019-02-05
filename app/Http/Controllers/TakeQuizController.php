@@ -12,8 +12,9 @@ use App\StudentAnswer;
 use App\ClassMembes;
 use App\Grade;
 use App\Question;
-
+use App\Notifications\GradedNotif;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class TakeQuizController extends Controller
 {
@@ -78,7 +79,10 @@ class TakeQuizController extends Controller
         $grade->type = 'Quiz';
         $grade->hps = $sum;
         $grade->save();
-     
+        
+        $user = User::find($student_id);
+        $user->notify(new GradedNotif($grade));
+
         return redirect()->route('quiz-score', $quiz_event_id);
     }
 

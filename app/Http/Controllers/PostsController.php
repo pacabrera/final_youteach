@@ -198,4 +198,25 @@ class PostsController extends Controller
 
         return view('teacher.turn-in', compact('myClass', 'assignment'));
     }
+
+    public function editPost($id, Request $request)
+    {
+        $post = Post::find($id);
+        $post->body = $request->input('body');
+        $post->save();
+        swal()->success('Successfully Edited',[]);
+    }
+
+    public function delPost($id, Request $request)
+    {
+    $post = Post::find($id);
+        if($post) {
+            $post->delete();
+            swal()->success('Successfully Deleted',[]);
+        }
+
+        else {
+          return back()->with('error', 'Error.');
+        }
+    }
 }
