@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\ClassMembers;
 use Cache;
 
-class User extends Authenticatable 
+class User extends Authenticatable  
 {
     protected $primaryKey = "id";
     
@@ -97,5 +97,10 @@ public function isOnline()
 {
     return Cache::has('user-is-online-' . $this->id);
 }
+
+    public function verifyUser()
+    {
+        return $this->hasOne('App\VerifyUser');
+    }
 
 }

@@ -26,6 +26,14 @@ class LoginController extends Controller
      * @var string
      */
     public function authenticated($request , $user){
+
+        if (!$user->verified) {
+            auth()->logout();
+            return back()->with('warning', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+        }
+        
+        else 
+        {
         if($user->permissions=='1'){
             
             return redirect()->route('teacher-panel') ;
@@ -37,6 +45,10 @@ class LoginController extends Controller
             
             return redirect()->route('admin-panel') ;
         }
+        }
+
+
+
 
     }
 

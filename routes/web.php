@@ -15,7 +15,7 @@ Route::get('/reg', 'HomeController@index')->name('reg');
 Route::get('/', 'HomeController@redirectToPanel')->name('home');
 
 Auth::routes();
-
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 //All Admin Routes
 Route::prefix('/admin')->group(function(){
 Route::get('/', 'AdminViewPanel@index')->name('admin-panel');
