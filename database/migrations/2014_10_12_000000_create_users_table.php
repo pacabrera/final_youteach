@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             'id' => '100',
             'email' => 'youteach@youteachlms.com',
             'permissions' => 0,
+            'verified' => '1',
             'password' => Hash::make("password"),
         ]);
     }

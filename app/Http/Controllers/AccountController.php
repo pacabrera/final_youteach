@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Storage;
 use Auth;
 use Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Mail\VerifyEmailTeacher;
+use Mail;
+use App\VerifyUser;
 class AccountController extends Controller
 {
         public function __construct()
@@ -44,10 +46,10 @@ class AccountController extends Controller
                 'password' => bcrypt('password'),
             ];
 
-            $usr = User::create($out);
+            $user = User::create($out);
 
 
-            //$usr = User::select('id')->where('usr', $request->input('usr'))->first();
+            $usr = User::where('id', $request->input('id'))->first();
             
             UserProfile::create([
                 'given_name' => $request->input('given_name'),
@@ -58,6 +60,13 @@ class AccountController extends Controller
                 'profile_pic' => 'no-profile.png',
                 'id' => $request->input('id'),
             ]);
+
+            $verifyUser = VerifyUser::create([
+            'user_id' => $request->input('id'),
+            'token' => str_random(40)
+        ]);
+
+            Mail::to($usr->email)->send(new VerifyEmailTeacher($usr));
 
             return redirect('/admin/teachers');
         }
