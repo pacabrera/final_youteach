@@ -43,10 +43,12 @@ class QrCodeGenerator extends Command
         echo 'Running';
         $klases = Klase::all();
         foreach($klases as $klase){
+           if(AttendanceQr::where('class_id', $klase->class_id)->whereDate('created_at', Carbon::today())->get()->count() <= 0){
             $qrcode = new AttendanceQr;
             $qrcode->class_id = $klase->class_id;
             $qrcode->qrcode = Carbon::now().str_random(6);
             $qrcode->save();
         }
+    }
     }
 }

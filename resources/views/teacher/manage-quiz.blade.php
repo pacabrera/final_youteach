@@ -61,7 +61,7 @@
         </div>
         <div class="col-lg-9 pt-4">
             <h3>Quiz Results</h3>
-            <table class="table table-hover">
+            <table id="dataTable2" class="table table-striped table-bordered dt-responsive nowrap">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -90,12 +90,19 @@
                     @endforeach
                 </tbody>
             </table>
-            <p class="text-center">---NOTHING FOLLOWS---</p>
         </div>
         
     </div>
 
 
 </section>
-
+</div>
+<script type="text/javascript">$(document).ready(function() {
+    $('#dataTable2').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'excel', 'pdf', 'print', 'csv'
+        ]
+    } );
+} );</script>
 @endsection

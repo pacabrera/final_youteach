@@ -7,6 +7,8 @@ use App\Klase;
 use App\ClassMembers;
 use App\Http\Requests\ClassRequest;
 use Auth;
+use App\AttendanceQr;
+use Carbon\Carbon;
 use App\Schedule;
 class ClassesController extends Controller
 {
@@ -93,6 +95,11 @@ class ClassesController extends Controller
             $schedule->save();
         }
        
+            $qrcode = new AttendanceQr;
+            $qrcode->class_id = $klase->class_id;
+            $qrcode->qrcode = Carbon::now().str_random(6);
+            $qrcode->save();
+
 
          swal()->success('Class Created!',[]);
         return redirect()->route('class-forum', $klase->class_id);

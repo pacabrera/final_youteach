@@ -17,8 +17,7 @@ use App\Question;
 use App\QuizEvent;
 use App\StudentScore;
 use App\Schedule;
-
-
+use DB;
 class StudentViewController extends Controller
 {
    public function __construct()
@@ -68,10 +67,10 @@ class StudentViewController extends Controller
         $request->validate([
             'class_code' => 'exists:classes,class_id|string',
         ]);
-
-        $is_joined = ClassMembers::where('class_id', $request->input('class_code'))
+        $idc =  $request->input('class_code');
+        $is_joined = ClassMembers::where(DB::raw('BINARY `class_id`'), $idc)
                         ->where('student_id', Auth::user()->id)
-                        ->count();
+                        ->first();
         if($is_joined){
             return response('Already joined!', 422);
         }else{
