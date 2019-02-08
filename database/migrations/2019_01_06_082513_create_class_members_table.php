@@ -14,7 +14,8 @@ class CreateClassMembersTable extends Migration
     public function up()
     {
         Schema::create('class_members', function (Blueprint $table) {
-            $table->string('class_id', 5);
+                        $cs = $table->string('class_id', 5);
+            $cs->collation = 'utf8mb4_bin';
             $table->integer('student_id');  //student ID comes from users table
             $table->string('isCalled', 1)->default(0);
             $table->timestamps();

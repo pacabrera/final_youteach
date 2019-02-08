@@ -19,7 +19,8 @@ class CreateSchedulesTable extends Migration
             $table->time('timeFrom');
             $table->time('timeTo');
             $table->string('room');
-            $table->string('class_id', 5);
+            $cs = $table->string('class_id', 5);
+$cs->collation = 'utf8mb4_bin';
             $table->foreign('class_id')->references('class_id')->on('classes')->onDelete('cascade');;
             $table->timestamps();
         });

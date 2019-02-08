@@ -17,7 +17,8 @@ class CreateQuizEventsTable extends Migration
             $table->increments('quiz_event_id');
             $table->string('quiz_event_name');
             $table->integer('questionnaire_id')->unsigned();
-            $table->string('class_id', 5);
+            $cs = $table->string('class_id', 5);
+$cs->collation = 'utf8mb4_bin';
             $table->integer('quiz_event_status');//0 = upcoming, 1 = pending, 2 = finished
             $table->timestamps();
         });

@@ -16,7 +16,8 @@ class CreateAttendanceQrsTable extends Migration
         Schema::create('attendance_qrs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('qrcode');
-            $table->string('class_id', 5);
+            $cs = $table->string('class_id', 5);
+$cs->collation = 'utf8mb4_bin';
             $table->foreign('class_id')->references('class_id')->on('classes')->onDelete('cascade');
             $table->timestamps();
         });

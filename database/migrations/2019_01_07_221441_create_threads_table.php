@@ -18,7 +18,8 @@ class CreateThreadsTable extends Migration
             $table->string('title');
             $table->integer('usr_id');
             $table->foreign('usr_id')->references('id')->on('users');
-            $table->string('class_id', 5);
+            $cs = $table->string('class_id', 5);
+$cs->collation = 'utf8mb4_bin';
             $table->foreign('class_id')->references('class_id')->on('classes')->onDelete('cascade');
             $table->string('video')->nullable();
             $table->unsignedInteger('assign_id')->nullable();
