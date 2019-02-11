@@ -45,10 +45,6 @@ class PostsController extends Controller
         else{
             abort(403);
         }
-
-
-
-
     }
 
 
@@ -58,7 +54,7 @@ class PostsController extends Controller
             'title' => 'required|string|max:191',
             'class_id' => 'required',
             'body' => 'required|string|max:225',
-            'video' => ['regex:@(https?://)?(?:www\.)?(youtu(?:\.be/([-\w]+)|be\.com/watch\?v=([-\w]+)))\S*@'],
+            'video' => "nullable|['regex:@(https?://)?(?:www\.)?(youtu(?:\.be/([-\w]+)|be\.com/watch\?v=([-\w]+)))\S*@']",
             'file.*' => 'mimes:jpeg,gif,png,mp4,mp3,wav,ogg,avi,mkv,doc,csv,xlsx,xls,docx,ppt,odt,ods,odp,rtf,txt,pptx,zip,rar|max:25000'
             ]);
 
@@ -162,7 +158,29 @@ class PostsController extends Controller
     {
         $checkIfLocked = Assignment::where('id', $id)->where('status', 1);
         $checkIfAlreadySubmitted = AssignSubmission::where('assgn_id', $id)->where('usr_id', Auth::user()->id)->first();
-        if($checkIfLocked->count() > 0){
+        if($checkIfLocked->count() > 0 && $checkIfLocked->where('allow_late', 1)){
+            $submission = new AssignSubmission;
+            $submission->response = $request->input('body');
+            $submission->assgn_id = $id;
+            $submission->usr_id = Auth::user()->id;
+            $submission->save();
+
+            if($request->hasFile('file')) {
+            foreach ($request->file as $file) {
+                $filename = $file->getClientOriginalName();
+                $file->storeAs($filename, 's3');
+                $filePath = 'assign_submissions/' . $filename;
+                Storage::disk('s3')->put($filePath, file_get_contents($file));
+                $fileModel = new AssignSubmissionFile;
+                $fileModel->file = $filename;
+                $fileModel->submission_id = $submission->id;
+                $fileModel->save();         
+            } 
+
+            swal()->success('Successfully Submitted','Your assignment is submitted as LATE, kindly submit your next assignments on time!',[]);
+        }
+    }
+        elseif($checkIfLocked->count() > 0 && $checkIfLocked->where('allow_late', 0)){
             swal()->warning('Assignment is Currently Locked',[]);
         }
         elseif(!empty($checkIfAlreadySubmitted)){

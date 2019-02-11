@@ -66,8 +66,8 @@
                         </div>
                       </div>
                       <div class="custom-control custom-radio custom-control-inline">
-  <input type="checkbox" id="customRadioInline1" name="status" class="custom-control-input" value="0">
-  <label class="custom-control-label" for="customRadioInline1">Allow Submissions Now</label>
+    <input type="checkbox" id="xd" name="late" class="custom-control-input" value="1">
+  <label class="custom-control-label" for="xd">Allow Late Submissions</label>
 </div>
                      <input type="hidden" id="xd" value="{{$myClass->class_id}}" name="class_id" /><br/>
                       <div class="line"></div>
@@ -92,7 +92,8 @@
                     @foreach($assignments as $ass)
                     <tr>
                          <td>{{$ass->title}}</td>
-                         <td><a href="{{ route('assign-submissions', $ass->id)}}">View Submissions</a></td>
+                         <td><a href="{{ route('assign-submissions', $ass->id)}}" class="btn btn-primary">Submissions</a>
+                         <a href="{{ route('assign-scores', $ass->id)}}" class="btn btn-secondary">Scores</a></td>
                     </tr>
                     @endforeach
                 </tbody>

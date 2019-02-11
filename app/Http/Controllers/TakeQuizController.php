@@ -103,7 +103,8 @@ class TakeQuizController extends Controller
                         ->get();
 
         if($QuizTaken->count() > 0){
-            return abort(403, 'Quiz already taken');
+             swal()->warning('Quiz Already Taken',[]);
+            return back();
         }
 
         $verify_quiz = DB::table('quiz_events')
@@ -113,9 +114,11 @@ class TakeQuizController extends Controller
                         ->get();
 
         if ($verify_quiz->count() < 1){
-            return abort(403, 'Not enrolled for this class to take the quiz.');
+            swal()->warning('Not enrolled for this class to take the quiz!',[]);
+            return back();
         }elseif($verify_quiz->where('quiz_event_status', 1)->count() < 1){
-            abort(403, 'Quiz not yet started or already ended.');
+            swal()->warning('Quiz already ended or not yet started',[]);
+            return back();
         }else{
                 $quiz = QuizEvent::find($id);
 

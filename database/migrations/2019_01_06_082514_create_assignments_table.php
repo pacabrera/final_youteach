@@ -21,9 +21,10 @@ class CreateAssignmentsTable extends Migration
             $table->integer('usr_id');
             $table->foreign('usr_id')->references('id')->on('users');
             $cs = $table->string('class_id', 5);
-$cs->collation = 'utf8mb4_bin';
+            $cs->collation = 'utf8mb4_bin';
             $table->foreign('class_id')->references('class_id')->on('classes')->onDelete('cascade');
-            $table->smallInteger('status');
+            $table->smallInteger('status')->default(0);;
+            $table->boolean('allow_late')->default(false);
             $table->timestamps();
         });
     }

@@ -72,7 +72,7 @@
 
 
             
-              @foreach($klase->thread as $xd)
+              @foreach($klase->thread->sortByDesc('created_at') as $xd)
             <div class="row mb-4">
               <div class="col-lg-10 mb-5 mb-lg-0">
                 <div class="card">

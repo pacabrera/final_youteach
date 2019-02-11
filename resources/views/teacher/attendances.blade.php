@@ -54,7 +54,7 @@
     $('#dataTable2').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'excel', 'pdf', 'print'
+            'copy', 'excel', 'pdf', 'print','csv'
         ]
     } );
 } );</script>

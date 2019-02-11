@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Event;
 use App\Schedule;
 use App\GradeCategory;
+use App\QuizEvent;
+use App\StudentScore;
 use App\Notifications\GradedNotif;
 
 class TeacherViewController extends Controller
@@ -41,7 +43,7 @@ class TeacherViewController extends Controller
     }
 
     public function recitation($class_id){
-                $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
+        $checkIfInClass = ClassMembers::where('class_id', $class_id)->where('student_id', Auth::user()->id);
         $checkIfInstructor = Klase::where('class_id', $class_id)->where('instructor_id', Auth::user()->id);
         
         if($checkIfInClass->count() > 0 or $checkIfInstructor->count()){
@@ -49,7 +51,9 @@ class TeacherViewController extends Controller
         $class = ClassMembers::where('class_members.class_id', $class_id)
         ->where('class_members.isCalled', 0) // 0 = not yet called , 1 = called not yet graded , 2 = graded and called
         ->join('classes', 'classes.class_id', '=', 'class_members.class_id')->get();
-        return view('teacher.recitation', compact('myClass', 'class'));
+
+        $grade = Grade::where('class_id', $class_id)->where('type', 'Recitation')->get();
+        return view('teacher.recitation', compact('myClass', 'class', 'grade'));
     }
     else {
         abort(403);
@@ -319,6 +323,18 @@ class TeacherViewController extends Controller
         }
        swal()->success('Successfully Created',[]);
        return redirect()->route('class-forum', $class_id);
+    }
+
+    public function scores($class_id){
+        $class_members = ClassMembers::where('class_id', $class_id)->get();
+        $quizzes = QuizEvent::where('class_id', $class_id)
+        ->get();
+
+        $quizscore = StudentScore::get();
+
+
+        $myClass = Klase::where('class_id', $class_id)->first();
+        return view('teacher.scores', compact('myClass', 'quizzes', 'class_members', 'quizscore'));
     }
 
 }

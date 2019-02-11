@@ -89,6 +89,7 @@ Route::put('/quiz/{id}', 'QuizEventController@update')->name('quiz.update');
 Route::resource('assignments', 'AssignmentController', ['only' => [//Sections and Grade Levels
     'index', 'store', 'update', 'destroy'
 ]]);
+Route::get('/assignment/score/{id}', 'AssignmentController@viewAssignGrade')->name('assign-scores');
 Route::get('/assignment/{id}', 'AssignmentController@viewSubmissions')->name('assign-submissions');
 Route::post('/assign', 'AssignmentController@gradeAssign')->name('grade-assign');
 Route::get('/submission/{id}', 'AssignmentController@singleSubmission')->name('single-submission');
@@ -119,7 +120,7 @@ Route::get('start-recitation/{class_id}', 'TeacherViewController@startRec')->nam
 
 Route::get('class-settings/{class_id}', 'TeacherViewController@classSettings')->name('class-settings');
 Route::get('class-schedule/{class_id}', 'TeacherViewController@schedules')->name('sched');
-
+Route::get('/scores/{class_id}', 'TeacherViewController@scores')->name('scores');
 Route::post('class-edit/{class_id}', 'TeacherViewController@editClassPost')->name('edit-classT');
 Route::post('class-sched/{class_id}', 'TeacherViewController@editSched')->name('edit-schedule');
 }); // End /teacher

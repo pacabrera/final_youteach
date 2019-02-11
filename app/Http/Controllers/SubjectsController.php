@@ -32,8 +32,8 @@ class SubjectsController extends Controller
     public function store(Request $request){
 
         $this->validate($request,[
-            'Subject_Code' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50|unique:subjects,subject_code',
-            'Subject_Description' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
+            'Subject_Code' => 'required|regex:/(^[A-Za-z0-9 ]+$)+/|max:50|unique:subjects,subject_code',
+            'Subject_Description' => 'required|regex:/(^[A-Za-z0-9 ]+$)+/|max:50',
         ]);
 
         $subject = new Subject;

@@ -105,7 +105,7 @@
                         <div class="flex-grow-1 d-flex align-items-center">
                           <div class="dot mr-3 bg-red"></div>
                           <div class="text">
-                            <h6 class="mb-0">Assignment</h6><span class="text-gray">{{ $myClass->assignment->where('status', 0)->count()}} new cases</span>
+                            <h6 class="mb-0">Assignment</h6><span class="text-gray">{{ $myClass->assignment->where('status', 0)->count()}} new assignments</span>
                           </div>
                         </div>
                         <div class="icon bg-red text-white"><i class="fas fa-clipboard-check"></i></div>
@@ -115,7 +115,7 @@
                         <div class="flex-grow-1 d-flex align-items-center">
                           <div class="dot mr-3 bg-red"></div>
                           <div class="text">
-                            <h6 class="mb-0">Quizzes</h6><span class="text-gray">{{ $myClass->quiz_event->where('status', 0)->count()}} new cases</span>
+                            <h6 class="mb-0">Quizzes</h6><span class="text-gray">{{ $myClass->quiz_event->where('status', 0)->count()}} new quizzes</span>
                           </div>
                         </div>
                         <div class="icon bg-red text-white"><i class="fas fa-clipboard-check"></i></div>

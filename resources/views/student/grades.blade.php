@@ -31,7 +31,6 @@
                 <tr id="tr-grades">
                 <th id="th-grades" class="text-left">Type</th>
                 <th id="th-grades" class="text-left">Score</th>
-               
                 </tr>
                 </thead>
 

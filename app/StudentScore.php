@@ -25,4 +25,9 @@ class StudentScore extends Model
     public function user_profile(){
         return $this->belongsTo('App\UserProfile', 'student_id', 'id');
     }
+
+    public function quizScore()
+   {
+      return $this->belongsTo(AttendanceQr::Class);
+   }
 }

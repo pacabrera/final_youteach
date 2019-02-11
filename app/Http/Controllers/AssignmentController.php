@@ -17,6 +17,7 @@ use App\Notifications\AssignmentPosted;
 use App\User;
 use Carbon\Carbon;
 use App\Notifications\GradedNotif;
+use App\AssignScore;
 class AssignmentController extends Controller
 {
     /**
@@ -54,10 +55,9 @@ class AssignmentController extends Controller
     {
 
         $request->validate([
-            'body' => 'required|regex:/(^[A-Za-z ]+$)+/|max:225',
-            'title' => 'required|regex:/(^[A-Za-z ]+$)+/|max:50',
+            'body' => 'required|regex:/(^[A-Za-z0-9 ]+$)+/|max:225',
+            'title' => 'required|regex:/(^[A-Za-z0-9 ]+$)+/|max:50',
             'deadline' => 'required|after:now',
-            'status' => 'required',
             'file.*' => 'mimes:jpeg,gif,png,mp4,mp3,wav,ogg,avi,mkv,doc,csv,xlsx,xls,docx,ppt,odt,ods,odp,rtf,txt,pptx,zip,rar|max:25000'
         ]);
 
@@ -67,7 +67,8 @@ class AssignmentController extends Controller
         $assignment->class_id = $request->input('class_id');
         $assignment->usr_id = Auth::user()->id;
         $assignment->deadline = $request->input('deadline');
-        $assignment->status = $request->input('status');
+        $assignment->status = 0;
+        $assignment->allow_late = $request->input('late');
         $assignment->save();
 
         if($request->hasFile('file')) {
@@ -158,6 +159,17 @@ class AssignmentController extends Controller
         return view('teacher.submissions', compact('submissions', 'myClass', 'xd'));
     }
 
+    public function viewAssignGrade($id)
+    {
+
+        $grades = AssignScore::where('assign_id', $id)->get();
+        $xd = Assignment::where('id', $id)->first();
+        $myClass = Klase::where('class_id', $xd->class_id)->first();
+
+
+        return view('teacher.grade-assign', compact('grades', 'myClass', 'xd'));
+    }
+
     public function singleSubmission($id)
     {
 
@@ -179,6 +191,14 @@ class AssignmentController extends Controller
     $request->validate([
     'grade' => 'required|integer|min:1',
     ]);
+
+            AssignScore::create([
+            'student_id' => $request->input('usr_id'),
+            'assign_id' => $request->input('assign_id'),
+            'score' => $request->input('grade'),
+            'recorded_on' => \Carbon\Carbon::now()
+        ]);
+
 
         $grade = new Grade;
         $grade->usr_id = $request->input('usr_id');

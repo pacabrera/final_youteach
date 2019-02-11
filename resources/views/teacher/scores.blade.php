@@ -28,61 +28,25 @@
                 <thead>
                 <tr >
                 <th>Student Name</th>
-                @if($grades->where('type', 'Quiz')->count() > 0)
-                @foreach($grades->where('type', 'Quiz') as $quizG)
-                <th>Quiz {{ $loop->iteration }}</th>
+                @foreach($quizzes as $quiz)
+                <th class="{{$quiz->quiz_event_name}}">{{$quiz->quiz_event_name}}</th>
                 @endforeach
-                @endif
-
-                @if($grades->where('type', 'Asssignment')->count() > 0)
-                @foreach($grades->where('type', 'Asssignment') as $assG)
-                <th>Assignment {{ $loop->iteration }}</th>
-                 @endforeach
-                 @endif
-
-                @if($grades->where('type', 'Activity')->count() > 0)
-                @foreach($grades->where('type', 'Activity') as $actG)
-                <th>Activity {{ $loop->iteration }}</th>
-                 @endforeach
-                 @endif
-
-                @if($grades->where('type', 'Recitation')->count() > 0)
-                @foreach($grades->where('type', 'Recitation') as $recG)
-                <th>Recitation {{ $loop->iteration }} </th>
-                  @endforeach
-                @endif
                 </tr>
                 </thead>
 
                 <tbody class="table-hover">
-                @foreach($grades as $student)
+                @foreach($class_members as $stud)
                 <tr>
-                <td class="text-left">{{$student->usr_id}}</td>
-                
-                @if($grades->where('type', 'Quiz')->count() > 0)
-                @foreach($grades->where('type', 'Quiz') as $quiz)
-                <td  class="text-left">{{$quiz->grade}}</td>
-                @endforeach
-                @endif
+                        <td>{{ $stud->user_profile->family_name }}, {{ $stud->user_profile->given_name }} {{ $stud->user_profile->ext_name
+                            }} {{ substr($stud->user_profile->middle_name,0,1) }}.</td>
+                         @foreach($quizzes as $quiz)
 
-                @if($grades->where('type', 'Asssignment')->count() > 0)
-                @foreach($grades->where('type', 'Asssignment') as $ass)
-                <td  class="text-left">{{$ass->grade}}</td>
-                @endforeach
-                @endif
-
-                @if($grades->where('type', 'Activity')->count() > 0)
-                @foreach($grades->where('type', 'Activity') as $act)
-                <td  class="text-left">{{$act->grade}}</td>
-                @endforeach
-                 @endif
-
-                @if($grades->where('type', 'Recitation')->count() > 0)
-                @foreach($grades->where('type', 'Recitation') as $rec)
-                <td  class="text-left">{{$rec->grade}}</td>
-                @endforeach
-                @endif
-              </tr>
+                         @foreach($quizscore->where('quiz_event_id', $quiz->quiz_event_id)->where('student_id', $stud->student_id) as $scoreQ)
+                        <td>{{$scoreQ->score}}</td>
+                        
+                        @endforeach
+                        @endforeach
+                </tr>
                @endforeach      
                 </tbody>
                 </table>

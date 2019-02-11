@@ -44,11 +44,11 @@
                                 <p><i class="fa fa-file-archive" style="font-size:45px;color:#f55b5b"></i></p>
                              </td>
                              <td width="80%">
-                                <p style="color: #737373;"><strong>{{$file->file}}</strong><br> {{ ConvertToMB::bytesToHuman(Storage::cloud()->getSize('assign_files/'.$file->file, 's3')) }} </p>
+                                <p style="color: #737373;"><strong>{{$file->file}}</strong><br> {{ ConvertToMB::bytesToHuman(Storage::cloud()->getSize('assign_submissions/'.$file->file, 's3')) }} </p>
                               
                              </td>
                              <td width="10%">
-                                <a href="{{ Storage::cloud()->url('post_files/'.$file->file, 's3') }}" style="float: right; padding-top: 15px; "> 
+                                <a href="{{ Storage::cloud()->url('assign_submissions/'.$file->file, 's3') }}" style="float: right; padding-top: 15px; "> 
                                   <i class="fa fa-download" style="font-size: 20px;"></i>
                                 </a>
                              </td>
@@ -98,7 +98,7 @@
                                                             padding: 20px;
                                                             border-radius: 5px;
                                                             " required>
-
+                                <input type="hidden" value="{{$assign->id}}" name="assign_id">
                                   <input type="hidden" id="student_id" name="usr_id" value="{{ $submission->usr_id}}">
                                   <input type="hidden" name="class_id" value="{{ $myClass->class_id }}">
                               </div>

@@ -24,30 +24,23 @@
                     <p>Deadline: {{ \Carbon\Carbon::parse($xd->deadline)->format('M d, Y - g:i A')}}</p>
                     <div class="line">
                     </div>
-            <table id="dataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+            <table id="dataTable2" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
                         <th>Student No.</th>
-                        <th>Date Submitted</th>
-                        <th></th>
+                        <th>Student Name</th>
+                        <th>Score</th>
+             
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($submissions as $submission)
-                    @if($submission->created_at < $xd->deadline)
-                    <tr>
-                        <td>{{ $submission->user_profile->family_name }}, {{ $submission->user_profile->given_name }}</td>
-                        <td>{{ \Carbon\Carbon::parse($submission->created_at)->format('M d, Y - g:i A')}}</td>
-                        <td><a href="{{route('single-submission', $submission->id)}}" class="btn btn-primary">View</a></td>
-                    </tr>
+                    @foreach($grades as $grade)
 
-                    @else
                     <tr>
-                        <td>{{ $submission->user_profile->family_name }}, {{ $submission->user_profile->given_name }}</td>
-                        <td>{{ \Carbon\Carbon::parse($submission->created_at)->format('M d, Y - g:i A')}} <strong>- LATE </strong></td>
-                        <td><a href="{{route('single-submission', $submission->id)}}" class="btn btn-primary">View</a></td>
+                      <td>{{$grade->student_id}}</td>
+                      <td>{{$grade->user_profile->family_name}}, {{$grade->user_profile->given_name}} {{substr($grade->user_profile->middle_name,0,1)}}.</td>
+                      <td>{{$grade->score}}</td>
                     </tr>
-                    @endif
                     @endforeach
                 </tbody>
             </table>
@@ -60,4 +53,12 @@
 </div>
 </section>
 </div>
+<script type="text/javascript">$(document).ready(function() {
+    $('#dataTable2').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'excel', 'pdf', 'print', 'csv'
+        ]
+    } );
+} );</script>
                   @endsection

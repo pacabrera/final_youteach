@@ -20,7 +20,8 @@
                   </div>
                   <div class="card-body">
                     <div class="container">
-    
+                      <div class="row">
+      <div class="col-lg-6 mb-5">
               <div style="background-color: #fa9a9a; border-radius: 5px; ">
 
                  <div  style="color: white;" class="alert">   
@@ -79,6 +80,28 @@
             </div>
             
         </div>
+        <div class="col-lg-6 mb-5">
+          <h3>Scores</h3>
+           <table id="dataTable2" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Grade</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($grade->sortByDesc('created_at') as $s)
+                    <tr>
+                        <th scope="row">{{ $s->user_profile->family_name }}, {{ $s->user_profile->given_name }}</th>
+                        <td>{{$s->grade}}</td>
+                        <td>{{ \Carbon\Carbon::parse($s->created_at)->format('M d, Y - g:i A')}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+      </div>
     </div>
 </div>
 </div>
@@ -127,7 +150,6 @@
 </form>
         <!-- //Modal Form-->   
 
-
 </section>
 </div>
  <audio id="audio" src="https://s3-ap-southeast-1.amazonaws.com/youteachlms/audio/recitation-%5BAudioTrimmer.com%5D.mp3" autostart="false" ></audio>
@@ -165,6 +187,13 @@
         });
     }
       </script>
-
+<script type="text/javascript">$(document).ready(function() {
+    $('#dataTable2').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'excel', 'pdf', 'print','csv'
+        ]
+    } );
+} );</script>
 
 @endsection

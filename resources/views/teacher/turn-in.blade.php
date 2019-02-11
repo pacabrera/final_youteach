@@ -2,6 +2,12 @@
 @section('title', 'Teacher - YouTeach')
 @section('content')
 
+@if($myClass->instructor_id == Auth::user()->id)
+<script type="text/javascript">
+    window.location = "{{route('assign-submissions', $assignment->id)}}";//here double curly bracket
+</script>
+@else
+
 <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
           <section class="py-5">
@@ -93,5 +99,5 @@
 
             </div>
 
-
+@endif
 @endsection

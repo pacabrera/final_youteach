@@ -1,7 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Teacher - YouTeach')
 @section('content')
-
+@if($myClass->instructor_id == Auth::user()->id)
+<script type="text/javascript">
+    window.location = "{{route('assign-submissions', $checkIfAlreadySubmitted->assgn_id)}}";//here double curly bracket
+</script>
+@else
 <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
           <section class="py-5">
@@ -32,11 +36,11 @@
                                 <p><i class="fa fa-file-archive" style="font-size:45px;color:#f55b5b"></i></p>
                              </td>
                              <td width="80%">
-                                <p style="color: #737373;"><strong>{{$file->file}}</strong><br> {{ ConvertToMB::bytesToHuman(Storage::cloud()->getSize('assign_files/'.$file->file, 's3')) }} </p>
+                                <p style="color: #737373;"><strong>{{$file->file}}</strong><br> {{ ConvertToMB::bytesToHuman(Storage::cloud()->getSize('assign_submissions/'.$file->file, 's3')) }} </p>
                               
                              </td>
                              <td width="10%">
-                                <a href="{{ Storage::cloud()->url('post_files/'.$file->file, 's3') }}" style="float: right; padding-top: 15px; "> 
+                                <a href="{{ Storage::cloud()->url('assign_submissions/'.$file->file, 's3') }}" style="float: right; padding-top: 15px; "> 
                                   <i class="fa fa-download" style="font-size: 20px;"></i>
                                 </a>
                              </td>
@@ -106,5 +110,5 @@
 
             </div>
 
-
+@endif
 @endsection
