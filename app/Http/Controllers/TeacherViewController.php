@@ -337,6 +337,13 @@ class TeacherViewController extends Controller
         return view('teacher.scores', compact('myClass', 'quizzes', 'class_members', 'quizscore'));
     }
 
+    public function scoreGroups($class_id){
+        $myClass = Klase::where('class_id', $class_id)->first();
+$grade = Grade::where('class_id', $class_id)->where('type', 'Activity')->get();
+        return view('teacher.group-grades', compact('myClass', 'grade'));
+
+    }
+
 }
 
 

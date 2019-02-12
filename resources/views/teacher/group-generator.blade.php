@@ -16,8 +16,16 @@
               <div class="col-lg-12 mb-5">
                 <div class="card">
                   <div class="card-header"  >
+                                     <div class="row">
+                        <div class="col-lg-9 col-md-6 col-sm-6">
                     <h3> {{ $myClass->class_name}} </h3>
                     <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
+                  </div>
+                       
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                             <a class="btn btn-warning" href="{{ route('score-group', $myClass->class_id)}}">Grades</a>
+                        </div>
+                        </div>
                   </div>
                   <div class="card-body">
                     <div class="container">

@@ -190,6 +190,7 @@
 <script type="text/javascript">$(document).ready(function() {
     $('#dataTable2').DataTable( {
         dom: 'Bfrtip',
+        "scrollX": true,
         buttons: [
             'copy', 'excel', 'pdf', 'print','csv'
         ]

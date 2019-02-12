@@ -117,7 +117,7 @@ Route::get('cards/{class_id}/{id}', 'TeacherViewController@singleCard')->name('s
 
 Route::post('gradecategory', 'TeacherViewController@createGradeCategory')->name('grade-categ');
 Route::get('start-recitation/{class_id}', 'TeacherViewController@startRec')->name('start-rec');
-
+Route::get('group-scores/{class_id}', 'TeacherViewController@scoreGroups')->name('score-group');
 Route::get('class-settings/{class_id}', 'TeacherViewController@classSettings')->name('class-settings');
 Route::get('class-schedule/{class_id}', 'TeacherViewController@schedules')->name('sched');
 Route::get('/scores/{class_id}', 'TeacherViewController@scores')->name('scores');
@@ -154,6 +154,7 @@ Route::get('/schedule', 'StudentViewController@schedule')->name('schedule');
 
 Route::get('/settings', 'StudentViewController@settingsView')->name('acc-settings');
 Route::put('/account/{account}', 'AccountController@changePassStud')->name('change-pass');
+Route::put('/profile/{account}', 'AccountController@updateProfile')->name('update-profile');
 
 Route::get('/class/{class_id}', 'PostsController@viewClass')->name('class-forum'); //Go to Class
 Route::get('/thread/{id}', 'PostsController@show')->name('post-single');

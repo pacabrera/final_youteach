@@ -17,29 +17,27 @@
                       <div class="card gedf-card" >
                     <div class="card">
                   <div class="card-header">
-                    <h3 class="h6 text-uppercase mb-0">Assignment Submissions</h3>
+                    <h3 class="h6 text-uppercase mb-0">Group Activity Grades</h3>
                   </div>
                   <div class="card-body">
-                    <h3>{{ $xd->title }}</h3>
-                    <p>Deadline: {{ \Carbon\Carbon::parse($xd->deadline)->format('M d, Y - g:i A')}}</p>
-                    <div class="line">
-                    </div>
+   
             <table id="dataTable2" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
                         <th>Student No.</th>
                         <th>Student Name</th>
                         <th>Score</th>
-             
+                         <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($grades as $grade)
+                    @foreach($grade as $s)
 
                     <tr>
-                      <td>{{$grade->student_id}}</td>
-                      <td>{{$grade->user_profile->family_name}}, {{$grade->user_profile->given_name}} {{substr($grade->user_profile->middle_name,0,1)}}.</td>
-                      <td>{{$grade->score}}</td>
+                      <td>{{$s->usr_id}}</td>
+                      <td>{{$s->user_profile->family_name}}, {{$s->user_profile->given_name}} {{substr($s->user_profile->middle_name,0,1)}}.</td>
+                      <td>{{$s->grade}}</td>
+                      <td>{{ \Carbon\Carbon::parse($s->created_at)->format('M d, Y - g:i A')}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -55,8 +53,9 @@
 </div>
 <script type="text/javascript">$(document).ready(function() {
     $('#dataTable2').DataTable( {
+      "scrollX": true,
         dom: 'Bfrtip',
-        "scrollX": true,
+        
         buttons: [
             'copy', 'excel', 'pdf', 'print', 'csv'
         ]

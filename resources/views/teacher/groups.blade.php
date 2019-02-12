@@ -127,10 +127,19 @@
               <!-- Form Elements -->
               <div class="col-lg-12 mb-5">
                 <div class="card">
-                  <div class="card-header"  style="background-color: #f55b5b; color: #e8e5e5;">
+                  <div class="card-header" >
+                                     <div class="row">
+                        <div class="col-lg-9 col-md-6 col-sm-6">
                     <h3> {{ $myClass->class_name}} </h3>
                     <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
                   </div>
+                       
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                             <a class="btn btn-warning" href="{{ route('score-group', $myClass->class_id)}}">Grades</a>
+                        </div>
+                        </div>
+                    </div>
+
                   <div class="card-body">
                     <div class="container">
     
@@ -147,9 +156,8 @@
              <div style="text-align: center;"> 
               <h3>NO. OF STUDENT IN {{ $myClass->class_name }}:</h3> <h1 class="text-red">{{ $myClass->class_members->count() }}</h1>
               <!-- start the realm of the buttons -->
-              
               <div id="rndmBtn">
-                <a href="" class="btn red" data-toggle="modal" data-target="#myModal">GENERATE</a>
+                <a href="{{route('group', $myClass->class_id)}}" class="btn red" >GENERATE</a>
               </div>
   <div class="line"></div>
   <div class="row" >
@@ -158,7 +166,12 @@
                 <table class="table-fill">
                   <thead>
                   <tr>
-                  <th class="text-center">GROUP: {{ $loop->iteration }}  
+                  <th class="text-center">GROUP: {{ $loop->iteration }} 
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#myModalG" id="grdbtn">GRADE GROUP</button> 
+                    @foreach($s as $stud) 
+                    <input type="hidden" name="studids[]" value="{{$stud->student_id}}" id="studcount">
+                     <input type="hidden" id="class_id" value="{{ $myClass->class_id }}">
+                    @endforeach
                     <input type="hidden" value="{{$s->count()}}" id="studcount">
                     @foreach($s as $ids)<input type="hidden" value="{{$ids->student_id}}" id="stud{{$loop->iteration}}">@endforeach
 
@@ -217,6 +230,43 @@
                     </div>
                   </div>
         <!-- //Modal Form-->  
+
+                            <div id="myModalG" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+                      <div role="document" class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            Input Grade:
+                          </div>
+                          <div class="modal-body">
+                             
+                              <div class="form-group">
+                                <input type="text" pattern="\d*" id="gradeG" name="grade" maxlength="3" 
+                                                            style="text-align: 
+                                                            center; 
+                                                            font-size: 30px; 
+                                                            height: 100px; 
+                                                            width: 120px; 
+                                                            display: block; 
+                                                            margin-left: auto; 
+                                                            margin-right: auto;
+                                                            padding: 20px;
+                                                            border-radius: 5px;
+                                                            ">
+                                  <input type="hidden" id="student_id" name="usr_id" >
+                                  <input type="hidden" id="class_idG" value="{{ $myClass->class_id }}">
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                            <button type="submit" class="btn btn-primary"  onclick="addGradeGroup()" id="b{{$item->student_id}}">Grade </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        <!-- //Modal Form-->  
+
+
 
 <!-- Change password Success Modal -->
 <div class="modal fade" id="gradeSuccess" tabindex="-1" role="dialog" aria-labelledby="gradeSuccess"
@@ -282,11 +332,18 @@
             }
         });
     }
+
+
+
+
   function addGradeGroup() {
-        var grade = $('#grade').val();
-        var class_id = $('#class_id').val();
+        var grade = $('#gradeG').val();
+        var class_id = $('#class_idG').val();
         
-        var student_id = $('#student_id').val();
+        $('#grdbtn').closest("th").find('input[name="studids[]"]').each(function() {
+            var student_id = ($(this).val());
+
+      var class_id = $('#class_id').val();
         $.ajax({
             url: '/teacher/group/',
             type: 'POST', //type is any HTTP method
@@ -294,11 +351,15 @@
                 grade, student_id, class_id
             },//Data as js object
                 success: function () {
-                $('#myModal').modal('hide')
+                $('#myModalG').modal('hide')
                 $('#gradeSuccess').modal('show')
                 $('#' + student_id).removeAttr("data-toggle");
+                 $('#grdbtn').removeAttr("data-toggle");
             }
         });
+
+        });
+
     }
 </script>
 

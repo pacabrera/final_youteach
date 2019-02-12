@@ -162,4 +162,11 @@ class AccountController extends Controller
         return back();
     }
 
+
+    public function updateProfile(Request $request, $id){
+
+            $user = User::find(Auth::id());
+            
+    }
+
 }
