@@ -35,8 +35,7 @@
 
                               <div class="form-group">
                                   <div class="custom-file">
-                                      <label class="custom-file-label" for="customFile">Attach File</label>
-                                      <input type='file' class="custom-file-input {{ $errors->has('file.*') ? 'is-invalid' : '' }}" onchange="readURL(this);" name="file[]" multiple />
+                                      <input type='file' id="inputGroupFile02" class="form-control-file{{ $errors->has('file.*') ? 'is-invalid' : '' }}" name="file[]" multiple />
                                         <div class="invalid-feedback">
                                         @if ($errors->has('file.*'))
                                           <div class="help-block">
@@ -44,6 +43,7 @@
                                          </div>
                                         @endif
                                         </div>
+<div id="fileList"></div>
                                       <hr>
                                   </div>
                               </div>
@@ -251,6 +251,15 @@ $(document).ready(function(){
          }
 
       </script>
+
+ <script>
+            $('#inputGroupFile02').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+        </script>
 
 @endsection
 

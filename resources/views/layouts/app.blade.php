@@ -365,6 +365,7 @@
 <script src="{{ asset('assets/js/bootstrap-timepicker.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
 <script src="{{ asset('js/share.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $('#timepickerFrom').timepicker();
 $('#timepickerTo').timepicker();

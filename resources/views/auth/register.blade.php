@@ -4,6 +4,9 @@
 @section('content')
     <main>
         <style>
+        .jumbotron{
+            background-color: maroon;
+        }
             p.home-lead {
                 font-size: 26px;
             }
@@ -23,12 +26,15 @@
         <div class="jumbotron">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 col-md-12 text-left mr-auto">
-                        <img src="{{ asset('assets/img/illustration.svg') }}" alt="" class="img-fluid">
-
+                    <div class="col-lg-4 col-md-12 text-left mr-auto">
+                        <img src="{{ asset('assets/img/logo.png') }}" alt="" class="img-fluid">
+                        <br>
+                        <br>
+                        <br>
+                        <h3 class="text-center" style="color:white"> A Junior High School Learning Management System for Holy Angel University</h3>
                     </div>
                     @if (Auth::guest())
-                    <div class="col-lg-5 col-md-12 col-sm-12">
+                    <div class="col-lg-8 col-md-12 col-sm-12">
                         <div class="card">
                             <div class="card-body">
                                 <p class="text-center text-muted">
@@ -36,7 +42,10 @@
                                     <a href="{{ route('login') }}">Click here</a> to join!
                                 </p>
                                 <hr>
-                                <form method="POST" action="{{ route('register') }}">
+                                 <form method="POST" action="{{ route('register') }}">
+                                <div class="row">
+                                    <div class="col-lg-6 md-6">
+                               
                                     @csrf
                                     <div class="form-group">
                                         <label for="">Name</label>
@@ -59,6 +68,8 @@
                                         </div>                                            
                                         </div>
                                     </div>
+                                
+                                   
                                     <div class="form-group">
                                         <label for="">Email Address</label>
                                         <input name="email" id="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}">
@@ -73,6 +84,8 @@
                                         <option value="Female">Female</option>
                                       </select>
                                     </div>
+                                </div>
+                                 <div class="col-lg-6 md-6">
                                     <div class="form-group">
                                         <label for="">Student No.</label>
                                         <input name="id" id="id" type="text" class="form-control {{ $errors->has('id') ? 'is-invalid' : '' }}" value="{{ old('id') }}">
@@ -97,9 +110,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success btn-block">Register</button>
-                                        <small class="form-text text-muted text-center">By clicking "Register", you agree to our terms of service and privacy policy.</small>
+                                        <button type="submit" class="btn btn-primary btn-block">Register</button>
                                     </div>
+                                </div>
+                            </div>
                                 </form>
                             </div>
                         </div>

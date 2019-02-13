@@ -18,7 +18,6 @@ class StatusAssignment
     public function handle($request, Closure $next)
     {
         $assignments = Assignment::where('deadline', '<=', Carbon::now())->update(['status' => 1]);
-        $late = Assignment::where('allow_late', 1)->where('deadline', '<=', Carbon::now()->addDay())->update(['allow_late' => 0]);
 
         return $next($request);
     }

@@ -68,7 +68,13 @@ class AssignmentController extends Controller
         $assignment->usr_id = Auth::user()->id;
         $assignment->deadline = $request->input('deadline');
         $assignment->status = 0;
-        $assignment->allow_late = $request->input('late');
+        if($request->input('late')){
+        $assignment->allow_late =  $request->input('late');
+    }
+    else
+    {
+        $assignment->allow_late =0;
+    }
         $assignment->save();
 
         if($request->hasFile('file')) {
@@ -145,7 +151,8 @@ class AssignmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Assignment::destroy($id);
+        swal()->success('Successfully Deleted',[]);
     }
 
     public function viewSubmissions($id)
@@ -211,7 +218,7 @@ class AssignmentController extends Controller
         $user->notify(new GradedNotif($grade));
 
         swal()->success('Successfully Graded',[]);
-        return back();
+        return redirect()->route('assign-scores', $request->input('assign_id'));
     }
 }
 }

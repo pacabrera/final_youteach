@@ -183,8 +183,9 @@ class PostsController extends Controller
         elseif($checkIfLocked->count() > 0 && $checkIfLocked->where('allow_late', 0)){
             swal()->warning('Assignment is Currently Locked',[]);
         }
-        elseif(!empty($checkIfAlreadySubmitted)){
+        elseif($checkIfAlreadySubmitted->count() > 0){
             swal()->warning('You already submit your Assignment!',[]);
+            return back();
         }
         else {
 
@@ -206,15 +207,15 @@ class PostsController extends Controller
             $fileModel->submission_id = $submission->id;
             $fileModel->save();         
         }  
-        swal()->success('Successfully Submitted Assignment',[]);
+        
 
     }
 
     }
         $assignment = Assignment::where('id', $id)->first();
         $myClass = Klase::where('class_id', $assignment->class_id)->first();
-
-        return view('teacher.turn-in', compact('myClass', 'assignment'));
+        swal()->success('Successfully Submitted Assignment',[]);
+        return redirect()->route('class-forum', $myClass->class_id);
     }
 
     public function editPost($id, Request $request)

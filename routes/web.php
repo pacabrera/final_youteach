@@ -89,6 +89,8 @@ Route::put('/quiz/{id}', 'QuizEventController@update')->name('quiz.update');
 Route::resource('assignments', 'AssignmentController', ['only' => [//Sections and Grade Levels
     'index', 'store', 'update', 'destroy'
 ]]);
+
+
 Route::get('/assignment/score/{id}', 'AssignmentController@viewAssignGrade')->name('assign-scores');
 Route::get('/assignment/{id}', 'AssignmentController@viewSubmissions')->name('assign-submissions');
 Route::post('/assign', 'AssignmentController@gradeAssign')->name('grade-assign');

@@ -28,6 +28,7 @@
                                         <th>Topic</th>
                                         <th>Subject</th>
                                         <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,6 +41,7 @@
                                             @else
                                              <td>Disabled</td>
                                              @endif
+                                             <td><a class="btn btn-primary" href="{{ route('quiz.show', $qe->quiz_event_id) }}">Manage Quiz</a> </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
