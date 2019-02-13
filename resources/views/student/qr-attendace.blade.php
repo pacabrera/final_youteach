@@ -82,7 +82,7 @@
         //var s_code = $('#s_code_new').val();
 
         $.ajax({
-            url: '/student/attendance/',
+            url: '/student/attendance',
             type: 'POST', //type is any HTTP method
             data: {
                 data:code
