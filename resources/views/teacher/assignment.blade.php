@@ -86,6 +86,7 @@
                     <tr>
                       <th>Assignment Title</th>
                       <th>Action</th>
+                      <th>Manage</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,7 +94,8 @@
                     <tr>
                          <td>{{$ass->title}}</td>
                          <td><a href="{{ route('assign-submissions', $ass->id)}}" class="btn btn-primary">Submissions</a>
-                         <a href="{{ route('assign-scores', $ass->id)}}" class="btn btn-secondary">Scores</a>
+                         <a href="{{ route('assign-scores', $ass->id)}}" class="btn btn-secondary">Scores</a></td>
+                         <td>
                        <button class="btn btn-danger" data-subid="{{ $ass->id }}" data-toggle="modal" data-target="#deleteSubject">Delete</button>
                      </td>
                     </tr>

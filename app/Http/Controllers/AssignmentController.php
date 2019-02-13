@@ -128,7 +128,8 @@ class AssignmentController extends Controller
 
     public function edit($id)
     {
-        //
+        $assign = Assignment::find($id);
+        return view('teacher.edit-assign', compact('assign'));
     }
 
     /**
@@ -140,7 +141,34 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $assignment = Assignment::find($id);
+        $assignment->body = $request->input('body');
+        $assignment->title = $request->input('title');
+        $assignment->class_id = $request->input('class_id');
+        $assignment->usr_id = Auth::user()->id;
+        $assignment->deadline = $request->input('deadline');
+        $assignment->status = 0;
+        if($request->input('late')){
+        $assignment->allow_late =  $request->input('late');
+    }
+    else
+    {
+        $assignment->allow_late =0;
+    }
+        $assignment->save();
+
+        if($request->hasFile('file')) {
+        foreach ($request->file as $file) {
+            $filename = $file->getClientOriginalName();
+            $file->storeAs($filename, 's3');
+            $filePath = 'assign_files/' . $filename;
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
+            $fileModel = new AssignFile;
+            $fileModel->file = $filename;
+            $fileModel->assgn_id = $assignment->id;
+            $fileModel->save();         
+        }
+    }
     }
 
     /**
