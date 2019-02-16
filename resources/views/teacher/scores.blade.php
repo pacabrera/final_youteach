@@ -42,8 +42,11 @@
                          @foreach($quizzes as $quiz)
 
                          @foreach($quizscore->where('quiz_event_id', $quiz->quiz_event_id)->where('student_id', $stud->student_id) as $scoreQ)
+                        @if(empty($scoreQ))
+                          <td>0</td>
+                          @else
                         <td>{{$scoreQ->score}}</td>
-                        
+                       @endif
                         @endforeach
                         @endforeach
                 </tr>

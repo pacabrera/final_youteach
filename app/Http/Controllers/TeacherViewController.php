@@ -330,7 +330,7 @@ class TeacherViewController extends Controller
         $quizzes = QuizEvent::where('class_id', $class_id)
         ->get();
 
-        $quizscore = StudentScore::get();
+        $quizscore = ClassMembers::join('quiz_student_score', 'quiz_student_score.student_id', "=", 'class_members.student_id')->get();
 
 
         $myClass = Klase::where('class_id', $class_id)->first();
@@ -339,7 +339,7 @@ class TeacherViewController extends Controller
 
     public function scoreGroups($class_id){
         $myClass = Klase::where('class_id', $class_id)->first();
-$grade = Grade::where('class_id', $class_id)->where('type', 'Activity')->get();
+        $grade = Grade::where('class_id', $class_id)->where('type', 'Activity')->get();
         return view('teacher.group-grades', compact('myClass', 'grade'));
 
     }

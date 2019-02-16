@@ -156,11 +156,24 @@ class PostsController extends Controller
     }
     public function turnInPost(Request $request, $id)
     {
-        $checkIfLocked = Assignment::where('id', $id)->where('status', 1);
+    	$assignment = Assignment::where('id', $id)->first();
+        $myClass = Klase::where('class_id', $assignment->class_id)->first();
+        $checkIfLocked = Assignment::where('id', $id)->where('status', 1)->first();
+        $checkIfLocked2 = Assignment::where('id', $id)->where('allow_late', 1)->first();
+        $checkIfLocked3 = Assignment::where('id', $id)->where('allow_late', 0)->first();
         $checkIfAlreadySubmitted = AssignSubmission::where('assgn_id', $id)->where('usr_id', Auth::user()->id)->first();
-        if($checkIfLocked->count() > 0 && $checkIfLocked->where('allow_late', 1)){
+
+        if(!empty($checkIfLocked) and !empty($checkIfLocked3)){
+            swal()->warning('Assignment is Currently Locked',[]);
+            return redirect()->route('class-forum', $myClass->class_id);
+        }
+        elseif($checkIfAlreadySubmitted){
+            swal()->warning('You already submit your Assignment!',[]);
+            return redirect()->route('class-forum', $myClass->class_id);
+        }
+        elseif(!empty($checkIfLocked) and !empty($checkIfLocked2)){
             $submission = new AssignSubmission;
-            $submission->response = $request->input('body');
+            $submission->response = 'ss';
             $submission->assgn_id = $id;
             $submission->usr_id = Auth::user()->id;
             $submission->save();
@@ -177,19 +190,12 @@ class PostsController extends Controller
                 $fileModel->save();         
             } 
 
-            swal()->success('Successfully Submitted','Your assignment is submitted as LATE, kindly submit your next assignments on time!',[]);
+            
         }
+        swal()->success('Successfully Submitted','Your assignment is submitted as LATE, kindly submit your next assignments on time!',[]);
+            return redirect()->route('class-forum', $myClass->class_id);
     }
-        elseif($checkIfLocked->count() > 0 && $checkIfLocked->where('allow_late', 0)){
-            swal()->warning('Assignment is Currently Locked',[]);
-        }
-        elseif($checkIfAlreadySubmitted->count() > 0){
-            swal()->warning('You already submit your Assignment!',[]);
-            return back();
-        }
         else {
-
-
         $submission = new AssignSubmission;
         $submission->response = $request->input('body');
         $submission->assgn_id = $id;
@@ -210,12 +216,11 @@ class PostsController extends Controller
         
 
     }
-
-    }
-        $assignment = Assignment::where('id', $id)->first();
-        $myClass = Klase::where('class_id', $assignment->class_id)->first();
-        swal()->success('Successfully Submitted Assignment',[]);
+		swal()->success('Successfully Submitted Assignment',[]);
         return redirect()->route('class-forum', $myClass->class_id);
+    }
+
+        
     }
 
     public function editPost($id, Request $request)
