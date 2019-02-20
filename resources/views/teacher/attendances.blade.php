@@ -16,12 +16,12 @@
                     <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
                       </div>
                     <div class="col-lg-3 col-md-6 col-sm-6">
-                             <a class="btn btn-warning" href="{{route('subjects.create')}}">View All Attendance</a>
+                             <a class="btn btn-warning" href="{{route('all-attendance', $myClass->class_id)}}">View All Attendance</a>
                         </div>
                     </div>
                   </div>
                   <div class="card-body" >
-                    <h1 class="text-center">{{ Carbon\Carbon::parse(Carbon\Carbon::now())->format('M d, Y') }}</h1>
+                    <h1 class="text-center">{{ \Carbon\Carbon::parse($xd->created_at)->format('M d, Y')}}</h1>
                     <table id="dataTable2" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                 <thead>
                     <tr>

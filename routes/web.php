@@ -72,6 +72,8 @@ Route::resource('class', 'ClassesController',  ['only' => [//Class
     'store', 'destroy'
 ]]);
 Route::get('/attendances/{id}', 'AttendanceController@getAttendance')->name('attendances');
+Route::get('/attendance-all/{class_id}', 'AttendanceController@getAllAttendance')->name('all-attendance');
+Route::get('/attendance/{class_id}/{month}/{year}', 'AttendanceController@getSingleAttendance')->name('single-attendance');
 
 Route::get('/recitation/{class_id}', 'TeacherViewController@recitation')->name('recitation');
 Route::post('/randomize/{class_id}', 'TeacherViewController@recitationTool')->name('randomize');

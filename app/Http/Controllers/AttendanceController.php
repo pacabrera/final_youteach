@@ -83,11 +83,32 @@ class AttendanceController extends Controller
 
     public function getAttendance($id)
     {
+        $xd = AttendanceQr::where('id', $id)->first();
+        $attendances = Attendance::where('qr_id', $id)->whereDate('created_at', Carbon::today())->get();
+        $myClass = Klase::where('class_id', $xd->class_id)->first();
+        $result = ClassMembers::whereNotIn('student_id', function($q){
+            $q->select('usr_id')->from('attendances')->whereDate('created_at', Carbon::today());
+        })->get();
+        return view('teacher.attendances', compact('myClass', 'attendances', 'result', 'xd'));
+    }
+
+    public function getAllAttendance($class_id)
+    {
+
+  $archives = AttendanceQr::all()->where('class_id', $class_id)->groupBy(function($date) {
+    return Carbon::parse($date->created_at)->format('Y-m');
+    });
+        $myClass = Klase::where('class_id', $class_id)->first();
+
+        return view('teacher.all-attendance', compact('myClass', 'archives'));
+    }
+    public function getSingleAttendance($class_id, $month, $year)
+    {
         $xd = AttendanceQr::where('id', $id)->first()->class_id;
         $attendances = Attendance::where('qr_id', $id)->whereDate('created_at', Carbon::today())->get();
         $myClass = Klase::where('class_id', $xd)->first();
         $result = ClassMembers::whereNotIn('student_id', function($q){
-            $q->select('usr_id')->from('attendances');
+            $q->select('usr_id')->from('attendances')->whereDate('created_at', Carbon::today());
         })->get();
         return view('teacher.attendances', compact('myClass', 'attendances', 'result'));
     }
