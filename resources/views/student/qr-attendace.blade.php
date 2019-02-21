@@ -2,18 +2,6 @@
 @section('title', 'Attendance - YouTeach')
 
 @section('content')
-<div class="page-holder w-100 d-flex flex-wrap">
-        <div class="container-fluid px-xl-5">
-          <section class="py-5">
-          <!-- Post -->   
-            <div class="row mb-4">            
-              <div class="col-lg-12 mb-4 mb-lg-0">
-                <div class="card">
-                  <div class="card-header"  >
-                    <h3> {{ $myClass->class_name}} </h3>
-                    <p>{{ $myClass->user_profile->given_name }} {{ $myClass->user_profile->family_name }} | {{ $myClass->subject->subject_desc}} | {{ $myClass->section->section_name}}</p> 
-                  </div>
-                  <div class="card-body" >
             <div class="container" id="QR-Code">
             <div class="col-md-6">
                 <div class="well" style="position: relative;display: inline-block;">
@@ -47,11 +35,11 @@
                 <select class="form-control" id="camera-select"></select>
                 <div class="form-group">
                    
-                    <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-upload"></span></button>
-                    <button title="Image shoot" class="btn btn-info btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-picture"></span></button>
-                    <button title="Play" class="btn btn-success btn-sm" id="play" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-play"></span></button>
-                    <button title="Pause" class="btn btn-warning btn-sm" id="pause" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-pause"></span></button>
-                    <button title="Stop streams" class="btn btn-danger btn-sm" id="stop" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-stop"></span></button>
+                    <button title="Decode Image" class="btn btn-primary btn-sm" id="decode-img" type="button" data-toggle="tooltip"><span class="fa fa-upload"></span></button>
+                    <button title="Image shoot" class="btn btn-info btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip"><span class="fa fa-camera"></span></button>
+                    <button title="Play" class="btn btn-success btn-sm" id="play" type="button" data-toggle="tooltip"><span class="fa fa-play"></span></button>
+                    <button title="Pause" class="btn btn-warning btn-sm" id="pause" type="button" data-toggle="tooltip"><span class="fa fa-pause"></span></button>
+                    <button title="Stop streams" class="btn btn-danger btn-sm" id="stop" type="button" data-toggle="tooltip"><span class="fa fa-stop"></span></button>
                  </div>
 
                 <div class="thumbnail" id="result">
